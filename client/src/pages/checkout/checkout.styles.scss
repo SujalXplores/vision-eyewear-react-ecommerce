@@ -11,7 +11,7 @@
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid darkgrey;
+    border-bottom: 1px solid #a9a9a9;
 
     .header-block {
       text-transform: capitalize;
@@ -38,6 +38,6 @@
     text-align: center;
     margin-top: 40px;
     font-size: 24px;
-    color: red;
+    color: #ff0000;
   }
 }
