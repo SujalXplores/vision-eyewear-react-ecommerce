@@ -6,19 +6,19 @@ const StripeCheckoutButton = ({ price }) => {
   const priceForStripe = price * 100;
   const publishableKey = 'pk_test_b7a3hFL5nC3qlBCZ6bQACpez00gyMMP52H';
 
-  const onToken = token => {
+  const onToken = (token) => {
     axios({
       url: '/payment',
       method: 'post',
       data: {
         amount: priceForStripe,
-        token: token
-      }
+        token: token,
+      },
     })
-      .then(response => {
+      .then((response) => {
         alert('Succesful Payment!');
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('Payment Error: ', error);
         alert(
           'There was an issue with your payment! Please make sure to use the provided credit card data'
@@ -29,11 +29,11 @@ const StripeCheckoutButton = ({ price }) => {
   return (
     <StripeCheckout
       label='Pay Now'
-      name='CRWN Clothing Ltd.'
+      name='Vision Eyewear'
       billingAddress
       shippingAddress
       image='https://svgshare.com/i/CUz.svg'
-      description={`Your total is $${price}`}
+      description={`Your total is ₹${price}`}
       amount={priceForStripe}
       panelLabel='Pay Now'
       token={onToken}
