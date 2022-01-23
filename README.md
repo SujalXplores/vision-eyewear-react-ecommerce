@@ -1,12 +1,12 @@
-# Vision Eyeware E-commerce Platform
+# Vision Eyewear E-commerce Platform
 
-> Vision Eyeware is a platform for e-commerce that allows you to sell your products online.
+> Vision Eyewear is a platform for e-commerce that allows you to sell your products online.
 
-Steps to install and use Vision Eyeware:
-Step 1: Clone the Vision Eyeware platform on your computer.
+Steps to install and use Vision Eyewear:
+Step 1: Clone the Vision Eyewear platform on your computer.
 
 ```bash
-git clone https://github.com/SujalShah3234/vision-eyeware-react-ecommerce.git
+git clone https://github.com/SujalShah3234/vision-eyewear-react-ecommerce.git
 ```
 
 Step 2: Install the dependencies.
