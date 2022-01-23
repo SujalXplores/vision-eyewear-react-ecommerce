@@ -1,38 +1,43 @@
 const INITIAL_STATE = {
   sections: [
     {
-      title: 'hats',
-      imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+      title: 'mens',
+      imageUrl:
+        'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Sunglasses-Men.jpg',
       id: 1,
-      linkUrl: 'shop/hats'
+      linkUrl: 'shop/mens',
     },
     {
-      title: 'jackets',
-      imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+      title: 'women',
+      imageUrl:
+        'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Sunglasses-Women.jpg',
       id: 2,
-      linkUrl: 'shop/jackets'
+      linkUrl: 'shop/women',
     },
     {
-      title: 'sneakers',
-      imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+      title: 'kids',
+      imageUrl:
+        'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Sunglasses-Kids.jpg',
       id: 3,
-      linkUrl: 'shop/sneakers'
+      linkUrl: 'shop/kids',
     },
     {
-      title: 'womens',
-      imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+      title: 'sunglasses',
+      imageUrl:
+        'https://india.ray-ban.com/pub/media/wysiwyg/Rb_home_opti/34-Sunglasses-Homepage-Banner-Desktop.jpg',
       size: 'large',
       id: 4,
-      linkUrl: 'shop/womens'
+      linkUrl: 'shop/sunglasses',
     },
     {
-      title: 'mens',
-      imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+      title: 'eyeglasses',
+      imageUrl:
+        'https://india.ray-ban.com/pub/media/wysiwyg/Rb_home_opti/36-Eyeglasses-Homepage-Banner-Desktop.jpg',
       size: 'large',
       id: 5,
-      linkUrl: 'shop/mens'
-    }
-  ]
+      linkUrl: 'shop/eyeglasses',
+    },
+  ],
 };
 
 const directoryReducer = (state = INITIAL_STATE, action) => {
