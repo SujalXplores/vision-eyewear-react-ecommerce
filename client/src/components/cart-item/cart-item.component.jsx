@@ -8,7 +8,12 @@ const CartItem = ({ item: { imageUrl, price, name, quantity } }) => (
     <div className='item-details'>
       <span className='name'>{name}</span>
       <span className='price'>
-        {quantity} x ₹{price}
+        {quantity} x{' '}
+        {new Intl.NumberFormat('en-IN', {
+          currency: 'INR',
+          style: 'currency',
+          maximumFractionDigits: 0,
+        }).format(price)}
       </span>
     </div>
   </div>

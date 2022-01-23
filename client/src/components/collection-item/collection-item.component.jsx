@@ -19,7 +19,13 @@ const CollectionItem = ({ item, addItem }) => {
       />
       <div className='collection-footer'>
         <span className='name'>{name}</span>
-        <span className='price'>₹{price}</span>
+        <span className='price'>
+          {new Intl.NumberFormat('en-IN', {
+            currency: 'INR',
+            style: 'currency',
+            maximumFractionDigits: 0,
+          }).format(price)}
+        </span>
       </div>
       <CustomButton onClick={() => addItem(item)} inverted>
         Add to cart

@@ -26,7 +26,13 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
           &#10095;
         </div>
       </span>
-      <span className='price'>₹{price}</span>
+      <span className='price'>
+        {new Intl.NumberFormat('en-IN', {
+          currency: 'INR',
+          style: 'currency',
+          maximumFractionDigits: 0,
+        }).format(price)}
+      </span>
       <div className='remove-button' onClick={() => clearItem(cartItem)}>
         &#10005;
       </div>
