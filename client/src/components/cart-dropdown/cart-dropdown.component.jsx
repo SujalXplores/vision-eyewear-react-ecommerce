@@ -11,15 +11,14 @@ import { toggleCartHidden } from '../../redux/cart/cart.actions.js';
 import './cart-dropdown.styles.scss';
 
 const CartDropdown = ({ cartItems, history, dispatch }) => (
-  // how to solve export 'withRouter' (imported as 'withRouter') was not found in 'react-router-dom' (imported as 'react-router')
-  <div className="cart-dropdown">
-    <div className="cart-items">
+  <div className='cart-dropdown'>
+    <div className='cart-items'>
       {cartItems.length ? (
         cartItems.map((cartItem) => (
           <CartItem key={cartItem.id} item={cartItem} />
         ))
       ) : (
-        <span className="empty-message">Your cart is empty</span>
+        <span className='empty-message'>Your cart is empty</span>
       )}
     </div>
     <CustomButton
@@ -28,7 +27,7 @@ const CartDropdown = ({ cartItems, history, dispatch }) => (
         dispatch(toggleCartHidden());
       }}
     >
-      GO TO CHECKOUT
+      CHECKOUT
     </CustomButton>
   </div>
 );
