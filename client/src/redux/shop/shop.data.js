@@ -1,249 +1,284 @@
 const SHOP_DATA = {
-  hats: {
-    id: 1,
-    title: 'Hats',
-    routeName: 'hats',
-    items: [
-      {
-        id: 1,
-        name: 'Brown Brim',
-        imageUrl: 'https://i.ibb.co/ZYW3VTp/brown-brim.png',
-        price: 25
-      },
-      {
-        id: 2,
-        name: 'Blue Beanie',
-        imageUrl: 'https://i.ibb.co/ypkgK0X/blue-beanie.png',
-        price: 18
-      },
-      {
-        id: 3,
-        name: 'Brown Cowboy',
-        imageUrl: 'https://i.ibb.co/QdJwgmp/brown-cowboy.png',
-        price: 35
-      },
-      {
-        id: 4,
-        name: 'Grey Brim',
-        imageUrl: 'https://i.ibb.co/RjBLWxB/grey-brim.png',
-        price: 25
-      },
-      {
-        id: 5,
-        name: 'Green Beanie',
-        imageUrl: 'https://i.ibb.co/YTjW3vF/green-beanie.png',
-        price: 18
-      },
-      {
-        id: 6,
-        name: 'Palm Tree Cap',
-        imageUrl: 'https://i.ibb.co/rKBDvJX/palm-tree-cap.png',
-        price: 14
-      },
-      {
-        id: 7,
-        name: 'Red Beanie',
-        imageUrl: 'https://i.ibb.co/bLB646Z/red-beanie.png',
-        price: 18
-      },
-      {
-        id: 8,
-        name: 'Wolf Cap',
-        imageUrl: 'https://i.ibb.co/1f2nWMM/wolf-cap.png',
-        price: 14
-      },
-      {
-        id: 9,
-        name: 'Blue Snapback',
-        imageUrl: 'https://i.ibb.co/X2VJP2W/blue-snapback.png',
-        price: 16
-      }
-    ]
-  },
-  sneakers: {
-    id: 2,
-    title: 'Sneakers',
-    routeName: 'sneakers',
-    items: [
-      {
-        id: 10,
-        name: 'Adidas NMD',
-        imageUrl: 'https://i.ibb.co/0s3pdnc/adidas-nmd.png',
-        price: 220
-      },
-      {
-        id: 11,
-        name: 'Adidas Yeezy',
-        imageUrl: 'https://i.ibb.co/dJbG1cT/yeezy.png',
-        price: 280
-      },
-      {
-        id: 12,
-        name: 'Black Converse',
-        imageUrl: 'https://i.ibb.co/bPmVXyP/black-converse.png',
-        price: 110
-      },
-      {
-        id: 13,
-        name: 'Nike White AirForce',
-        imageUrl: 'https://i.ibb.co/1RcFPk0/white-nike-high-tops.png',
-        price: 160
-      },
-      {
-        id: 14,
-        name: 'Nike Red High Tops',
-        imageUrl: 'https://i.ibb.co/QcvzydB/nikes-red.png',
-        price: 160
-      },
-      {
-        id: 15,
-        name: 'Nike Brown High Tops',
-        imageUrl: 'https://i.ibb.co/fMTV342/nike-brown.png',
-        price: 160
-      },
-      {
-        id: 16,
-        name: 'Air Jordan Limited',
-        imageUrl: 'https://i.ibb.co/w4k6Ws9/nike-funky.png',
-        price: 190
-      },
-      {
-        id: 17,
-        name: 'Timberlands',
-        imageUrl: 'https://i.ibb.co/Mhh6wBg/timberlands.png',
-        price: 200
-      }
-    ]
-  },
-  jackets: {
-    id: 3,
-    title: 'Jackets',
-    routeName: 'jackets',
-    items: [
-      {
-        id: 18,
-        name: 'Black Jean Shearling',
-        imageUrl: 'https://i.ibb.co/XzcwL5s/black-shearling.png',
-        price: 125
-      },
-      {
-        id: 19,
-        name: 'Blue Jean Jacket',
-        imageUrl: 'https://i.ibb.co/mJS6vz0/blue-jean-jacket.png',
-        price: 90
-      },
-      {
-        id: 20,
-        name: 'Grey Jean Jacket',
-        imageUrl: 'https://i.ibb.co/N71k1ML/grey-jean-jacket.png',
-        price: 90
-      },
-      {
-        id: 21,
-        name: 'Brown Shearling',
-        imageUrl: 'https://i.ibb.co/s96FpdP/brown-shearling.png',
-        price: 165
-      },
-      {
-        id: 22,
-        name: 'Tan Trench',
-        imageUrl: 'https://i.ibb.co/M6hHc3F/brown-trench.png',
-        price: 185
-      }
-    ]
-  },
-  womens: {
-    id: 4,
-    title: 'Womens',
-    routeName: 'womens',
-    items: [
-      {
-        id: 23,
-        name: 'Blue Tanktop',
-        imageUrl: 'https://i.ibb.co/7CQVJNm/blue-tank.png',
-        price: 25
-      },
-      {
-        id: 24,
-        name: 'Floral Blouse',
-        imageUrl: 'https://i.ibb.co/4W2DGKm/floral-blouse.png',
-        price: 20
-      },
-      {
-        id: 25,
-        name: 'Floral Dress',
-        imageUrl: 'https://i.ibb.co/KV18Ysr/floral-skirt.png',
-        price: 80
-      },
-      {
-        id: 26,
-        name: 'Red Dots Dress',
-        imageUrl: 'https://i.ibb.co/N3BN1bh/red-polka-dot-dress.png',
-        price: 80
-      },
-      {
-        id: 27,
-        name: 'Striped Sweater',
-        imageUrl: 'https://i.ibb.co/KmSkMbH/striped-sweater.png',
-        price: 45
-      },
-      {
-        id: 28,
-        name: 'Yellow Track Suit',
-        imageUrl: 'https://i.ibb.co/v1cvwNf/yellow-track-suit.png',
-        price: 135
-      },
-      {
-        id: 29,
-        name: 'White Blouse',
-        imageUrl: 'https://i.ibb.co/qBcrsJg/white-vest.png',
-        price: 20
-      }
-    ]
-  },
   mens: {
-    id: 5,
+    id: 1,
     title: 'Mens',
     routeName: 'mens',
     items: [
       {
+        id: 1,
+        name: 'RB3598',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/RB3598.png',
+        price: 8290,
+      },
+      {
+        id: 2,
+        name: 'RB3334',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/RB3334.png',
+        price: 5590,
+      },
+      {
+        id: 3,
+        name: 'RB3129',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/RB3129.png',
+        price: 6590,
+      },
+      {
+        id: 4,
+        name: 'Scuderia Ferrari',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/RB-4297-Scuderia-Ferrari.png',
+        price: 10890,
+      },
+      {
+        id: 5,
+        name: 'Aviator Titanium',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Aviator-Titanium.png',
+        price: 30090,
+      },
+      {
+        id: 6,
+        name: 'Frank Titanium',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Frank-titanium.png',
+        price: 25490,
+      },
+      {
+        id: 7,
+        name: 'Aviator Total Black',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Aviator-Total-Black.png',
+        price: 5670,
+      },
+      {
+        id: 8,
+        name: 'RB2180',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/RB2180.png',
+        price: 8890,
+      },
+      {
+        id: 9,
+        name: 'RB9978',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/RB-4125-Scuderia-Ferrari.png',
+        price: 5890,
+      },
+    ],
+  },
+  women: {
+    id: 2,
+    title: 'Women',
+    routeName: 'women',
+    items: [
+      {
+        id: 10,
+        name: 'Mr Burbank',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Mr-Burbank.png',
+        price: 10190,
+      },
+      {
+        id: 11,
+        name: 'Lady Burbank',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Lady-Burbank.png',
+        price: 10190,
+      },
+      {
+        id: 12,
+        name: 'State Street',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/State-Street.png',
+        price: 10150,
+      },
+      {
+        id: 13,
+        name: 'Jack',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Jack.png',
+        price: 10900,
+      },
+      {
+        id: 14,
+        name: 'Orion',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Orion.png',
+        price: 9840,
+      },
+      {
+        id: 15,
+        name: 'Inverness',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Inverness.png',
+        price: 10190,
+      },
+      {
+        id: 16,
+        name: 'New Wayfarer',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/New-Wayfarer.png',
+        price: 9540,
+      },
+      {
+        id: 17,
+        name: 'Hexagonal',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Hexagonal.png',
+        price: 9590,
+      },
+    ],
+  },
+  kids: {
+    id: 3,
+    title: 'Kids',
+    routeName: 'kids',
+    items: [
+      {
+        id: 18,
+        name: 'Vincent Chase',
+        imageUrl:
+          'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e11056-c2-eyeglasses_g_8367.jpg',
+        price: 999,
+      },
+      {
+        id: 19,
+        name: 'Navy Blue',
+        imageUrl:
+          'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-e10954-c1-eyeglasses_vincent-chase-vc-e10954-c1-eyeglasses_eyeglasses_m_0011_1.jpg',
+        price: 999,
+      },
+      {
+        id: 20,
+        name: 'Full Rim Yellow',
+        imageUrl:
+          'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-s11936-c2-full-rim-sunglasses_sunglasses_g_9860_1_1.jpg',
+        price: 2000,
+      },
+      {
+        id: 21,
+        name: 'Brown Skull',
+        imageUrl:
+          'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//v/i/vincent-chase-vc-s11939-c2-full-rim-sunglasses_sunglasses_untitled-2.jpg',
+        price: 999,
+      },
+      {
+        id: 22,
+        name: 'Matt Black',
+        imageUrl:
+          'https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//h/o/hooper-hp-e10001m-c1-eyeglasses_G_4339.jpg',
+        price: 1999,
+      },
+    ],
+  },
+  sunglasses: {
+    id: 4,
+    title: 'Sunglasses',
+    routeName: 'sunglasses',
+    items: [
+      {
+        id: 23,
+        name: 'Justin',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Justin.png',
+        price: 8190,
+      },
+      {
+        id: 24,
+        name: 'Erika',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Erika.png',
+        price: 7590,
+      },
+      {
+        id: 25,
+        name: 'Chris',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Chris.png',
+        price: 8190,
+      },
+      {
+        id: 26,
+        name: 'RB2180',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/RB2180.png',
+        price: 8890,
+      },
+      {
+        id: 27,
+        name: 'Aviator Titanium',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Aviator-Titanium.png',
+        price: 30090,
+      },
+      {
+        id: 28,
+        name: 'Round Evolve',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/Round-Evolve.png',
+        price: 11590,
+      },
+      {
+        id: 29,
+        name: 'RB 3689 Evolve',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Product_images/RB-3689-Evolve.png',
+        price: 11590,
+      },
+    ],
+  },
+  eyeglasses: {
+    id: 5,
+    title: 'Eyeglasses',
+    routeName: 'eyeglasses',
+    items: [
+      {
         id: 30,
-        name: 'Camo Down Vest',
-        imageUrl: 'https://i.ibb.co/xJS0T3Y/camo-vest.png',
-        price: 325
+        name: 'Aviator Optics',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_eyeglasses_clp_opti/0RX6489250058.png',
+        price: 7590,
       },
       {
         id: 31,
-        name: 'Floral T-shirt',
-        imageUrl: 'https://i.ibb.co/qMQ75QZ/floral-shirt.png',
-        price: 20
+        name: 'Wayfarer Optics',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_eyeglasses_clp_opti/0RX5184810652.png',
+        price: 8090,
       },
       {
         id: 32,
-        name: 'Black & White Longsleeve',
-        imageUrl: 'https://i.ibb.co/55z32tw/long-sleeve.png',
-        price: 25
+        name: 'Nomad Optics',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_eyeglasses_clp_opti/0RX5487201254.png',
+        price: 7590,
       },
       {
         id: 33,
-        name: 'Pink T-shirt',
-        imageUrl: 'https://i.ibb.co/RvwnBL8/pink-shirt.png',
-        price: 25
+        name: 'Jack Optics',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_eyeglasses_clp_opti/0RX6465250949.png',
+        price: 7590,
       },
       {
         id: 34,
-        name: 'Jean Long Sleeve',
-        imageUrl: 'https://i.ibb.co/VpW4x5t/roll-up-jean-shirt.png',
-        price: 40
+        name: 'Hexagonal Optics',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_eyeglasses_clp_opti/0RX6448310551.png',
+        price: 7590,
       },
       {
         id: 35,
-        name: 'Burgundy T-shirt',
-        imageUrl: 'https://i.ibb.co/mh3VM1f/polka-dot-shirt.png',
-        price: 25
-      }
-    ]
-  }
+        name: 'Thalia Optics',
+        imageUrl:
+          'https://india.ray-ban.com/pub/media/wysiwyg/Rb_eyeglasses_clp_opti/0RX5395200051.png',
+        price: 7590,
+      },
+    ],
+  },
 };
 
 export default SHOP_DATA;
