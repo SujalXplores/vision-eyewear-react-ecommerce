@@ -40,7 +40,7 @@ const SignIn = (props) => {
           type='email'
           handleChange={handleChange}
           value={userCredentials.email}
-          label='email'
+          label='Email'
           required
         />
         <FormInput
@@ -48,7 +48,7 @@ const SignIn = (props) => {
           type='password'
           value={userCredentials.password}
           handleChange={handleChange}
-          label='password'
+          label='Password'
           required
         />
         <div className='buttons'>
