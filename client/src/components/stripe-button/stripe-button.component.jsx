@@ -31,7 +31,7 @@ const StripeCheckoutButton = ({ price }) => {
       name='Vision Eyewear'
       billingAddress
       shippingAddress
-      image='https://svgshare.com/i/CUz.svg'
+      image='https://raw.githubusercontent.com/SujalShah3234/vision-eyewear-react-ecommerce/master/client/src/assets/brand-logo.svg'
       description={`Your total is ₹${price}`}
       amount={priceForStripe}
       panelLabel='Pay Now'
