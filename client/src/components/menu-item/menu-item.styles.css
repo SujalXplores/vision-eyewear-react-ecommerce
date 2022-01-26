@@ -8,6 +8,8 @@
   border: 1px solid #000000;
   margin: 0 7.5px 15px;
   overflow: hidden;
+  border-radius: 15px;
+  border: none;
 }
 
 .menu-item-container:hover {
@@ -41,30 +43,5 @@
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-position: center;
-}
-
-.content-container {
-  height: 90px;
-  padding: 0 25px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #000;
-  background-color: #fff;
-  opacity: 0.7;
-  position: absolute;
-}
-
-.content-title {
-  font-weight: bold;
-  margin-bottom: 6px;
-  font-size: 22px;
-  color: #4a4a4a;
-}
-
-.content-subtitle {
-  font-weight: lighter;
-  font-size: 16px;
+  background-position: bottom;
 }
