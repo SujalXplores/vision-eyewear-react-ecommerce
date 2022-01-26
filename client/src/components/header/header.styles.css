@@ -4,12 +4,24 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+  padding: 0 0.5rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: hsla(0, 0%, 94.5%, 0.7);
+  z-index: 999;
+  backdrop-filter: blur(10px);
 }
 
 .logo-container {
   height: 100%;
   width: 70px;
   padding: 10px;
+}
+
+.logo {
+  height: 38px;
+  width: auto;
 }
 
 .options-container {
