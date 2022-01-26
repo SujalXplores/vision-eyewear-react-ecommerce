@@ -1,7 +1,9 @@
-import { CustomButtonContainer } from './custom-button.styles';
+import './custom-button.styles.css';
 
 export const CustomButton = ({ children, ...props }) => (
-  <CustomButtonContainer {...props}>{children}</CustomButtonContainer>
+  <button {...props} className={`btn ${props.className}`}>
+    {children}
+  </button>
 );
 
 export default CustomButton;

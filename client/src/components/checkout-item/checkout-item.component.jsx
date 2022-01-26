@@ -6,38 +6,32 @@ import {
   removeItem,
 } from '../../redux/cart/cart.actions';
 
-import {
-  CheckoutItemContainer,
-  ImageContainer,
-  TextContainer,
-  QuantityContainer,
-  RemoveButtonContainer,
-} from './checkout-item.styles';
+import './checkout-item.styles.css';
 
 export const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
   return (
-    <CheckoutItemContainer>
-      <ImageContainer>
+    <div className='checkout-item-container'>
+      <div className='image-container'>
         <img src={imageUrl} alt='item' />
-      </ImageContainer>
-      <TextContainer>{name}</TextContainer>
-      <QuantityContainer>
+      </div>
+      <span className='text-container'>{name}</span>
+      <span className='text-container quantity-container'>
         <div onClick={() => removeItem(cartItem)}>&#10094;</div>
         <span>{quantity}</span>
         <div onClick={() => addItem(cartItem)}>&#10095;</div>
-      </QuantityContainer>
-      <TextContainer>
+      </span>
+      <span className='text-container'>
         {new Intl.NumberFormat('en-IN', {
           currency: 'INR',
           style: 'currency',
           maximumFractionDigits: 0,
         }).format(price)}
-      </TextContainer>
-      <RemoveButtonContainer onClick={() => clearItem(cartItem)}>
+      </span>
+      <div className='btn-remove' onClick={() => clearItem(cartItem)}>
         &#10005;
-      </RemoveButtonContainer>
-    </CheckoutItemContainer>
+      </div>
+    </div>
   );
 };
 
