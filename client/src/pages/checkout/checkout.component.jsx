@@ -9,51 +9,40 @@ import {
   selectCartTotal,
 } from '../../redux/cart/cart.selectors';
 
-import {
-  CheckoutPageContainer,
-  CheckoutHeaderContainer,
-  HeaderBlockContainer,
-  TotalContainer,
-  WarningContainer,
-} from './checkout.styles';
+import './checkout.styles.css';
 
 export const CheckoutPage = ({ cartItems, total }) => (
-  <CheckoutPageContainer>
-    <CheckoutHeaderContainer>
-      <HeaderBlockContainer>
+  <div className='checkout-page-container'>
+    <div className='checkout-header-container'>
+      <div className='header-block-container'>
         <span>Product</span>
-      </HeaderBlockContainer>
-      <HeaderBlockContainer>
+      </div>
+      <div className='header-block-container'>
         <span>Description</span>
-      </HeaderBlockContainer>
-      <HeaderBlockContainer>
+      </div>
+      <div className='header-block-container'>
         <span>Quantity</span>
-      </HeaderBlockContainer>
-      <HeaderBlockContainer>
+      </div>
+      <div className='header-block-container'>
         <span>Price</span>
-      </HeaderBlockContainer>
-      <HeaderBlockContainer>
+      </div>
+      <div className='header-block-container'>
         <span>Remove</span>
-      </HeaderBlockContainer>
-    </CheckoutHeaderContainer>
+      </div>
+    </div>
     {cartItems.map((cartItem) => (
       <CheckoutItem key={cartItem.id} cartItem={cartItem} />
     ))}
-    <TotalContainer>
+    <div className='total-container'>
       TOTAL:{' '}
       {new Intl.NumberFormat('en-IN', {
         currency: 'INR',
         style: 'currency',
         maximumFractionDigits: 0,
       }).format(total)}
-    </TotalContainer>
-    <WarningContainer>
-      *Please use the following test credit card for payments*
-      <br />
-      4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
-    </WarningContainer>
+    </div>
     <StripeCheckoutButton price={total} />
-  </CheckoutPageContainer>
+  </div>
 );
 
 const mapStateToProps = createStructuredSelector({
