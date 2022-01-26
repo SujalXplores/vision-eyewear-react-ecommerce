@@ -13,16 +13,12 @@ export const MenuItem = ({
   <div
     className='menu-item-container'
     onClick={() => history.push(`${match.url}${linkUrl}`)}
-    style={{ height: size ? '380px' : '240px' }}
+    style={{ height: size ? '600px' : '340px' }}
   >
     <div
       className='background-image background-img-container'
       style={{ backgroundImage: `url(${imageUrl})` }}
     ></div>
-    <div className='content content-container'>
-      <span className='content-title'>{title.toUpperCase()}</span>
-      <span className='content-subtitle'>SHOP NOW</span>
-    </div>
   </div>
 );
 
