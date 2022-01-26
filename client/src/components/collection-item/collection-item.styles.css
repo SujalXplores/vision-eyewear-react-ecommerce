@@ -5,6 +5,7 @@
   height: 350px;
   align-items: center;
   position: relative;
+  border: 1px solid #e1e1e1;
 }
 
 .collection-item-container:hover .image {
@@ -29,14 +30,16 @@
   height: 100%;
   background-size: cover;
   background-position: bottom;
+  border-bottom: 1px solid #e1e1e1;
 }
 
 .collection-footer-container {
   width: 100%;
-  height: 5%;
+  height: 10%;
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+  padding: 0.3rem;
 }
 
 .name-container {
@@ -46,6 +49,10 @@
 
 .price-container {
   text-align: right;
+}
+
+.name-container .price-container {
+  font-size: 15px;
 }
 
 @media screen and (max-width: 800px) {
