@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import CartItem from '../cart-item/cart-item.component';
 import { selectCartItems } from '../../redux/cart/cart.selectors';
@@ -8,10 +8,11 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import CustomButton from '../custom-button/custom-button.component';
 import './cart-dropdown.styles.css';
 
-export const CartDropdown = ({ history }) => {
+export const CartDropdown = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
   const currentUser = useSelector(selectCurrentUser);
+  const history = useHistory();
   return (
     <div className='cart-dropdown-container'>
       <div className='cart-items-container'>
@@ -36,4 +37,4 @@ export const CartDropdown = ({ history }) => {
   );
 };
 
-export default withRouter(CartDropdown);
+export default CartDropdown;
