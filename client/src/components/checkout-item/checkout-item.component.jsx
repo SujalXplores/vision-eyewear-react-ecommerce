@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import {
   clearItemFromCart,
@@ -8,8 +8,13 @@ import {
 
 import './checkout-item.styles.css';
 
-export const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
+export const CheckoutItem = ({ cartItem }) => {
+  const dispatch = useDispatch();
+  const clearItem = (item) => dispatch(clearItemFromCart(item));
+  const addItemToCart = (item) => dispatch(addItem(item));
+  const removeItemFromCart = (item) => dispatch(removeItem(item));
   const { name, imageUrl, price, quantity } = cartItem;
+
   return (
     <div className='checkout-item-container'>
       <div className='image-container'>
@@ -17,9 +22,9 @@ export const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
       </div>
       <span className='text-container'>{name}</span>
       <span className='text-container quantity-container'>
-        <div onClick={() => removeItem(cartItem)}>&#10094;</div>
+        <div onClick={() => removeItemFromCart(cartItem)}>&#10094;</div>
         <span>{quantity}</span>
-        <div onClick={() => addItem(cartItem)}>&#10095;</div>
+        <div onClick={() => addItemToCart(cartItem)}>&#10095;</div>
       </span>
       <span className='text-container'>
         {new Intl.NumberFormat('en-IN', {
@@ -35,10 +40,4 @@ export const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  clearItem: (item) => dispatch(clearItemFromCart(item)),
-  addItem: (item) => dispatch(addItem(item)),
-  removeItem: (item) => dispatch(removeItem(item)),
-});
-
-export default connect(null, mapDispatchToProps)(CheckoutItem);
+export default CheckoutItem;
