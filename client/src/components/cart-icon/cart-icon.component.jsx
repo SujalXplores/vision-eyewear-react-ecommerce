@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import Badge from '@mui/material/Badge';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 import { selectCartItemsCount } from '../../redux/cart/cart.selectors';
-import { ReactComponent as ShoppingIconSVG } from '../../assets/shopping-bag.svg';
-import './cart-icon.styles.css';
 
 export const CartIcon = () => {
   const dispatch = useDispatch();
@@ -12,8 +13,9 @@ export const CartIcon = () => {
 
   return (
     <div onClick={onToggle} className='cart-container'>
-      <ShoppingIconSVG className='shopping-icon' />
-      <span className='item-count-container'>{itemCount}</span>
+      <Badge badgeContent={itemCount} color='secondary'>
+        <ShoppingBagIcon color='action' />
+      </Badge>
     </div>
   );
 };

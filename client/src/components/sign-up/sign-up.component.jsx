@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
 
 import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
 import { signUpStart } from '../../redux/user/user.actions';
 import './sign-up.styles.css';
 
@@ -71,9 +71,14 @@ const SignUp = () => {
           label='Confirm Password'
           required
         />
-        <CustomButton type='submit' className='btn-secondary'>
+        <Button
+          variant='contained'
+          size='large'
+          color='secondary'
+          type='submit'
+        >
           SIGN UP
-        </CustomButton>
+        </Button>
       </form>
     </div>
   );
