@@ -1,6 +1,6 @@
-import Button from '@mui/material/Button';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useHistory } from 'react-router-dom';
+import { Button } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import BanerLogo from '../../assets/banner-girl.png';
 import './banner.styles.css';
 
