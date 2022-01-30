@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
+import LoginIcon from '@mui/icons-material/Login';
+import GoogleIcon from '@mui/icons-material/Google';
 
 import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
-
 import {
   googleSignInStart,
   emailSignInStart,
@@ -57,17 +58,26 @@ const SignIn = () => {
           required
         />
         <div className='buttons-bar-container'>
-          <CustomButton type='submit' className='btn-secondary'>
-            {' '}
-            Sign in{' '}
-          </CustomButton>
-          <CustomButton
-            className='btn-secondary btn-google'
+          <Button
+            variant='contained'
+            size='large'
+            color='secondary'
+            type='submit'
+            startIcon={<LoginIcon />}
+          >
+            Sign in
+          </Button>
+
+          <Button
+            variant='outlined'
             type='button'
+            size='large'
+            color='secondary'
+            startIcon={<GoogleIcon />}
             onClick={handleGoogleAuth}
           >
             Sign in with Google
-          </CustomButton>
+          </Button>
         </div>
       </form>
     </div>

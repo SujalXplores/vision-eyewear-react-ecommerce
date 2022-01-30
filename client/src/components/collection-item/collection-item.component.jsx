@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-// import toast, { Toaster } from 'react-hot-toast';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 import { addItem } from '../../redux/cart/cart.actions';
-import CustomButton from '../custom-button/custom-button.component';
 import './collection-item.styles.css';
 
 export const CollectionItem = ({ item }) => {
@@ -25,9 +25,16 @@ export const CollectionItem = ({ item }) => {
           }).format(price)}
         </span>
       </div>
-      <CustomButton className='btn-add btn-inverted' onClick={onAddItem}>
+      <Button
+        size='small'
+        variant='contained'
+        color='secondary'
+        className='btn-add'
+        startIcon={<AddIcon />}
+        onClick={onAddItem}
+      >
         Add to cart
-      </CustomButton>
+      </Button>
     </div>
   );
 };
