@@ -56,7 +56,7 @@ export const CartDrawer = () => {
   return (
     <SwipeableDrawer
       anchor='right'
-      open={hidden}
+      open={!hidden}
       onClose={toggleDrawer}
       onOpen={toggleDrawer}
     >
