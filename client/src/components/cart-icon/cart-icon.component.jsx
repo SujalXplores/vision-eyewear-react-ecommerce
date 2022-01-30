@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-
-import Badge from '@mui/material/Badge';
+import { Badge } from '@mui/material';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
 import { toggleCartHidden } from '../../redux/cart/cart.actions';

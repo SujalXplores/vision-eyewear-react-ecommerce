@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import Button from '@mui/material/Button';
+import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { addItem } from '../../redux/cart/cart.actions';
 import './collection-item.styles.css';

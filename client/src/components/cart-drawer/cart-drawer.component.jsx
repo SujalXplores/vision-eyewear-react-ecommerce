@@ -1,10 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
+import { Button, List, SwipeableDrawer, Box } from '@mui/material';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
-import List from '@mui/material/List';
 
 import CartItem from '../cart-item/cart-item.component';
 import {
