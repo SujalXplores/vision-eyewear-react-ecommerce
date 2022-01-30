@@ -2,8 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import CartIcon from '../cart-icon/cart-icon.component';
-import CartDropdown from '../cart-dropdown/cart-dropdown.component';
-import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import CartDrawer from '../cart-drawer/cart-drawer.component';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { signOutStart } from '../../redux/user/user.actions';
 import { ReactComponent as Logo } from '../../assets/brand-logo.svg';
@@ -13,7 +12,6 @@ export const Header = () => {
   const dispatch = useDispatch();
   const onSignOut = () => dispatch(signOutStart());
   const currentUser = useSelector(selectCurrentUser);
-  const hidden = useSelector(selectCartHidden);
   return (
     <div className='header-container'>
       <Link to='/' className='logo-container'>
@@ -37,7 +35,7 @@ export const Header = () => {
         )}
         <CartIcon />
       </div>
-      {hidden ? null : <CartDropdown />}
+      <CartDrawer />
     </div>
   );
 };
