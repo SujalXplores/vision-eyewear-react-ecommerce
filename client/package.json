@@ -9,6 +9,7 @@
   "dependencies": {
     "@mui/icons-material": "^5.3.1",
     "@mui/material": "^5.3.1",
+    "@stripe/stripe-js": "^1.22.0",
     "firebase": "9.6.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -22,8 +23,8 @@
     "reselect": "4.1.5"
   },
   "devDependencies": {
-    "redux-logger": "3.0.6",
-    "react-scripts": "5.0.0"
+    "react-scripts": "5.0.0",
+    "redux-logger": "3.0.6"
   },
   "resolutions": {
     "babel-jest": "24.7.1"

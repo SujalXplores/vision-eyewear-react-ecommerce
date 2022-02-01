@@ -1,3 +1,4 @@
+import '@stripe/stripe-js';
 import { useEffect, lazy, Suspense } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
