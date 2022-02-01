@@ -13,7 +13,6 @@ export const Header = () => {
   const dispatch = useDispatch();
   const onSignOut = () => dispatch(signOutStart());
   const currentUser = useSelector(selectCurrentUser);
-  console.log(currentUser);
   return (
     <div className='header-container'>
       <Link to='/' className='logo-container'>
