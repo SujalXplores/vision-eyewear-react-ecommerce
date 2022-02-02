@@ -7,6 +7,7 @@ import {
   selectCartItems,
   selectCartTotal,
 } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 import './checkout.styles.css';
 
 let stripePromise;
@@ -22,6 +23,7 @@ const getStripe = () => {
 export const CheckoutPage = () => {
   const cartItems = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
+  const currentUser = useSelector(selectCurrentUser);
 
   let items = [];
   cartItems.map((item) => {
@@ -31,20 +33,23 @@ export const CheckoutPage = () => {
       quantity: quantity,
     };
     items.push(obj);
+    return items;
   });
 
   console.log(items);
 
+  const { email } = currentUser;
+
   const checkoutOptions = {
     lineItems: items,
     mode: 'payment',
+    billingAddressCollection: 'required',
+    customerEmail: email,
     successUrl: 'http://localhost:3000/shop',
     cancelUrl: 'http://localhost:3000/checkout/cancel',
   };
 
   const redirectCheckout = async () => {
-    console.log('inside redirect to checkout');
-
     const stripe = await getStripe();
     const { error } = await stripe.redirectToCheckout(checkoutOptions);
     console.log('Stripe error !', error);
@@ -80,7 +85,6 @@ export const CheckoutPage = () => {
           maximumFractionDigits: 0,
         }).format(total)}
       </div>
-      {/* <StripeCheckoutButton price={total} /> */}
       <Button
         onClick={redirectCheckout}
         size='large'
