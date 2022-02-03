@@ -17,6 +17,7 @@
 .preview-container {
   display: flex;
   justify-content: space-between;
+  grid-gap: 20px;
 }
 
 @media screen and (max-width: 800px) {
