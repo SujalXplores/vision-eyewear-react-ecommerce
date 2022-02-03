@@ -1,7 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { Button, Snackbar } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import {
+  Fab,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Snackbar,
+  Tooltip,
+} from '@mui/material';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+
 import { addItem } from '../../redux/cart/cart.actions';
 import './collection-item.styles.css';
 
@@ -9,6 +18,7 @@ export const CollectionItem = ({ item }) => {
   const [state, setState] = useState(false);
   const dispatch = useDispatch();
   const { name, price, imageUrl } = item;
+
   const onAddItem = () => {
     dispatch(addItem(item));
     setState(true);
@@ -19,31 +29,32 @@ export const CollectionItem = ({ item }) => {
   };
 
   return (
-    <div className='collection-item-container'>
-      <div
-        className='image background-image'
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      />
-      <div className='collection-footer-container'>
-        <span className='name-container'>{name}</span>
-        <span className='price-container'>
-          {new Intl.NumberFormat('en-IN', {
-            currency: 'INR',
-            style: 'currency',
-            maximumFractionDigits: 0,
-          }).format(price)}
-        </span>
-      </div>
-      <Button
-        size='small'
-        variant='contained'
-        color='secondary'
-        className='btn-add'
-        startIcon={<AddIcon />}
-        onClick={onAddItem}
-      >
-        Add to cart
-      </Button>
+    <>
+      <Card sx={{ maxWidth: 345 }} raised className='item-card'>
+        <CardMedia component='img' width='100%' image={imageUrl} alt={name} />
+        <CardContent>
+          <Typography gutterBottom variant='h5' component='div'>
+            {name}
+          </Typography>
+          <Typography variant='body2' color='text.secondary'>
+            {new Intl.NumberFormat('en-IN', {
+              currency: 'INR',
+              style: 'currency',
+              maximumFractionDigits: 0,
+            }).format(price) + '/-'}
+          </Typography>
+          <Tooltip title='Add to cart' placement='bottom'>
+            <Fab
+              className='add-to-cart'
+              onClick={onAddItem}
+              size='small'
+              color='secondary'
+            >
+              <AddShoppingCartIcon />
+            </Fab>
+          </Tooltip>
+        </CardContent>
+      </Card>
       <Snackbar
         autoHideDuration={2000}
         open={state}
@@ -53,7 +64,7 @@ export const CollectionItem = ({ item }) => {
         color='secondary'
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       />
-    </div>
+    </>
   );
 };
 
