@@ -37,7 +37,7 @@ export const Header = () => {
         <CartIcon />
         {currentUser && (
           <Avatar alt={currentUser.displayName} src={currentUser.photoURL}>
-            {currentUser.displayName.charAt(0)}
+            {currentUser?.displayName?.charAt(0)}
           </Avatar>
         )}
       </div>
