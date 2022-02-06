@@ -59,9 +59,8 @@ export const CollectionItem = ({ item }) => {
         autoHideDuration={2000}
         open={state}
         onClose={handleClose}
-        message='1 item added to cart'
+        message='✅ 1 item added to cart'
         key={Math.random()}
-        color='secondary'
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       />
     </>
