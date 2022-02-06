@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import Button from '@mui/material/Button';
+import { Button, TextField } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import GoogleIcon from '@mui/icons-material/Google';
 
-import FormInput from '../form-input/form-input.component';
+// import FormInput from '../form-input/form-input.component';
 import {
   googleSignInStart,
   emailSignInStart,
@@ -18,6 +18,7 @@ const SignIn = () => {
   const handleEmailAuth = (email, password) =>
     dispatch(emailSignInStart({ email, password }));
 
+  const [disable, setDisable] = useState(false);
   const [userCredentials, setCredentials] = useState({
     email: '',
     password: '',
@@ -27,6 +28,7 @@ const SignIn = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setDisable(true);
     handleEmailAuth(email, password);
   };
 
@@ -41,21 +43,31 @@ const SignIn = () => {
       <span>Sign in with your email and password</span>
 
       <form onSubmit={handleSubmit}>
-        <FormInput
+        <TextField
           name='email'
           type='email'
-          handleChange={handleChange}
+          onChange={handleChange}
           value={email}
           label='Email'
           required
+          style={{ margin: '25px 0' }}
+          variant='standard'
+          size='small'
+          fullWidth
+          color='secondary'
         />
-        <FormInput
+        <TextField
           name='password'
           type='password'
           value={password}
-          handleChange={handleChange}
+          onChange={handleChange}
           label='Password'
           required
+          style={{ margin: '25px 0' }}
+          variant='standard'
+          size='small'
+          fullWidth
+          color='secondary'
         />
         <div className='buttons-bar-container'>
           <Button
@@ -63,6 +75,7 @@ const SignIn = () => {
             size='large'
             color='secondary'
             type='submit'
+            disabled={disable}
             startIcon={<LoginIcon />}
           >
             Sign in

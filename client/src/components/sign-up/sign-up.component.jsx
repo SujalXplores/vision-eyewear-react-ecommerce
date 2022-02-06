@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import Button from '@mui/material/Button';
-
-import FormInput from '../form-input/form-input.component';
+import { Button, TextField } from '@mui/material';
+// import FormInput from '../form-input/form-input.component';
 import { signUpStart } from '../../redux/user/user.actions';
 import './sign-up.styles.css';
 
@@ -11,6 +10,7 @@ const SignUp = () => {
   const handleSignUp = (userCredentials) =>
     dispatch(signUpStart(userCredentials));
 
+  const [disable, setDisable] = useState(false);
   const [userCredentials, setUserCredentials] = useState({
     displayName: '',
     email: '',
@@ -26,6 +26,7 @@ const SignUp = () => {
       alert("Confirm password don't match");
       return;
     }
+    setDisable(true);
     handleSignUp({ displayName, email, password });
   };
 
@@ -39,43 +40,65 @@ const SignUp = () => {
       <h2 className='sign-up-title'>I do not have a account</h2>
       <span>Sign up with your email and password</span>
       <form className='sign-up-form' onSubmit={handleSubmit}>
-        <FormInput
+        <TextField
           type='text'
+          style={{ margin: '15px 0' }}
           name='displayName'
           value={displayName}
           onChange={handleChange}
           label='Display Name'
+          variant='standard'
+          size='small'
+          fullWidth
+          color='secondary'
           required
         />
-        <FormInput
+        <TextField
           type='email'
           name='email'
+          style={{ margin: '15px 0' }}
           value={email}
           onChange={handleChange}
           label='Email'
           required
+          variant='standard'
+          size='small'
+          fullWidth
+          color='secondary'
         />
-        <FormInput
+        <TextField
           type='password'
           name='password'
+          style={{ margin: '15px 0' }}
           value={password}
           onChange={handleChange}
           label='Password'
           required
+          variant='standard'
+          size='small'
+          fullWidth
+          color='secondary'
         />
-        <FormInput
+        <TextField
           type='password'
           name='confirmPassword'
           value={confirmPassword}
           onChange={handleChange}
           label='Confirm Password'
           required
+          style={{ margin: '15px 0' }}
+          variant='standard'
+          size='small'
+          fullWidth
+          color='secondary'
         />
         <Button
           variant='contained'
           size='large'
           color='secondary'
           type='submit'
+          disabled={disable}
+          sx={{ marginTop: '1rem' }}
         >
           SIGN UP
         </Button>

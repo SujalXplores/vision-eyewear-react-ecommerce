@@ -1,6 +1,16 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Avatar } from '@mui/material';
+import {
+  Avatar,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+} from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDrawer from '../cart-drawer/cart-drawer.component';
@@ -11,8 +21,23 @@ import './header.styles.css';
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const onSignOut = () => dispatch(signOutStart());
   const currentUser = useSelector(selectCurrentUser);
+
+  const [open, setOpen] = useState(false);
+
+  const onSignOut = () => {
+    dispatch(signOutStart());
+    setOpen(false);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div className='header-container'>
       <Link to='/' className='logo-container'>
@@ -26,7 +51,7 @@ export const Header = () => {
           CONTACT
         </Link>
         {currentUser ? (
-          <Link as='div' onClick={onSignOut} to='/'>
+          <Link as='div' onClick={handleClickOpen} to='/'>
             SIGN OUT
           </Link>
         ) : (
@@ -37,10 +62,27 @@ export const Header = () => {
         <CartIcon />
         {currentUser && (
           <Avatar alt={currentUser.displayName} src={currentUser.photoURL}>
-            {currentUser.displayName.charAt(0)}
+            {currentUser?.displayName?.charAt(0)}
           </Avatar>
         )}
       </div>
+      <Dialog open={open} keepMounted onClose={handleClose}>
+        <DialogTitle>
+          <LogoutIcon sx={{ verticalAlign: 'middle', marginRight: '10px' }} />
+          Confirm Signout
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to sign out?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={onSignOut} color='error'>
+            Signout
+          </Button>
+        </DialogActions>
+      </Dialog>
       <CartDrawer />
     </div>
   );

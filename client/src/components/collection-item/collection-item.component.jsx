@@ -8,6 +8,7 @@ import {
   Typography,
   Snackbar,
   Tooltip,
+  Skeleton,
 } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
@@ -16,8 +17,13 @@ import './collection-item.styles.css';
 
 export const CollectionItem = ({ item }) => {
   const [state, setState] = useState(false);
+  const [items, setItems] = useState(null);
+
   const dispatch = useDispatch();
-  const { name, price, imageUrl } = item;
+
+  setTimeout(() => {
+    setItems(item);
+  }, 3000);
 
   const onAddItem = () => {
     dispatch(addItem(item));
@@ -31,18 +37,44 @@ export const CollectionItem = ({ item }) => {
   return (
     <>
       <Card sx={{ maxWidth: 345 }} raised className='item-card'>
-        <CardMedia component='img' width='100%' image={imageUrl} alt={name} />
+        {items ? (
+          <CardMedia
+            component='img'
+            width='100%'
+            image={items.imageUrl}
+            alt={items.name}
+          />
+        ) : (
+          <Skeleton
+            sx={{ height: 300, width: 345 }}
+            animation='wave'
+            variant='rectangular'
+          />
+        )}
         <CardContent>
-          <Typography gutterBottom variant='h5' component='div'>
-            {name}
-          </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            {new Intl.NumberFormat('en-IN', {
-              currency: 'INR',
-              style: 'currency',
-              maximumFractionDigits: 0,
-            }).format(price) + '/-'}
-          </Typography>
+          {items ? (
+            <>
+              <Typography gutterBottom variant='h5' component='div'>
+                {items.name}
+              </Typography>
+              <Typography variant='body2' color='text.secondary'>
+                {new Intl.NumberFormat('en-IN', {
+                  currency: 'INR',
+                  style: 'currency',
+                  maximumFractionDigits: 0,
+                }).format(items.price) + '/-'}
+              </Typography>
+            </>
+          ) : (
+            <>
+              <Skeleton
+                animation='wave'
+                height={10}
+                style={{ marginBottom: 6 }}
+              />
+              <Skeleton animation='wave' height={10} width='80%' />
+            </>
+          )}
           <Tooltip title='Add to cart' placement='bottom'>
             <Fab
               className='add-to-cart'
@@ -59,9 +91,8 @@ export const CollectionItem = ({ item }) => {
         autoHideDuration={2000}
         open={state}
         onClose={handleClose}
-        message='1 item added to cart'
+        message='✅ 1 item added to cart'
         key={Math.random()}
-        color='secondary'
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       />
     </>
