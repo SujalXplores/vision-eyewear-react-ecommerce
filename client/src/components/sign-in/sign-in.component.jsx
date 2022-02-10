@@ -18,7 +18,6 @@ const SignIn = () => {
   const handleEmailAuth = (email, password) =>
     dispatch(emailSignInStart({ email, password }));
 
-  const [disable, setDisable] = useState(false);
   const [userCredentials, setCredentials] = useState({
     email: '',
     password: '',
@@ -28,7 +27,6 @@ const SignIn = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setDisable(true);
     handleEmailAuth(email, password);
   };
 
@@ -75,7 +73,6 @@ const SignIn = () => {
             size='large'
             color='secondary'
             type='submit'
-            disabled={disable}
             startIcon={<LoginIcon />}
           >
             Sign in
