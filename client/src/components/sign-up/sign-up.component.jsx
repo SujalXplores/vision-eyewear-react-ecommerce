@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, TextField } from '@mui/material';
-// import FormInput from '../form-input/form-input.component';
+import { Button, TextField, Snackbar } from '@mui/material';
 import { signUpStart } from '../../redux/user/user.actions';
 import './sign-up.styles.css';
 
@@ -10,7 +9,8 @@ const SignUp = () => {
   const handleSignUp = (userCredentials) =>
     dispatch(signUpStart(userCredentials));
 
-  const [disable, setDisable] = useState(false);
+  const [state, setState] = useState(false);
+
   const [userCredentials, setUserCredentials] = useState({
     displayName: '',
     email: '',
@@ -23,16 +23,19 @@ const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      alert("Confirm password don't match");
+      setState(true);
       return;
     }
-    setDisable(true);
     handleSignUp({ displayName, email, password });
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUserCredentials({ ...userCredentials, [name]: value });
+  };
+
+  const handleClose = () => {
+    setState(false);
   };
 
   return (
@@ -97,12 +100,19 @@ const SignUp = () => {
           size='large'
           color='secondary'
           type='submit'
-          disabled={disable}
           sx={{ marginTop: '1rem' }}
         >
           SIGN UP
         </Button>
       </form>
+      <Snackbar
+        autoHideDuration={3000}
+        open={state}
+        onClose={handleClose}
+        message='Confirm password does not match!'
+        key={Math.random()}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      />
     </div>
   );
 };
