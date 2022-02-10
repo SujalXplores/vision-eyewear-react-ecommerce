@@ -23,7 +23,7 @@ export const CollectionItem = ({ item }) => {
 
   setTimeout(() => {
     setItems(item);
-  }, 3000);
+  }, 2000);
 
   const onAddItem = () => {
     dispatch(addItem(item));
