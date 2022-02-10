@@ -36,7 +36,7 @@ export const CollectionItem = ({ item }) => {
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }} raised className='item-card'>
+      <Card sx={{ maxWidth: 345 }} className='item-card' variant='outlined'>
         {items ? (
           <CardMedia
             component='img'
