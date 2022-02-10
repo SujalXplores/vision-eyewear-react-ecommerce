@@ -45,18 +45,18 @@ export const Header = () => {
       </Link>
       <div className='options-container'>
         <Link className='option-link' to='/shop'>
-          SHOP
+          Shop
         </Link>
         <Link className='option-link' to='/shop'>
-          CONTACT
+          Contact
         </Link>
         {currentUser ? (
           <Link as='div' onClick={handleClickOpen} to='/'>
-            SIGN OUT
+            Sign Out
           </Link>
         ) : (
           <Link className='option-link' to='/signin'>
-            SIGN IN
+            Sign In
           </Link>
         )}
         <CartIcon />

@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  min-height: 100%;
+}
+
 html {
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;

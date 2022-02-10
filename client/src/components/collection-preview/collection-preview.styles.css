@@ -20,7 +20,15 @@
   grid-gap: 20px;
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 425px) {
+  .preview-container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 15px;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 800px) {
   .collection-preview-container {
     align-items: center;
   }

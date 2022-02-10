@@ -19,7 +19,7 @@
   margin-top: 30px;
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 800px) {
   .collection-items-container {
     grid-template-columns: 1fr 1fr;
     grid-gap: 15px;
