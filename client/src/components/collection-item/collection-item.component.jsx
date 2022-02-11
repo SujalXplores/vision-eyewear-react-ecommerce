@@ -77,16 +77,26 @@ export const CollectionItem = ({ item }) => {
           )}
         </CardContent>
         <CardActions>
-          <Button
-            className='add-to-cart'
-            onClick={onAddItem}
-            size='small'
-            color='secondary'
-            variant='outlined'
-            startIcon={<AddShoppingCartIcon />}
-          >
-            Add to cart
-          </Button>
+          {items ? (
+            <Button
+              className='add-to-cart'
+              onClick={onAddItem}
+              size='small'
+              color='secondary'
+              variant='outlined'
+              startIcon={<AddShoppingCartIcon />}
+            >
+              Add to cart
+            </Button>
+          ) : (
+            <Skeleton
+              variant='rectangular'
+              animation='wave'
+              height={22}
+              width={109}
+              sx={{ margin: '7px' }}
+            />
+          )}
         </CardActions>
       </Card>
       <Snackbar

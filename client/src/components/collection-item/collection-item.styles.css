@@ -3,11 +3,5 @@
 }
 
 .add-to-cart {
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
   margin: 7px;
-}
-
-.item-card:hover .add-to-cart {
-  opacity: 1;
 }
