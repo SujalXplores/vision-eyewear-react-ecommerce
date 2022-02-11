@@ -1,64 +1,101 @@
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-
-import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
+import { useSelector } from 'react-redux';
+import { loadStripe } from '@stripe/stripe-js';
+import { Button } from '@mui/material';
+import PaymentIcon from '@mui/icons-material/Payment';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
-
 import {
   selectCartItems,
   selectCartTotal,
 } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import './checkout.styles.css';
 
-import {
-  CheckoutPageContainer,
-  CheckoutHeaderContainer,
-  HeaderBlockContainer,
-  TotalContainer,
-  WarningContainer,
-} from './checkout.styles';
+let stripePromise;
 
-export const CheckoutPage = ({ cartItems, total }) => (
-  <CheckoutPageContainer>
-    <CheckoutHeaderContainer>
-      <HeaderBlockContainer>
-        <span>Product</span>
-      </HeaderBlockContainer>
-      <HeaderBlockContainer>
-        <span>Description</span>
-      </HeaderBlockContainer>
-      <HeaderBlockContainer>
-        <span>Quantity</span>
-      </HeaderBlockContainer>
-      <HeaderBlockContainer>
-        <span>Price</span>
-      </HeaderBlockContainer>
-      <HeaderBlockContainer>
-        <span>Remove</span>
-      </HeaderBlockContainer>
-    </CheckoutHeaderContainer>
-    {cartItems.map((cartItem) => (
-      <CheckoutItem key={cartItem.id} cartItem={cartItem} />
-    ))}
-    <TotalContainer>
-      TOTAL:{' '}
-      {new Intl.NumberFormat('en-IN', {
-        currency: 'INR',
-        style: 'currency',
-        maximumFractionDigits: 0,
-      }).format(total)}
-    </TotalContainer>
-    <WarningContainer>
-      *Please use the following test credit card for payments*
-      <br />
-      4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
-    </WarningContainer>
-    <StripeCheckoutButton price={total} />
-  </CheckoutPageContainer>
-);
+const getStripe = () => {
+  if (!stripePromise) {
+    console.log(process.env.REACT_APP_STRIPE_KEY);
+    stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+  }
+  return stripePromise;
+};
 
-const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartItems,
-  total: selectCartTotal,
-});
+export const CheckoutPage = () => {
+  const cartItems = useSelector(selectCartItems);
+  const total = useSelector(selectCartTotal);
+  const currentUser = useSelector(selectCurrentUser);
 
-export default connect(mapStateToProps)(CheckoutPage);
+  let items = [];
+  cartItems.map((item) => {
+    const { price_id, quantity } = item;
+    const obj = {
+      price: price_id,
+      quantity: quantity,
+    };
+    items.push(obj);
+    return items;
+  });
+
+  console.log(items);
+
+  const { email } = currentUser;
+
+  const checkoutOptions = {
+    lineItems: items,
+    mode: 'payment',
+    billingAddressCollection: 'required',
+    customerEmail: email,
+    successUrl: 'http://localhost:3000/shop',
+    cancelUrl: 'http://localhost:3000/checkout/cancel',
+  };
+
+  const redirectCheckout = async () => {
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout(checkoutOptions);
+    console.log('Stripe error !', error);
+  };
+
+  return (
+    <div className='checkout-page-container'>
+      <div className='checkout-header-container'>
+        <div className='header-block-container'>
+          <span>Product</span>
+        </div>
+        <div className='header-block-container'>
+          <span>Description</span>
+        </div>
+        <div className='header-block-container'>
+          <span>Quantity</span>
+        </div>
+        <div className='header-block-container'>
+          <span>Price</span>
+        </div>
+        <div className='header-block-container'>
+          <span>Remove</span>
+        </div>
+      </div>
+      {cartItems.map((cartItem) => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      ))}
+      <div className='total-container'>
+        TOTAL:{' '}
+        {new Intl.NumberFormat('en-IN', {
+          currency: 'INR',
+          style: 'currency',
+          maximumFractionDigits: 0,
+        }).format(total)}
+      </div>
+      <Button
+        onClick={redirectCheckout}
+        size='large'
+        variant='contained'
+        startIcon={<PaymentIcon />}
+        sx={{ marginBottom: '40px' }}
+      >
+        Pay with Stripe
+      </Button>
+    </div>
+  );
+};
+
+export default CheckoutPage;

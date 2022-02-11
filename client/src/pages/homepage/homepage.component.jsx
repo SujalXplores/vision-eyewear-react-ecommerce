@@ -1,11 +1,12 @@
+import Banner from '../../components/banner/banner.component';
 import Directory from '../../components/directory/directory.component';
-
-import { HomePageContainer } from './homepage.styles';
+import './homepage.styles.css';
 
 const HomePage = () => (
-  <HomePageContainer>
+  <div className='homepage-container'>
+    <Banner />
     <Directory />
-  </HomePageContainer>
+  </div>
 );
 
 export default HomePage;

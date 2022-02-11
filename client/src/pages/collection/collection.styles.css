@@ -1,0 +1,27 @@
+.collection-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.collection-title {
+  font-size: 38px;
+  margin: 0 auto 30px;
+}
+
+.collection-items-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.collection-items-container > div {
+  margin-top: 30px;
+}
+
+@media (max-width: 800px) {
+  .collection-items-container {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+  }
+}

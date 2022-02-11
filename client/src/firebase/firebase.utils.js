@@ -22,13 +22,14 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   const snapShot = await userRef.get();
 
   if (!snapShot.exists) {
-    const { displayName, email } = userAuth;
+    const { displayName, email, photoURL } = userAuth;
     const createdAt = new Date();
     try {
       await userRef.set({
         displayName,
         email,
         createdAt,
+        photoURL,
         ...additionalData,
       });
     } catch (error) {
@@ -47,7 +48,6 @@ export const addCollectionAndDocuments = async (
 
   const batch = firestore.batch();
   objectsToAdd.forEach((obj) => {
-    console.log(obj);
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });

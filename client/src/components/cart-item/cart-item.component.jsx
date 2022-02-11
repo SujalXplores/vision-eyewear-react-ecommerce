@@ -1,15 +1,10 @@
 import { memo } from 'react';
-
-import {
-  CartItemContainer,
-  ItemDetailsContainer,
-  CartItemImage,
-} from './cart-item.styles';
+import './cart-item.styles.css';
 
 const CartItem = ({ item: { imageUrl, price, name, quantity } }) => (
-  <CartItemContainer>
-    <CartItemImage src={imageUrl} alt='item' />
-    <ItemDetailsContainer>
+  <div className='cart-item-container'>
+    <img className='cart-item-img' src={imageUrl} alt='item' />
+    <div className='item-details-container'>
       <span>{name}</span>
       <span>
         {quantity} x{' '}
@@ -19,8 +14,8 @@ const CartItem = ({ item: { imageUrl, price, name, quantity } }) => (
           maximumFractionDigits: 0,
         }).format(price)}
       </span>
-    </ItemDetailsContainer>
-  </CartItemContainer>
+    </div>
+  </div>
 );
 
 export default memo(CartItem);

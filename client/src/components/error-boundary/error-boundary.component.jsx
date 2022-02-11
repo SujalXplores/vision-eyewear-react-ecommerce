@@ -1,40 +1,38 @@
 import { Component } from 'react';
+import './error-boundary.styles.css';
 
-import {
-  ErrorImageOverlay,
-  ErrorImageContainer,
-  ErrorImageText,
-} from './error-boundary.styles';
+const ErrorComponent = () => {
+  return (
+    <div className='error-image-overlay'>
+      <div
+        className='error-image-container'
+        style={{ backgroundImage: 'url(https://i.imgur.com/yW2W9SC.png)' }}
+      ></div>
+      <h2 className='error-image-text'>Something went wrong!</h2>
+    </div>
+  );
+};
 
 class ErrorBoundary extends Component {
-  constructor() {
-    super();
+  state = {
+    hasError: false,
+    error: { message: '', stack: '' },
+    info: { componentStack: '' },
+  };
 
-    this.state = {
-      hasErrored: false,
-    };
-  }
+  static getDerivedStateFromError = (error) => {
+    return { hasError: true };
+  };
 
-  static getDerivedStateFromError(error) {
-    // process the error
-    return { hasErrored: true };
-  }
-
-  componentDidCatch(error, info) {
-    console.log(error);
-  }
+  componentDidCatch = (error, info) => {
+    this.setState({ error, info });
+  };
 
   render() {
-    if (this.state.hasErrored) {
-      return (
-        <ErrorImageOverlay>
-          <ErrorImageContainer imageUrl='https://i.imgur.com/yW2W9SC.png' />
-          <ErrorImageText>Sorry this page is broken</ErrorImageText>
-        </ErrorImageOverlay>
-      );
-    }
+    const { hasError } = this.state;
+    const { children } = this.props;
 
-    return this.props.children;
+    return hasError ? <ErrorComponent /> : children;
   }
 }
 

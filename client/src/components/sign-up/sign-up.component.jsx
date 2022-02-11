@@ -1,88 +1,120 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-
-import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
-
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Button, TextField, Snackbar } from '@mui/material';
 import { signUpStart } from '../../redux/user/user.actions';
+import './sign-up.styles.css';
 
-import { SignUpContainer, SignUpTitle } from './sign-up.styles';
+const SignUp = () => {
+  const dispatch = useDispatch();
+  const handleSignUp = (userCredentials) =>
+    dispatch(signUpStart(userCredentials));
 
-const SignUp = ({ signUpStart }) => {
+  const [state, setState] = useState(false);
+
   const [userCredentials, setUserCredentials] = useState({
     displayName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
   const { displayName, email, password, confirmPassword } = userCredentials;
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
     if (password !== confirmPassword) {
-      alert("passwords don't match");
+      setState(true);
       return;
     }
-
-    signUpStart({ displayName, email, password });
+    handleSignUp({ displayName, email, password });
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-
     setUserCredentials({ ...userCredentials, [name]: value });
   };
 
+  const handleClose = () => {
+    setState(false);
+  };
+
   return (
-    <SignUpContainer>
-      <SignUpTitle>I do not have a account</SignUpTitle>
+    <div className='sign-up-container'>
+      <h2 className='sign-up-title'>I do not have a account</h2>
       <span>Sign up with your email and password</span>
       <form className='sign-up-form' onSubmit={handleSubmit}>
-        <FormInput
+        <TextField
           type='text'
+          style={{ margin: '15px 0' }}
           name='displayName'
           value={displayName}
           onChange={handleChange}
           label='Display Name'
+          variant='standard'
+          size='small'
+          fullWidth
+          color='secondary'
           required
         />
-        <FormInput
+        <TextField
           type='email'
           name='email'
+          style={{ margin: '15px 0' }}
           value={email}
           onChange={handleChange}
           label='Email'
           required
+          variant='standard'
+          size='small'
+          fullWidth
+          color='secondary'
         />
-        <FormInput
+        <TextField
           type='password'
           name='password'
+          style={{ margin: '15px 0' }}
           value={password}
           onChange={handleChange}
           label='Password'
           required
+          variant='standard'
+          size='small'
+          fullWidth
+          color='secondary'
         />
-        <FormInput
+        <TextField
           type='password'
           name='confirmPassword'
           value={confirmPassword}
           onChange={handleChange}
           label='Confirm Password'
           required
+          style={{ margin: '15px 0' }}
+          variant='standard'
+          size='small'
+          fullWidth
+          color='secondary'
         />
-        <CustomButton type='submit'>SIGN UP</CustomButton>
+        <Button
+          variant='contained'
+          size='large'
+          color='secondary'
+          type='submit'
+          sx={{ marginTop: '1rem' }}
+        >
+          SIGN UP
+        </Button>
       </form>
-    </SignUpContainer>
+      <Snackbar
+        autoHideDuration={3000}
+        open={state}
+        onClose={handleClose}
+        message='Confirm password does not match!'
+        key={Math.random()}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      />
+    </div>
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  signUpStart: userCredentials => dispatch(signUpStart(userCredentials))
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignUp);
+export default SignUp;
