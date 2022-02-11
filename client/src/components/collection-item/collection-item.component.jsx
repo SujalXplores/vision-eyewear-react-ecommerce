@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import {
-  Fab,
+  Button,
   Card,
   CardContent,
   CardMedia,
+  CardActions,
   Typography,
   Snackbar,
-  Tooltip,
   Skeleton,
 } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -75,17 +75,19 @@ export const CollectionItem = ({ item }) => {
               <Skeleton animation='wave' height={10} width='80%' />
             </>
           )}
-          <Tooltip title='Add to cart' placement='bottom'>
-            <Fab
-              className='add-to-cart'
-              onClick={onAddItem}
-              size='small'
-              color='secondary'
-            >
-              <AddShoppingCartIcon />
-            </Fab>
-          </Tooltip>
         </CardContent>
+        <CardActions>
+          <Button
+            className='add-to-cart'
+            onClick={onAddItem}
+            size='small'
+            color='secondary'
+            variant='outlined'
+            startIcon={<AddShoppingCartIcon />}
+          >
+            Add to cart
+          </Button>
+        </CardActions>
       </Card>
       <Snackbar
         autoHideDuration={2000}
