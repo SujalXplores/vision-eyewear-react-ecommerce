@@ -61,7 +61,11 @@ export const Header = () => {
         )}
         <CartIcon />
         {currentUser && (
-          <Avatar alt={currentUser.displayName} src={currentUser.photoURL}>
+          <Avatar
+            alt={currentUser.displayName}
+            src={currentUser.photoURL}
+            sx={{ width: 30, height: 30 }}
+          >
             {currentUser?.displayName?.charAt(0)}
           </Avatar>
         )}
