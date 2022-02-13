@@ -9,6 +9,8 @@ import {
   Typography,
   Snackbar,
   Skeleton,
+  Alert,
+  Slide,
 } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
@@ -24,6 +26,10 @@ export const CollectionItem = ({ item }) => {
   setTimeout(() => {
     setItems(item);
   }, 2000);
+
+  const TransitionLeft = (props) => {
+    return <Slide {...props} direction='left' />;
+  };
 
   const onAddItem = () => {
     dispatch(addItem(item));
@@ -103,10 +109,12 @@ export const CollectionItem = ({ item }) => {
         autoHideDuration={2000}
         open={state}
         onClose={handleClose}
-        message='✅ 1 item added to cart'
         key={Math.random()}
+        TransitionComponent={TransitionLeft}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      />
+      >
+        <Alert severity='success'>1 item added to cart.</Alert>
+      </Snackbar>
     </>
   );
 };

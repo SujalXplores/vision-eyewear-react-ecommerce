@@ -89,6 +89,7 @@ export const CheckoutPage = () => {
         onClick={redirectCheckout}
         size='large'
         variant='contained'
+        color='secondary'
         startIcon={<PaymentIcon />}
         sx={{ marginBottom: '40px' }}
       >
