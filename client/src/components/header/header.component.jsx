@@ -9,7 +9,13 @@ import {
   DialogContentText,
   DialogActions,
   Button,
+  Menu,
+  MenuItem,
+  Tooltip,
+  IconButton,
+  ListItemIcon,
 } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 import CartIcon from '../cart-icon/cart-icon.component';
@@ -25,12 +31,24 @@ export const Header = () => {
 
   const [open, setOpen] = useState(false);
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isAvatarmenuOpen = Boolean(anchorEl);
+
+  const handleAvatarClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleAvatarClose = () => {
+    setAnchorEl(null);
+  };
+
   const onSignOut = () => {
     dispatch(signOutStart());
     setOpen(false);
   };
 
   const handleClickOpen = () => {
+    setAnchorEl(null);
     setOpen(true);
   };
 
@@ -50,24 +68,46 @@ export const Header = () => {
         <Link className='option-link' to='/shop'>
           Contact
         </Link>
-        {currentUser ? (
-          <Link as='div' onClick={handleClickOpen} to='/'>
-            Sign Out
-          </Link>
-        ) : (
+        {!currentUser && (
           <Link className='option-link' to='/signin'>
             Sign In
           </Link>
         )}
         <CartIcon />
         {currentUser && (
-          <Avatar
-            alt={currentUser.displayName}
-            src={currentUser.photoURL}
-            sx={{ width: 30, height: 30 }}
-          >
-            {currentUser?.displayName?.charAt(0)}
-          </Avatar>
+          <>
+            <Tooltip title='Account settings'>
+              <IconButton onClick={handleAvatarClick} size='small'>
+                <Avatar
+                  alt={currentUser.displayName}
+                  src={currentUser.photoURL}
+                  sx={{ width: '30px', height: '30px' }}
+                >
+                  {currentUser?.displayName?.charAt(0)}
+                </Avatar>
+              </IconButton>
+            </Tooltip>
+            <Menu
+              anchorEl={anchorEl}
+              open={isAvatarmenuOpen}
+              onClose={handleAvatarClose}
+            >
+              <MenuItem onClick={handleAvatarClose}>
+                <ListItemIcon>
+                  <AccountCircleIcon fontSize='small' />
+                </ListItemIcon>
+                Profile
+              </MenuItem>
+              <MenuItem>
+                <ListItemIcon>
+                  <LogoutIcon fontSize='small' />
+                </ListItemIcon>
+                <Link onClick={handleClickOpen} to='/'>
+                  Sign Out
+                </Link>
+              </MenuItem>
+            </Menu>
+          </>
         )}
       </div>
       <Dialog open={open} keepMounted onClose={handleClose}>
