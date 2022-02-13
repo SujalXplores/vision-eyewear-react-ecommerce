@@ -111,7 +111,7 @@ export const CollectionItem = ({ item }) => {
         onClose={handleClose}
         key={Math.random()}
         TransitionComponent={TransitionLeft}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
         <Alert severity='success'>1 item added to cart.</Alert>
       </Snackbar>
