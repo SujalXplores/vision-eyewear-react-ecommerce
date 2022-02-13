@@ -10,7 +10,9 @@ import ErrorBoundary from './components/error-boundary/error-boundary.component'
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 import Footer from './components/footer/footer.component';
-
+const PageNotFound = lazy(() =>
+  import('./pages/error404/pagenotfound.component')
+);
 const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
 const ShopPage = lazy(() => import('./pages/shop/shop.component'));
 const SignInAndSignUpPage = lazy(() =>
@@ -47,7 +49,8 @@ const App = () => {
                 currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage />
               }
             />
-            <Route path='*' component={() => <Redirect to='/' />} />
+            <Route exact path='/pagenotfound' component={PageNotFound} />
+            <Route path='*' component={() => <Redirect to='/pagenotfound' />} />
           </Suspense>
         </ErrorBoundary>
       </Switch>

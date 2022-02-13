@@ -1,0 +1,12 @@
+.page-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100vh;
+}
+
+.text-404 {
+  text-align: center;
+  line-height: 2;
+}
