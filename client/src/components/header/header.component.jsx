@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Avatar,
   Dialog,
@@ -27,7 +27,7 @@ import './header.styles.css';
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
 
   const [open, setOpen] = useState(false);
@@ -46,7 +46,7 @@ export const Header = () => {
   const onSignOut = () => {
     dispatch(signOutStart());
     setOpen(false);
-    history.replace('/');
+    navigate('/', { replace: true });
   };
 
   const handleClickOpen = () => {

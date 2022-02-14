@@ -1,11 +1,11 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import BanerLogo from '../../assets/banner-girl.png';
 import './banner.styles.css';
 
 const Banner = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <div className='banner'>
@@ -21,7 +21,7 @@ const Banner = () => {
         </p>
         <br />
         <Button
-          onClick={() => history.push('/shop')}
+          onClick={() => navigate('/shop')}
           variant='contained'
           endIcon={<ArrowForwardIcon />}
           size='large'

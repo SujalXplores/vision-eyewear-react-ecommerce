@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, List, SwipeableDrawer, Box } from '@mui/material';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 
@@ -18,7 +18,7 @@ export const CartDrawer = () => {
   const currentUser = useSelector(selectCurrentUser);
   const hidden = useSelector(selectCartHidden);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const toggleDrawer = () => {
     dispatch(toggleCartHidden());
@@ -43,8 +43,8 @@ export const CartDrawer = () => {
             onClick={() => {
               dispatch(toggleCartHidden());
               currentUser
-                ? history.push('/checkout')
-                : history.replace('/signin');
+                ? navigate('/checkout')
+                : navigate('/signin', { replace: true });
             }}
           >
             CHECKOUT

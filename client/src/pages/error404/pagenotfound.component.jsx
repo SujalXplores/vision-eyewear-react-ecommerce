@@ -1,12 +1,12 @@
 import { Button } from '@mui/material';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './pagenotfound.styles.css';
 
 const PageNotFound = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const goToHome = () => {
-    history.push('/');
+    navigate('/');
   };
 
   return (
