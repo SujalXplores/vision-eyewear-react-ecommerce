@@ -10,13 +10,11 @@ import {
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import './checkout.styles.css';
 
-let stripePromise;
+import { ReactComponent as EmptyCartIcon } from '../../assets/empty-cart.svg';
 
 const getStripe = () => {
-  if (!stripePromise) {
-    console.log(process.env.REACT_APP_STRIPE_KEY);
-    stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
-  }
+  let stripePromise;
+  stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
   return stripePromise;
 };
 
@@ -36,8 +34,6 @@ export const CheckoutPage = () => {
     return items;
   });
 
-  console.log(items);
-
   const { email } = currentUser;
 
   const checkoutOptions = {
@@ -56,46 +52,54 @@ export const CheckoutPage = () => {
   };
 
   return (
-    <div className='checkout-page-container'>
-      <div className='checkout-header-container'>
-        <div className='header-block-container'>
-          <span>Product</span>
+    <>
+      {cartItems.length ? (
+        <div className='checkout-page-container'>
+          <div className='checkout-header-container'>
+            <div className='header-block-container'>
+              <span>Product</span>
+            </div>
+            <div className='header-block-container'>
+              <span>Description</span>
+            </div>
+            <div className='header-block-container'>
+              <span>Quantity</span>
+            </div>
+            <div className='header-block-container'>
+              <span>Price</span>
+            </div>
+            <div className='header-block-container'>
+              <span>Remove</span>
+            </div>
+          </div>
+          {cartItems.map((cartItem) => (
+            <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+          ))}
+          <div className='total-container'>
+            TOTAL:{' '}
+            {new Intl.NumberFormat('en-IN', {
+              currency: 'INR',
+              style: 'currency',
+              maximumFractionDigits: 0,
+            }).format(total)}
+          </div>
+          <Button
+            onClick={redirectCheckout}
+            size='large'
+            variant='contained'
+            color='secondary'
+            startIcon={<PaymentIcon />}
+            sx={{ marginBottom: '40px' }}
+          >
+            Pay with Stripe
+          </Button>
         </div>
-        <div className='header-block-container'>
-          <span>Description</span>
+      ) : (
+        <div style={{ display: 'grid', placeItems: 'center' }}>
+          <EmptyCartIcon style={{ height: '50vh' }} />
         </div>
-        <div className='header-block-container'>
-          <span>Quantity</span>
-        </div>
-        <div className='header-block-container'>
-          <span>Price</span>
-        </div>
-        <div className='header-block-container'>
-          <span>Remove</span>
-        </div>
-      </div>
-      {cartItems.map((cartItem) => (
-        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
-      ))}
-      <div className='total-container'>
-        TOTAL:{' '}
-        {new Intl.NumberFormat('en-IN', {
-          currency: 'INR',
-          style: 'currency',
-          maximumFractionDigits: 0,
-        }).format(total)}
-      </div>
-      <Button
-        onClick={redirectCheckout}
-        size='large'
-        variant='contained'
-        color='secondary'
-        startIcon={<PaymentIcon />}
-        sx={{ marginBottom: '40px' }}
-      >
-        Pay with Stripe
-      </Button>
-    </div>
+      )}
+    </>
   );
 };
 

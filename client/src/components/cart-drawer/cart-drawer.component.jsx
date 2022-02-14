@@ -11,6 +11,8 @@ import {
 import { toggleCartHidden } from '../../redux/cart/cart.actions.js';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
+import { ReactComponent as EmptyCartIcon } from '../../assets/empty-cart.svg';
+
 export const CartDrawer = () => {
   const dispatch = useDispatch();
 
@@ -32,7 +34,7 @@ export const CartDrawer = () => {
             <CartItem key={cartItem.id} item={cartItem} />
           ))
         ) : (
-          <span>Your cart is empty</span>
+          <EmptyCartIcon />
         )}
         {cartItems.length ? (
           <Button
