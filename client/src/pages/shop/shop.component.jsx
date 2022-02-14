@@ -10,9 +10,7 @@ const CollectionsOverviewContainer = lazy(() =>
   import('../../components/collections-overview/collections-overview.container')
 );
 
-const CollectionPageContainer = lazy(() =>
-  import('../collection/collection.container')
-);
+const CollectionPage = lazy(() => import('../collection/collection.component'));
 
 export const ShopPage = () => {
   const dispatch = useDispatch();
@@ -25,14 +23,8 @@ export const ShopPage = () => {
     <div className='shop-page-container'>
       <Suspense fallback={<Spinner />}>
         <Routes>
-          <Route
-            path='/'
-            element={<CollectionsOverviewContainer />}
-          />
-          <Route
-            path=':collectionId'
-            element={<CollectionPageContainer />}
-          />
+          <Route path='/' element={<CollectionsOverviewContainer />} />
+          <Route path=':collectionId' element={<CollectionPage />} />
         </Routes>
       </Suspense>
     </div>

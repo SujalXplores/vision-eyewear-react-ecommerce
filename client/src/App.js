@@ -1,13 +1,13 @@
 import '@stripe/stripe-js';
 import { useEffect, lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { useDispatch,  } from 'react-redux';
-//useSelector,Navigate
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Header from './components/header/header.component';
 import Spinner from './components/spinner/spinner.component';
 import ErrorBoundary from './components/error-boundary/error-boundary.component';
 
-// import { selectCurrentUser } from './redux/user/user.selectors';
+import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 import Footer from './components/footer/footer.component';
 
@@ -23,11 +23,26 @@ const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
 
 const App = () => {
   const dispatch = useDispatch();
-  // const currentUser = useSelector(selectCurrentUser);
+  const currentUser = useSelector(selectCurrentUser);
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(checkUserSession());
   }, [dispatch]);
+
+  const HideLogin = ({ children }) => {
+    if (currentUser) {
+      return <Navigate to='/' state={{ from: location }} replace />;
+    }
+    return children;
+  };
+
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to='/login' state={{ from: location }} replace />;
+    }
+    return children;
+  };
 
   return (
     <>
@@ -37,8 +52,22 @@ const App = () => {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/shop/*' element={<ShopPage />} />
-            <Route path='/checkout' element={<CheckoutPage />} />
-            <Route path='/signin' element={<SignInAndSignUpPage />} />
+            <Route
+              path='/checkout'
+              element={
+                <ProtectedRoute>
+                  <CheckoutPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/signin'
+              element={
+                <HideLogin>
+                  <SignInAndSignUpPage />
+                </HideLogin>
+              }
+            />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Suspense>
