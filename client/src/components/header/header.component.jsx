@@ -71,7 +71,7 @@ export const Header = () => {
           Contact
         </Link>
         {!currentUser && (
-          <Link className='option-link' to='/signin'>
+          <Link className='option-link' to='/auth/signin'>
             Sign In
           </Link>
         )}

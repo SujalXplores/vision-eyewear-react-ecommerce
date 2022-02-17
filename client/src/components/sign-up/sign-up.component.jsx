@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, TextField, Snackbar } from '@mui/material';
+import { Button, TextField, Avatar, Paper, Box, Grid, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+
 import { signUpStart } from '../../redux/user/user.actions';
-import './sign-up.styles.css';
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const handleSignUp = (userCredentials) =>
     dispatch(signUpStart(userCredentials));
-
-  const [state, setState] = useState(false);
 
   const [userCredentials, setUserCredentials] = useState({
     displayName: '',
@@ -23,7 +23,7 @@ const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      setState(true);
+      alert("Password not matched!")
       return;
     }
     handleSignUp({ displayName, email, password });
@@ -34,86 +34,87 @@ const SignUp = () => {
     setUserCredentials({ ...userCredentials, [name]: value });
   };
 
-  const handleClose = () => {
-    setState(false);
-  };
-
   return (
-    <div className='sign-up-container'>
-      <h2 className='sign-up-title'>I do not have a account</h2>
-      <span>Sign up with your email and password</span>
-      <form className='sign-up-form' onSubmit={handleSubmit}>
-        <TextField
-          type='text'
-          style={{ margin: '15px 0' }}
-          name='displayName'
-          value={displayName}
-          onChange={handleChange}
-          label='Display Name'
-          variant='standard'
-          size='small'
-          fullWidth
-          color='secondary'
-          required
-        />
-        <TextField
-          type='email'
-          name='email'
-          style={{ margin: '15px 0' }}
-          value={email}
-          onChange={handleChange}
-          label='Email'
-          required
-          variant='standard'
-          size='small'
-          fullWidth
-          color='secondary'
-        />
-        <TextField
-          type='password'
-          name='password'
-          style={{ margin: '15px 0' }}
-          value={password}
-          onChange={handleChange}
-          label='Password'
-          required
-          variant='standard'
-          size='small'
-          fullWidth
-          color='secondary'
-        />
-        <TextField
-          type='password'
-          name='confirmPassword'
-          value={confirmPassword}
-          onChange={handleChange}
-          label='Confirm Password'
-          required
-          style={{ margin: '15px 0' }}
-          variant='standard'
-          size='small'
-          fullWidth
-          color='secondary'
-        />
-        <Button
-          variant='contained'
-          size='large'
-          color='secondary'
-          type='submit'
-          sx={{ marginTop: '1rem' }}
-        >
-          SIGN UP
-        </Button>
-      </form>
-      <Snackbar
-        autoHideDuration={3000}
-        open={state}
-        onClose={handleClose}
-        message='Confirm password does not match!'
-        key={Math.random()}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      />
-    </div>
+    <Grid item xs={12} sm={8} md={5} component={Paper} square>
+      <Box
+        sx={{
+          my: 8,
+          mx: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component='h1' variant='h5'>
+          Sign Up
+        </Typography>
+        <Box component='form' noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            label='Display Name'
+            type='text'
+            name='displayName'
+            value={displayName}
+            onChange={handleChange}
+            color='secondary'
+          />
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            type='email'
+            name='email'
+            value={email}
+            onChange={handleChange}
+            label='Email'
+            color='secondary'
+          />
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            type='password'
+            name='password'
+            value={password}
+            onChange={handleChange}
+            label='Password'
+            color='secondary'
+          />
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            type='password'
+            name='confirmPassword'
+            value={confirmPassword}
+            onChange={handleChange}
+            label='Confirm Password'
+            color='secondary'
+          />
+          <Button
+            type='submit'
+            fullWidth
+            color='secondary'
+            variant='contained'
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign Up
+          </Button>
+          <Grid container>
+            <Grid item>
+              <Link to='/auth/signin' variant='body2' color='secondary'>
+                Already have an account? Sign In
+              </Link>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </Grid>
   );
 };
 
