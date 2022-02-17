@@ -33,7 +33,7 @@ export const Header = () => {
   const [open, setOpen] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const isAvatarmenuOpen = Boolean(anchorEl);
+  const isAvatarMenuOpen = Boolean(anchorEl);
 
   const handleAvatarClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -67,9 +67,11 @@ export const Header = () => {
         <Link className='option-link' to='/shop'>
           Shop
         </Link>
-        <Link className='option-link' to='/shop'>
-          Contact
-        </Link>
+        {currentUser && (
+          <Link className='option-link' to='/contactus'>
+            Contact Us
+          </Link>
+        )}
         {!currentUser && (
           <Link className='option-link' to='/auth/signin'>
             Sign In
@@ -91,7 +93,7 @@ export const Header = () => {
             </Tooltip>
             <Menu
               anchorEl={anchorEl}
-              open={isAvatarmenuOpen}
+              open={isAvatarMenuOpen}
               onClose={handleAvatarClose}
             >
               <MenuItem onClick={handleAvatarClose}>
@@ -112,7 +114,7 @@ export const Header = () => {
       </div>
       <Dialog open={open} keepMounted onClose={handleClose}>
         <DialogTitle>
-          <LogoutIcon sx={{ verticalAlign: 'middle', marginRight: '10px' }} />
+          <LogoutIcon sx={{ verticalAlign: 'middle', mr: '10px' }} />
           Confirm Signout
         </DialogTitle>
         <DialogContent>

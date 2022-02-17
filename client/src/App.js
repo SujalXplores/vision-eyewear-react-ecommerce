@@ -22,6 +22,7 @@ const SignInAndSignUpPage = lazy(() =>
   import('./pages/sign-in-and-sign-up/sign-in-and-sign-up.component')
 );
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
+const ContactUs = lazy(() => import('./pages/contactus/contactus.component'));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const App = () => {
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
-      return <Navigate to='/login' state={{ from: location }} replace />;
+      return <Navigate to='/auth/signin' state={{ from: location }} replace />;
     }
     return children;
   };
@@ -54,6 +55,14 @@ const App = () => {
         <Suspense fallback={<Spinner />}>
           <Routes>
             <Route index path='/' element={<HomePage />} />
+            <Route
+              path='contactus'
+              element={
+                <ProtectedRoute>
+                  <ContactUs />
+                </ProtectedRoute>
+              }
+            />
             <Route path='shop/*' element={<ShopPage />} />
             <Route
               path='checkout'
