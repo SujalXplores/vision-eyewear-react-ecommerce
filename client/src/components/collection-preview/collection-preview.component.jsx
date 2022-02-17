@@ -5,6 +5,7 @@ import './collection-preview.styles.css';
 
 export const CollectionPreview = ({ title, items, routeName }) => {
   const navigate = useNavigate();
+  
   const handleClick = () => {
     navigate(`/shop/${routeName}`);
   };

@@ -21,7 +21,7 @@ const Banner = () => {
         </p>
         <br />
         <Button
-          onClick={() => navigate('/shop')}
+          onClick={() => navigate('shop')}
           variant='contained'
           endIcon={<ArrowForwardIcon />}
           size='large'

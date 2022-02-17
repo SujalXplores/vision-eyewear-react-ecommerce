@@ -41,8 +41,8 @@ export const CheckoutPage = () => {
     mode: 'payment',
     billingAddressCollection: 'required',
     customerEmail: email,
-    successUrl: 'http://localhost:3000/shop',
-    cancelUrl: 'http://localhost:3000/checkout/cancel',
+    successUrl: 'http://localhost:3000/order-confirmed',
+    cancelUrl: 'http://localhost:3000/cart',
   };
 
   const redirectCheckout = async () => {
