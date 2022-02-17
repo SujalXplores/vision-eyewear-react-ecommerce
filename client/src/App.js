@@ -12,6 +12,7 @@ import { checkUserSession } from './redux/user/user.actions';
 import Footer from './components/footer/footer.component';
 import SignIn from './components/sign-in/sign-in.component';
 import SignUp from './components/sign-up/sign-up.component';
+import { fetchCollectionsStart } from './redux/shop/shop.actions';
 const PageNotFound = lazy(() =>
   import('./pages/error404/pagenotfound.component')
 );
@@ -24,11 +25,12 @@ const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
 
 const App = () => {
   const dispatch = useDispatch();
-  const currentUser = useSelector(selectCurrentUser);
   const location = useLocation();
+  const currentUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
     dispatch(checkUserSession());
+    dispatch(fetchCollectionsStart());
   }, [dispatch]);
 
   const HideLogin = ({ children }) => {
