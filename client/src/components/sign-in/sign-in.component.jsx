@@ -1,13 +1,24 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, TextField } from '@mui/material';
+import { Link } from 'react-router-dom';
+import {
+  Button,
+  TextField,
+  Avatar,
+  Paper,
+  Box,
+  Grid,
+  Typography,
+  FormControlLabel,
+  Checkbox,
+} from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+
 import {
   googleSignInStart,
   emailSignInStart,
 } from '../../redux/user/user.actions';
-
-import './sign-in.styles.css';
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -61,61 +72,82 @@ const SignIn = () => {
   );
 
   return (
-    <div className='sign-in-container'>
-      <h2 className='sign-in-title'>I already have an account</h2>
-      <span>Sign in with your email and password</span>
-
-      <form onSubmit={handleSubmit}>
-        <TextField
-          name='email'
-          type='email'
-          onChange={handleChange}
-          value={email}
-          label='Email'
-          required
-          style={{ margin: '25px 0' }}
-          variant='standard'
-          size='small'
-          fullWidth
-          color='secondary'
-        />
-        <TextField
-          name='password'
-          type='password'
-          value={password}
-          onChange={handleChange}
-          label='Password'
-          required
-          style={{ margin: '25px 0' }}
-          variant='standard'
-          size='small'
-          fullWidth
-          color='secondary'
-        />
-        <div className='buttons-bar-container'>
+    <Grid item xs={12} sm={8} md={5} component={Paper} square>
+      <Box
+        sx={{
+          my: 8,
+          mx: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component='h1' variant='h5'>
+          Sign In
+        </Typography>
+        <Box component='form' noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            type='email'
+            name='email'
+            value={email}
+            onChange={handleChange}
+            label='Email'
+            color='secondary'
+          />
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            type='password'
+            name='password'
+            value={password}
+            onChange={handleChange}
+            label='Password'
+            color='secondary'
+          />
+          <FormControlLabel
+            control={<Checkbox value='remember' color='primary' />}
+            label='Remember me'
+          />
           <Button
             variant='contained'
             size='large'
+            fullWidth
             color='secondary'
             type='submit'
             startIcon={<LoginIcon />}
+            sx={{ mt: 3, mb: 2 }}
           >
             Sign in
           </Button>
-
           <Button
             variant='outlined'
             type='button'
             size='large'
+            fullWidth
             color='secondary'
             startIcon={<GoogleIcon />}
             onClick={handleGoogleAuth}
+            sx={{ mb: 2 }}
           >
             Sign in with Google
           </Button>
-        </div>
-      </form>
-    </div>
+          <Grid container>
+            <Grid item>
+              <Link to='/auth/signup' variant='body2' color='secondary'>
+                Don't have an account? Sign Up
+              </Link>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </Grid>
   );
 };
 

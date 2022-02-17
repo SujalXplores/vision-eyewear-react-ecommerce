@@ -45,8 +45,8 @@ export const CartDrawer = () => {
             onClick={() => {
               dispatch(toggleCartHidden());
               currentUser
-                ? navigate('/checkout')
-                : navigate('/signin', { replace: true });
+                ? navigate('checkout')
+                : navigate('auth/signin', { replace: true });
             }}
           >
             CHECKOUT

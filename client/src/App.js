@@ -10,7 +10,8 @@ import ErrorBoundary from './components/error-boundary/error-boundary.component'
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 import Footer from './components/footer/footer.component';
-
+import SignIn from './components/sign-in/sign-in.component';
+import SignUp from './components/sign-up/sign-up.component';
 const PageNotFound = lazy(() =>
   import('./pages/error404/pagenotfound.component')
 );
@@ -50,10 +51,10 @@ const App = () => {
       <ErrorBoundary>
         <Suspense fallback={<Spinner />}>
           <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/shop/*' element={<ShopPage />} />
+            <Route index path='/' element={<HomePage />} />
+            <Route path='shop/*' element={<ShopPage />} />
             <Route
-              path='/checkout'
+              path='checkout'
               element={
                 <ProtectedRoute>
                   <CheckoutPage />
@@ -61,13 +62,16 @@ const App = () => {
               }
             />
             <Route
-              path='/signin'
+              path='auth'
               element={
                 <HideLogin>
                   <SignInAndSignUpPage />
                 </HideLogin>
               }
-            />
+            >
+              <Route path='signin' element={<SignIn />} />
+              <Route path='signup' element={<SignUp />} />
+            </Route>
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Suspense>

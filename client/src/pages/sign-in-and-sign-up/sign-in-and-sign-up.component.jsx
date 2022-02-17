@@ -1,13 +1,25 @@
-import SignIn from '../../components/sign-in/sign-in.component';
-import SignUp from '../../components/sign-up/sign-up.component';
+import { CssBaseline, Grid } from '@mui/material';
+import { Outlet } from 'react-router-dom';
 
-import './sign-in-and-sign-up.styles.css';
-
-const SignInAndSignUpPage = () => (
-  <div className='auth-wrapper'>
-    <SignIn />
-    <SignUp />
-  </div>
-);
+const SignInAndSignUpPage = () => {
+  return (
+    <Grid container component='main' sx={{ height: '100vh' }}>
+      <CssBaseline />
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={7}
+        sx={{
+          backgroundImage: 'url(https://source.unsplash.com/random)',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      />
+      <Outlet />
+    </Grid>
+  );
+};
 
 export default SignInAndSignUpPage;
