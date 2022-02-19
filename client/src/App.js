@@ -53,38 +53,41 @@ const App = () => {
       <Header />
       <ErrorBoundary>
         <Suspense fallback={<Spinner />}>
-          <Routes>
-            <Route index path='/' element={<HomePage />} />
-            <Route
-              path='contactus'
-              element={
-                <ProtectedRoute>
-                  <ContactUs />
-                </ProtectedRoute>
-              }
-            />
-            <Route path='shop/*' element={<ShopPage />} />
-            <Route
-              path='checkout'
-              element={
-                <ProtectedRoute>
-                  <CheckoutPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path='auth'
-              element={
-                <HideLogin>
-                  <SignInAndSignUpPage />
-                </HideLogin>
-              }
-            >
-              <Route path='signin' element={<SignIn />} />
-              <Route path='signup' element={<SignUp />} />
-            </Route>
-            <Route path='*' element={<PageNotFound />} />
-          </Routes>
+          <main className='main__container'>
+            <Routes>
+              <Route index path='/' element={<HomePage />} />
+              <Route
+                path='contactus'
+                element={
+                  <ProtectedRoute>
+                    <ContactUs />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path='shop/*' element={<ShopPage />} />
+              {/* <Route path='order-confirm' element={} /> */}
+              <Route
+                path='checkout'
+                element={
+                  <ProtectedRoute>
+                    <CheckoutPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path='auth'
+                element={
+                  <HideLogin>
+                    <SignInAndSignUpPage />
+                  </HideLogin>
+                }
+              >
+                <Route path='signin' element={<SignIn />} />
+                <Route path='signup' element={<SignUp />} />
+              </Route>
+              <Route path='*' element={<PageNotFound />} />
+            </Routes>
+          </main>
         </Suspense>
       </ErrorBoundary>
       <Footer />
