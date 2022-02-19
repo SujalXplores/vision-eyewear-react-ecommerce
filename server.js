@@ -1,8 +1,7 @@
 const express = require('express');
-
-const app = express();
 const cors = require('cors');
-var nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
+const app = express();
 
 app.use(express.json());
 app.use(cors());
@@ -11,7 +10,7 @@ app.post('/mail', async (req, res) => {
   const to_mail = req.body.email;
   const message = req.body.message;
   console.log(req.body);
-  var transporter = nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
@@ -21,7 +20,7 @@ app.post('/mail', async (req, res) => {
     },
   });
 
-  var mailOptions = {
+  const mailOptions = {
     from: 'virtivaghjiramni@gmail.com',
     to: to_mail,
     subject: 'Message from vision eyewear',
@@ -35,7 +34,7 @@ app.post('/mail', async (req, res) => {
       });
     } else {
       res.json({
-        msg: 'success',
+        msg: info,
       });
     }
   });
