@@ -13,6 +13,9 @@ import Footer from './components/footer/footer.component';
 import SignIn from './components/sign-in/sign-in.component';
 import SignUp from './components/sign-up/sign-up.component';
 import { fetchCollectionsStart } from './redux/shop/shop.actions';
+const ConfirmOrder = lazy(() =>
+  import('./pages/confimorder/confirmorder.component')
+);
 const PageNotFound = lazy(() =>
   import('./pages/error404/pagenotfound.component')
 );
@@ -65,7 +68,7 @@ const App = () => {
                 }
               />
               <Route path='shop/*' element={<ShopPage />} />
-              {/* <Route path='order-confirm' element={} /> */}
+              <Route path='order-confirmed' element={<ConfirmOrder />} />
               <Route
                 path='checkout'
                 element={
