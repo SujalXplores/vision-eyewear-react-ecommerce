@@ -3,13 +3,13 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const config = {
-  apiKey: 'AIzaSyB9MwmkKoD8hTicmHeKlOKUTIdfQHwZtZ0',
-  authDomain: 'vision-eyewear.firebaseapp.com',
-  projectId: 'vision-eyewear',
-  storageBucket: 'vision-eyewear.appspot.com',
-  messagingSenderId: '839591185248',
-  appId: '1:839591185248:web:c98c447c57745b00bc6c05',
-  measurementId: 'G-S5D60QZX74',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: 'vision-eyewear-2034.firebaseapp.com',
+  projectId: 'vision-eyewear-2034',
+  storageBucket: 'vision-eyewear-2034.appspot.com',
+  messagingSenderId: '921653081031',
+  appId: '1:921653081031:web:dea31c3abd3ff42766dfe2',
+  measurementId: 'G-XKFVJQEEXB',
 };
 
 firebase.initializeApp(config);
