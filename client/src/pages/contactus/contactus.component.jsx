@@ -5,48 +5,74 @@ import {
   Button,
   Box,
   Paper,
-  CssBaseline,
   Avatar,
   Typography,
+  Alert,
 } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
+import SendIcon from '@mui/icons-material/Send';
+import useInput from '../../hooks/useInput';
 
 const ContactUs = () => {
-  const [message, setMessage] = useState('');
-  const [email, setEmail] = useState('');
+  let formIsValid = false;
+
+  const isNotEmpty = (val) => val.trim() !== '';
+  const isValidEmail = (val) => /^\S+@\S+\.\S+$/.test(val);
+
+  const [error, setError] = useState('');
+
+  const {
+    value: enteredEmail,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: resetEmail,
+  } = useInput(isValidEmail);
+
+  const {
+    value: enteredMessage,
+    isValid: messageIsValid,
+    hasError: messageHasError,
+    valueChangeHandler: messageChangeHandler,
+    inputBlurHandler: messageBlurHandler,
+    reset: resetMessage,
+  } = useInput(isNotEmpty);
 
   const sendmail = async (event) => {
     event.preventDefault();
 
-    if (message && email === '') {
+    if (!formIsValid) {
       return;
     }
 
-    const res = await fetch('http://localhost:3001/mail', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        message,
-      }),
-    });
-    const data = await res.json();
-    console.log(data);
+    try {
+      const res = await fetch('http://localhost:3001/mail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: enteredEmail,
+          message: enteredMessage,
+        }),
+      });
+      const data = await res.json();
+      console.log('data', data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      resetEmail();
+      resetMessage();
+    }
   };
 
-  const handleChangeMessage = (event) => {
-    setMessage(event.target.value);
-  };
-
-  const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
-  };
+  if (emailIsValid && messageIsValid) {
+    formIsValid = true;
+  }
 
   return (
     <Grid container component='main' sx={{ height: '100vh' }}>
-      <CssBaseline />
       <Grid
         item
         xs={false}
@@ -84,6 +110,7 @@ const ContactUs = () => {
           >
             Fill up the form and our team will get back to you within 24 hours.
           </Typography>
+          {error && <Alert severity='error'>{error}</Alert>}
           <Box component='form' sx={{ mt: 1 }} onSubmit={sendmail}>
             <Grid container spacing={1}>
               <TextField
@@ -95,9 +122,14 @@ const ContactUs = () => {
                 margin='normal'
                 fullWidth
                 autoFocus
-                value={email}
-                onChange={handleChangeEmail}
                 required
+                onChange={emailChangeHandler}
+                onBlur={emailBlurHandler}
+                error={emailHasError}
+                value={enteredEmail}
+                {...(emailHasError && {
+                  helperText: 'Invalid Email Address!',
+                })}
               />
               <TextField
                 color='secondary'
@@ -107,10 +139,15 @@ const ContactUs = () => {
                 placeholder='Type your message here'
                 variant='outlined'
                 margin='normal'
-                onChange={handleChangeMessage}
-                value={message}
                 fullWidth
                 required
+                onChange={messageChangeHandler}
+                onBlur={messageBlurHandler}
+                value={enteredMessage}
+                error={messageHasError}
+                {...(messageHasError && {
+                  helperText: 'Message cannot be empty!',
+                })}
               />
               <Button
                 type='submit'
@@ -118,8 +155,10 @@ const ContactUs = () => {
                 color='secondary'
                 sx={{ mt: 3 }}
                 fullWidth
+                disabled={!formIsValid}
+                endIcon={<SendIcon />}
               >
-                Submit
+                Send
               </Button>
             </Grid>
           </Box>
