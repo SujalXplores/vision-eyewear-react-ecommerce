@@ -14,7 +14,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import { signUpStart } from '../../redux/user/user.actions';
 import useInput from '../../hooks/useInput';
-import { selectErrorMessage } from '../../redux/user/user.selectors';
+import { selectSignUpErrorMessage } from '../../redux/user/user.selectors';
 
 const SignUp = () => {
   let formIsValid = false;
@@ -22,7 +22,7 @@ const SignUp = () => {
   const isNotEmpty = (val) => val.trim() !== '';
   const isValidEmail = (val) => /^\S+@\S+\.\S+$/.test(val);
 
-  const hasErrorInSignUp = useSelector(selectErrorMessage);
+  const hasErrorInSignUp = useSelector(selectSignUpErrorMessage);
 
   const dispatch = useDispatch();
   const handleSignUp = (userCredentials) =>
@@ -128,6 +128,7 @@ const SignUp = () => {
             margin='normal'
             required
             fullWidth
+            autoFocus
             label='Display Name'
             type='text'
             name='displayName'
