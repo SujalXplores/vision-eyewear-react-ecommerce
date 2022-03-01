@@ -1,38 +1,105 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Button, TextField, Avatar, Paper, Box, Grid, Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  Button,
+  TextField,
+  Avatar,
+  Paper,
+  Box,
+  Grid,
+  Typography,
+  Alert,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import { signUpStart } from '../../redux/user/user.actions';
+import useInput from '../../hooks/useInput';
+import { selectSignUpErrorMessage } from '../../redux/user/user.selectors';
 
 const SignUp = () => {
+  let formIsValid = false;
+
+  const isNotEmpty = (val) => val.trim() !== '';
+  const isValidEmail = (val) => /^\S+@\S+\.\S+$/.test(val);
+
+  const hasErrorInSignUp = useSelector(selectSignUpErrorMessage);
+
   const dispatch = useDispatch();
   const handleSignUp = (userCredentials) =>
     dispatch(signUpStart(userCredentials));
 
-  const [userCredentials, setUserCredentials] = useState({
-    displayName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
+  const {
+    value: enteredDisplayName,
+    isValid: displayNameIsValid,
+    hasError: displayNameHasError,
+    valueChangeHandler: displayNameChangeHandler,
+    inputBlurHandler: displayNameBlurHandler,
+    reset: resetDisplayName,
+  } = useInput(isNotEmpty);
 
-  const { displayName, email, password, confirmPassword } = userCredentials;
+  const {
+    value: enteredEmail,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: resetEmail,
+  } = useInput(isValidEmail);
 
-  const handleSubmit = async (event) => {
+  const {
+    value: enteredPassword,
+    isValid: passwordIsValid,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    reset: resetPassword,
+  } = useInput(isNotEmpty);
+
+  const {
+    value: enteredConfirmPassword,
+    isValid: confirmPasswordIsValid,
+    hasError: confirmPasswordHasError,
+    valueChangeHandler: confirmPasswordChangeHandler,
+    inputBlurHandler: confirmPasswordBlurHandler,
+    reset: resetConfirmPassword,
+  } = useInput(isNotEmpty);
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Password not matched!")
+
+    if (!formIsValid) {
       return;
     }
-    handleSignUp({ displayName, email, password });
+
+    console.log({
+      displayName: enteredDisplayName,
+      email: enteredEmail,
+      password: enteredPassword,
+      address: '',
+      phone: '',
+    });
+
+    handleSignUp({
+      displayName: enteredDisplayName,
+      email: enteredEmail,
+      password: enteredPassword,
+    });
+
+    resetDisplayName();
+    resetEmail();
+    resetPassword();
+    resetConfirmPassword();
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUserCredentials({ ...userCredentials, [name]: value });
-  };
+  if (
+    displayNameIsValid &&
+    emailIsValid &&
+    passwordIsValid &&
+    confirmPasswordIsValid &&
+    enteredPassword === enteredConfirmPassword
+  ) {
+    formIsValid = true;
+  }
 
   return (
     <Grid item xs={12} sm={8} md={5} component={Paper} square>
@@ -51,17 +118,28 @@ const SignUp = () => {
         <Typography component='h1' variant='h5'>
           Sign Up
         </Typography>
-        <Box component='form' noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
+        {hasErrorInSignUp && (
+          <Alert severity='error' sx={{ mt: 1 }}>
+            {hasErrorInSignUp.message}
+          </Alert>
+        )}
+        <Box component='form' sx={{ mt: 1 }} onSubmit={handleSubmit}>
           <TextField
             margin='normal'
             required
             fullWidth
+            autoFocus
             label='Display Name'
             type='text'
             name='displayName'
-            value={displayName}
-            onChange={handleChange}
             color='secondary'
+            value={enteredDisplayName}
+            onChange={displayNameChangeHandler}
+            onBlur={displayNameBlurHandler}
+            error={displayNameHasError}
+            {...(displayNameHasError && {
+              helperText: 'Display name is required!',
+            })}
           />
           <TextField
             margin='normal'
@@ -69,10 +147,15 @@ const SignUp = () => {
             fullWidth
             type='email'
             name='email'
-            value={email}
-            onChange={handleChange}
             label='Email'
             color='secondary'
+            onChange={emailChangeHandler}
+            onBlur={emailBlurHandler}
+            error={emailHasError}
+            value={enteredEmail}
+            {...(emailHasError && {
+              helperText: 'Invalid Email Address!',
+            })}
           />
           <TextField
             margin='normal'
@@ -80,10 +163,15 @@ const SignUp = () => {
             fullWidth
             type='password'
             name='password'
-            value={password}
-            onChange={handleChange}
             label='Password'
             color='secondary'
+            value={enteredPassword}
+            onChange={passwordChangeHandler}
+            onBlur={passwordBlurHandler}
+            error={passwordHasError}
+            {...(passwordHasError && {
+              helperText: 'Password is required!',
+            })}
           />
           <TextField
             margin='normal'
@@ -91,17 +179,24 @@ const SignUp = () => {
             fullWidth
             type='password'
             name='confirmPassword'
-            value={confirmPassword}
-            onChange={handleChange}
             label='Confirm Password'
             color='secondary'
+            value={enteredConfirmPassword}
+            onChange={confirmPasswordChangeHandler}
+            onBlur={confirmPasswordBlurHandler}
+            error={confirmPasswordHasError}
+            {...(confirmPasswordHasError && {
+              helperText: 'Confirm Password is required!',
+            })}
           />
+
           <Button
             type='submit'
             fullWidth
             color='secondary'
             variant='contained'
             sx={{ mt: 3, mb: 2 }}
+            disabled={!formIsValid}
           >
             Sign Up
           </Button>

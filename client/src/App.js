@@ -59,14 +59,7 @@ const App = () => {
           <main className='main__container'>
             <Routes>
               <Route index path='/' element={<HomePage />} />
-              <Route
-                path='contactus'
-                element={
-                  <ProtectedRoute>
-                    <ContactUs />
-                  </ProtectedRoute>
-                }
-              />
+              <Route path='contactus' element={<ContactUs />} />
               <Route path='shop/*' element={<ShopPage />} />
               <Route path='order-confirmed' element={<ConfirmOrder />} />
               <Route
