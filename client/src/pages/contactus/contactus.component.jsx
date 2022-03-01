@@ -9,17 +9,19 @@ import {
   Avatar,
   Typography,
 } from '@mui/material';
-import { useSelector } from 'react-redux';
 import EmailIcon from '@mui/icons-material/Email';
-import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 const ContactUs = () => {
   const [message, setMessage] = useState('');
-  const currentUser = useSelector(selectCurrentUser);
-  const { email } = currentUser;
+  const [email, setEmail] = useState('');
 
   const sendmail = async (event) => {
     event.preventDefault();
+
+    if (message && email === '') {
+      return;
+    }
+
     const res = await fetch('http://localhost:3001/mail', {
       method: 'POST',
       headers: {
@@ -34,9 +36,12 @@ const ContactUs = () => {
     console.log(data);
   };
 
-  const handleChange = (event) => {
-    const { value } = event.target;
-    setMessage(value);
+  const handleChangeMessage = (event) => {
+    setMessage(event.target.value);
+  };
+
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value);
   };
 
   return (
@@ -90,7 +95,8 @@ const ContactUs = () => {
                 margin='normal'
                 fullWidth
                 value={email}
-                disabled
+                onChange={handleChangeEmail}
+                required
               />
               <TextField
                 color='secondary'
@@ -100,7 +106,7 @@ const ContactUs = () => {
                 placeholder='Type your message here'
                 variant='outlined'
                 margin='normal'
-                onChange={handleChange}
+                onChange={handleChangeMessage}
                 value={message}
                 fullWidth
                 required

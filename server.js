@@ -15,16 +15,16 @@ app.post('/mail', async (req, res) => {
     port: 465,
     secure: true,
     auth: {
-      user: 'virtivaghjiramni@gmail.com',
-      pass: 'Asdf@4234',
+      user: 'visioneyewear182@gmail.com',
+      pass: 'Asdf@5234',
     },
   });
 
   const mailOptions = {
-    from: 'virtivaghjiramni@gmail.com',
-    to: to_mail,
-    subject: 'Message from vision eyewear',
-    html: `<h1>Hi there,</h1><p>${message}</p>`,
+    from: 'visioneyewear182@gmail.com',
+    to: 'visioneyewear182@gmail.com',
+    subject: 'Message from Customer',
+    html: `<h1>Hi there,</h1><h4>Here is a message from ${to_mail}</h4><p>${message}</p>`,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {

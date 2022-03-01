@@ -67,11 +67,9 @@ export const Header = () => {
         <Link className='option-link' to='/shop'>
           Shop
         </Link>
-        {currentUser && (
-          <Link className='option-link' to='/contactus'>
-            Contact Us
-          </Link>
-        )}
+        <Link className='option-link' to='/contactus'>
+          Contact Us
+        </Link>
         {!currentUser && (
           <Link className='option-link' to='/auth/signin'>
             Sign In
