@@ -94,6 +94,7 @@ const ContactUs = () => {
                 variant='outlined'
                 margin='normal'
                 fullWidth
+                autoFocus
                 value={email}
                 onChange={handleChangeEmail}
                 required
