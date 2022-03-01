@@ -13,6 +13,7 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import './checkout.styles.css';
 
 import { ReactComponent as EmptyCartIcon } from '../../assets/empty-cart.svg';
+import { firestore } from '../../firebase/firebase.utils';
 
 const getStripe = () => {
   let stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
@@ -36,7 +37,7 @@ export const CheckoutPage = () => {
     return items;
   });
 
-  const { email } = currentUser;
+  const { email, id } = currentUser;
 
   const checkoutOptions = {
     lineItems: items,
@@ -44,7 +45,7 @@ export const CheckoutPage = () => {
     billingAddressCollection: 'required',
     customerEmail: email,
     successUrl: 'http://localhost:3000/order-confirmed',
-    cancelUrl: 'http://localhost:3000/checkout',
+    cancelUrl: 'http://localhost:3000',
   };
 
   const redirectCheckout = async () => {
@@ -57,9 +58,22 @@ export const CheckoutPage = () => {
     setCheckOutMode(e.target.value);
   };
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (checkOutMode === 'cash') {
       console.log('Cash mode');
+      console.log(currentUser);
+      console.log(cartItems);
+      console.log(total);
+      const createdAt = new Date();
+      const orderRef = firestore.doc(`orders/${email}/${id}/${createdAt}`);
+      try {
+        await orderRef.set({
+          ordered_items: cartItems,
+          total,
+        });
+      } catch (error) {
+        console.log('error creating order', error.message);
+      }
     } else {
       redirectCheckout();
     }
