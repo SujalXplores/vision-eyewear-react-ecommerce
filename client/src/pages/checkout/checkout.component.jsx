@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import { Button, RadioGroup, Radio, FormControlLabel } from '@mui/material';
 import PaymentIcon from '@mui/icons-material/Payment';
@@ -14,6 +15,7 @@ import './checkout.styles.css';
 
 import { ReactComponent as EmptyCartIcon } from '../../assets/empty-cart.svg';
 import { firestore } from '../../firebase/firebase.utils';
+import { clearCart } from '../../redux/cart/cart.actions';
 
 const getStripe = () => {
   let stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
@@ -25,6 +27,9 @@ export const CheckoutPage = () => {
   const cartItems = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const clearCartItems = () => dispatch(clearCart());
 
   let items = [];
   cartItems.map((item) => {
@@ -37,7 +42,7 @@ export const CheckoutPage = () => {
     return items;
   });
 
-  const { email, id } = currentUser;
+  const { email } = currentUser;
 
   const checkoutOptions = {
     lineItems: items,
@@ -65,12 +70,16 @@ export const CheckoutPage = () => {
       console.log(cartItems);
       console.log(total);
       const createdAt = new Date();
-      const orderRef = firestore.doc(`orders/${email}/${id}/${createdAt}`);
       try {
+        const orderRef = firestore.collection('orders').doc();
         await orderRef.set({
+          createdAt,
+          email,
           ordered_items: cartItems,
           total,
         });
+        clearCartItems();
+        navigate('/order-confirmed');
       } catch (error) {
         console.log('error creating order', error.message);
       }
