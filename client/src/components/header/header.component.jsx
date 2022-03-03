@@ -35,6 +35,8 @@ export const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const isAvatarMenuOpen = Boolean(anchorEl);
 
+  const navigateToProfile = () => navigate('/profile');
+
   const handleAvatarClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -49,7 +51,7 @@ export const Header = () => {
     navigate('/', { replace: true });
   };
 
-  const handleClickOpen = () => {
+  const handleOpenDialog = () => {
     setAnchorEl(null);
     setOpen(true);
   };
@@ -94,13 +96,13 @@ export const Header = () => {
               open={isAvatarMenuOpen}
               onClose={handleAvatarClose}
             >
-              <MenuItem onClick={handleAvatarClose}>
+              <MenuItem onClick={navigateToProfile}>
                 <ListItemIcon>
                   <AccountCircleIcon fontSize='small' />
                 </ListItemIcon>
                 Profile
               </MenuItem>
-              <MenuItem onClick={handleClickOpen}>
+              <MenuItem onClick={handleOpenDialog}>
                 <ListItemIcon>
                   <LogoutIcon fontSize='small' />
                 </ListItemIcon>

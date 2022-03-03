@@ -7,6 +7,7 @@ import SignIn from './components/sign-in/sign-in.component';
 import SignUp from './components/sign-up/sign-up.component';
 
 const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
+const Profile = lazy(() => import('./pages/profile/profile.component'));
 const ShopPage = lazy(() => import('./pages/shop/shop.component'));
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
 const ContactUs = lazy(() => import('./pages/contactus/contactus.component'));
@@ -49,6 +50,14 @@ const Router = () => {
         element={
           <ProtectedRoute>
             <CheckoutPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path='profile'
+        element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         }
       />
