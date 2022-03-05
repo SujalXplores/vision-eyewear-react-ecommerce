@@ -1,16 +1,16 @@
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import BanerLogo from '../../assets/banner-girl.png';
-import './banner.styles.css';
+import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import BanerLogo from "../../assets/banner-girl.png";
+import styles from "./banner.module.css";
 
 const Banner = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='banner'>
-      <div className='banner-desc'>
-        <h1 className='text-thin'>
+    <div className={styles["banner"]}>
+      <div className={styles["banner-desc"]}>
+        <h1 className={styles["text-thin"]}>
           <strong>See</strong>&nbsp;everything with&nbsp;
           <strong>Clarity</strong>
         </h1>
@@ -21,7 +21,7 @@ const Banner = () => {
         </p>
         <br />
         <Button
-          onClick={() => navigate('shop')}
+          onClick={() => navigate("shop")}
           variant='contained'
           endIcon={<ArrowForwardIcon />}
           size='large'
@@ -30,7 +30,7 @@ const Banner = () => {
           Shop Now
         </Button>
       </div>
-      <div className='banner-img'>
+      <div className={styles["banner-img"]}>
         <img src={BanerLogo} alt='Vision Eyewear' />
       </div>
     </div>
