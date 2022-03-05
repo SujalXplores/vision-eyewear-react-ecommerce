@@ -23,11 +23,11 @@ const App = () => {
     <>
       <Header />
       <ErrorBoundary>
-        <Suspense fallback={<Spinner />}>
-          <main className='main__container'>
+        <main className='main__container'>
+          <Suspense fallback={<Spinner />}>
             <Router />
-          </main>
-        </Suspense>
+          </Suspense>
+        </main>
       </ErrorBoundary>
       <Footer />
     </>
