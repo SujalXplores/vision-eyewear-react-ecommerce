@@ -92,6 +92,7 @@ export const CollectionItem = ({ item }) => {
               className={styles["add-to-cart"]}
               onClick={onAddItem}
               size='small'
+              fullWidth
               color='secondary'
               variant='outlined'
               startIcon={<AddShoppingCartIcon />}
