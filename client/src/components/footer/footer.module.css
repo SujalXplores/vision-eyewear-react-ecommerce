@@ -35,6 +35,11 @@ section {
 
 /* The company logo */
 
+.logo {
+  height: 50px;
+  width: auto;
+}
+
 .footer-distributed .logo {
   color: #000;
   font: normal 36px inherit;
