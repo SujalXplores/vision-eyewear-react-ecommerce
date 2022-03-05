@@ -1,30 +1,30 @@
-import { lazy } from 'react';
-import { useSelector } from 'react-redux';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { lazy } from "react";
+import { useSelector } from "react-redux";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
-import { selectCurrentUser } from './redux/user/user.selectors';
-import SignIn from './components/sign-in/sign-in.component';
-import SignUp from './components/sign-up/sign-up.component';
+import { selectCurrentUser } from "./redux/user/user.selectors";
+import SignIn from "./components/sign-in/sign-in.component";
+import SignUp from "./components/sign-up/sign-up.component";
 
-const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
-const Profile = lazy(() => import('./pages/profile/profile.component'));
-const ShopPage = lazy(() => import('./pages/shop/shop.component'));
-const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
-const ContactUs = lazy(() => import('./pages/contactus/contactus.component'));
+const HomePage = lazy(() => import("./pages/homepage/homepage.component"));
+const Profile = lazy(() => import("./pages/profile/profile.component"));
+const ShopPage = lazy(() => import("./pages/shop/shop.component"));
+const CheckoutPage = lazy(() => import("./pages/checkout/checkout.component"));
+const ContactUs = lazy(() => import("./pages/contactus/contactus.component"));
 const ConfirmOrder = lazy(() =>
-  import('./pages/confimorder/confirmorder.component')
+  import("./pages/confimorder/confirmorder.component")
 );
 const PageNotFound = lazy(() =>
-  import('./pages/error404/pagenotfound.component')
+  import("./pages/error404/pagenotfound.component")
 );
 const SignInAndSignUpPage = lazy(() =>
-  import('./pages/sign-in-and-sign-up/sign-in-and-sign-up.component')
+  import("./pages/sign-in-and-sign-up/sign-in-and-sign-up.component")
 );
 const CollectionsOverviewContainer = lazy(() =>
-  import('./components/collections-overview/collections-overview.container')
+  import("./components/collections-overview/collections-overview.container")
 );
 const CollectionPage = lazy(() =>
-  import('./pages/collection/collection.component')
+  import("./pages/collection/collection.component")
 );
 
 const Router = () => {
