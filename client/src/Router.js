@@ -20,6 +20,12 @@ const PageNotFound = lazy(() =>
 const SignInAndSignUpPage = lazy(() =>
   import('./pages/sign-in-and-sign-up/sign-in-and-sign-up.component')
 );
+const CollectionsOverviewContainer = lazy(() =>
+  import('./components/collections-overview/collections-overview.container')
+);
+const CollectionPage = lazy(() =>
+  import('./pages/collection/collection.component')
+);
 
 const Router = () => {
   const location = useLocation();
@@ -43,7 +49,10 @@ const Router = () => {
     <Routes>
       <Route index path='/' element={<HomePage />} />
       <Route path='contactus' element={<ContactUs />} />
-      <Route path='shop/*' element={<ShopPage />} />
+      <Route path='shop/*' element={<ShopPage />}>
+        <Route path='' index element={<CollectionsOverviewContainer />} />
+        <Route path=':collectionId' element={<CollectionPage />} />
+      </Route>
       <Route path='order-confirmed' element={<ConfirmOrder />} />
       <Route
         path='checkout'
