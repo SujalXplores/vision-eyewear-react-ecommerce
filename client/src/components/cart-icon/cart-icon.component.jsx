@@ -1,9 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Badge, Tooltip, IconButton } from '@mui/material';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import { useDispatch, useSelector } from "react-redux";
+import { Badge, Tooltip, IconButton } from "@mui/material";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 
-import { toggleCartHidden } from '../../redux/cart/cart.actions';
-import { selectCartItemsCount } from '../../redux/cart/cart.selectors';
+import { toggleCartHidden } from "../../redux/cart/cart.actions";
+import { selectCartItemsCount } from "../../redux/cart/cart.selectors";
 
 export const CartIcon = () => {
   const dispatch = useDispatch();

@@ -1,17 +1,17 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { Button, List, SwipeableDrawer, Box } from '@mui/material';
-import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Button, List, SwipeableDrawer, Box } from "@mui/material";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 
-import CartItem from '../cart-item/cart-item.component';
+import CartItem from "../cart-item/cart-item.component";
 import {
   selectCartItems,
   selectCartHidden,
-} from '../../redux/cart/cart.selectors';
-import { toggleCartHidden } from '../../redux/cart/cart.actions.js';
-import { selectCurrentUser } from '../../redux/user/user.selectors';
+} from "../../redux/cart/cart.selectors";
+import { toggleCartHidden } from "../../redux/cart/cart.actions.js";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 
-import { ReactComponent as EmptyCartIcon } from '../../assets/empty-cart.svg';
+import { ReactComponent as EmptyCartIcon } from "../../assets/empty-cart.svg";
 
 export const CartDrawer = () => {
   const dispatch = useDispatch();
@@ -41,12 +41,13 @@ export const CartDrawer = () => {
             variant='contained'
             color='secondary'
             size='small'
+            fullWidth
             endIcon={<ShoppingCartCheckoutIcon />}
             onClick={() => {
               dispatch(toggleCartHidden());
               currentUser
-                ? navigate('checkout')
-                : navigate('auth/signin', { replace: true });
+                ? navigate("checkout")
+                : navigate("auth/signin", { replace: true });
             }}
           >
             CHECKOUT
