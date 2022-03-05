@@ -1,14 +1,14 @@
-import { Component } from 'react';
-import './error-boundary.styles.css';
+import { Component } from "react";
+import styles from "./error-boundary.module.css";
 
 const ErrorComponent = () => {
   return (
-    <div className='error-image-overlay'>
+    <div className={styles["error-image-overlay"]}>
       <div
-        className='error-image-container'
-        style={{ backgroundImage: 'url(https://i.imgur.com/yW2W9SC.png)' }}
+        className={styles["error-image-container"]}
+        style={{ backgroundImage: "url(https://i.imgur.com/yW2W9SC.png)" }}
       ></div>
-      <h2 className='error-image-text'>Something went wrong!</h2>
+      <h2 className={styles["error-image-text"]}>Something went wrong!</h2>
     </div>
   );
 };
@@ -16,8 +16,8 @@ const ErrorComponent = () => {
 class ErrorBoundary extends Component {
   state = {
     hasError: false,
-    error: { message: '', stack: '' },
-    info: { componentStack: '' },
+    error: { message: "", stack: "" },
+    info: { componentStack: "" },
   };
 
   static getDerivedStateFromError = (error) => {
