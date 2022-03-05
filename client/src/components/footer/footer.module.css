@@ -110,7 +110,7 @@ section {
 }
 
 .footer-distributed .footer-links a:before {
-  content: '|';
+  content: "|";
   font-weight: 300;
   font-size: 20px;
   left: 0;

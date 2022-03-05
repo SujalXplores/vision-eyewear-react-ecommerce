@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../assets/brand-logo.svg';
-import './footer.styles.css';
+import { Link } from "react-router-dom";
+import { ReactComponent as Logo } from "../../assets/brand-logo.svg";
+import styles from "./footer.module.css";
 
 const Footer = () => (
-  <footer className='footer-distributed'>
-    <div className='footer-left'>
-      <Logo className='logo' />
+  <footer className={styles["footer-distributed"]}>
+    <div className={styles["footer-left"]}>
+      <Logo className={styles["logo"]} />
 
-      <p className='footer-links'>
-        <Link to='/' className='link-1'>
+      <p className={styles["footer-links"]}>
+        <Link to='/' className={styles["link-1"]}>
           Home
         </Link>
         <Link to='/'>Blog</Link>
@@ -17,28 +17,25 @@ const Footer = () => (
         <Link to='/'>Faq</Link>
         <Link to='/'>Contact</Link>
       </p>
-      <p className='footer-company-name'>Vision Eyewear © 2022</p>
+      <p className={styles["footer-company-name"]}>Vision Eyewear © 2022</p>
     </div>
-    <div className='footer-center'>
+    <div className={styles["footer-center"]}>
       <div>
-        <i className='fa fa-map-marker'></i>
         <p>
           <span>503, Nr Klassic Gold Hotel</span> C G Road, Ahmedabad
         </p>
       </div>
       <div>
-        <i className='fa fa-phone'></i>
         <p>07955314243</p>
       </div>
       <div>
-        <i className='fa fa-envelope'></i>
         <p>
           <a href='mailto:support@company.com'>support@visioneyewear.com</a>
         </p>
       </div>
     </div>
-    <div className='footer-right'>
-      <p className='footer-company-about'>
+    <div className={styles["footer-right"]}>
+      <p className={styles["footer-company-about"]}>
         <span>Buy the best eyewear form vision eyewear</span>
         Vision Eyewear is the leading e-commerce portal for eyewear in India.
         Sunglasses as well as eyeglasses are available for men and women in a
