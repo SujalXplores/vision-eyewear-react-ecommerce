@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 import {
   Button,
   Card,
@@ -11,11 +11,11 @@ import {
   Skeleton,
   Alert,
   Slide,
-} from '@mui/material';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+} from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-import { addItem } from '../../redux/cart/cart.actions';
-import './collection-item.styles.css';
+import { addItem } from "../../redux/cart/cart.actions";
+import styles from "./collection-item.module.css";
 
 export const CollectionItem = ({ item }) => {
   const [state, setState] = useState(false);
@@ -42,7 +42,11 @@ export const CollectionItem = ({ item }) => {
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }} className='item-card' variant='outlined'>
+      <Card
+        sx={{ maxWidth: 345 }}
+        className={styles["item-card"]}
+        variant='outlined'
+      >
         {items ? (
           <CardMedia
             component='img'
@@ -64,11 +68,11 @@ export const CollectionItem = ({ item }) => {
                 {items.name}
               </Typography>
               <Typography variant='body2' color='text.secondary'>
-                {new Intl.NumberFormat('en-IN', {
-                  currency: 'INR',
-                  style: 'currency',
+                {new Intl.NumberFormat("en-IN", {
+                  currency: "INR",
+                  style: "currency",
                   maximumFractionDigits: 0,
-                }).format(items.price) + '/-'}
+                }).format(items.price) + "/-"}
               </Typography>
             </>
           ) : (
@@ -85,7 +89,7 @@ export const CollectionItem = ({ item }) => {
         <CardActions>
           {items ? (
             <Button
-              className='add-to-cart'
+              className={styles["add-to-cart"]}
               onClick={onAddItem}
               size='small'
               color='secondary'
@@ -100,7 +104,7 @@ export const CollectionItem = ({ item }) => {
               animation='wave'
               height={22}
               width={109}
-              sx={{ margin: '7px' }}
+              sx={{ margin: "7px" }}
             />
           )}
         </CardActions>
@@ -111,7 +115,7 @@ export const CollectionItem = ({ item }) => {
         onClose={handleClose}
         key={Math.random()}
         TransitionComponent={TransitionLeft}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert severity='success'>1 item added to cart.</Alert>
       </Snackbar>
