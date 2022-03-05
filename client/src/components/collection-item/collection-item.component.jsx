@@ -80,7 +80,7 @@ export const CollectionItem = ({ item }) => {
               <Skeleton
                 animation='wave'
                 height={10}
-                style={{ marginBottom: 6 }}
+                className={styles["skeleton-text"]}
               />
               <Skeleton animation='wave' height={10} width='80%' />
             </>
