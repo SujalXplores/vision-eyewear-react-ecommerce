@@ -41,6 +41,15 @@
   width: 100%;
 }
 
+.empty-cart-grid {
+  display: grid !important;
+  place-items: center !important;
+}
+
+.empty-cart-icon {
+  height: 50vh !important;
+}
+
 @media screen and (max-width: 800px) {
   .checkout-page-container {
     width: 90%;

@@ -151,8 +151,8 @@ export const CheckoutPage = () => {
           </Button>
         </div>
       ) : (
-        <div style={{ display: "grid", placeItems: "center" }}>
-          <EmptyCartIcon style={{ height: "50vh" }} />
+        <div className={styles["empty-cart-grid"]}>
+          <EmptyCartIcon className={styles["empty-cart-icon"]} />
         </div>
       )}
     </>
