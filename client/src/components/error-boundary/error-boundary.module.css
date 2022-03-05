@@ -8,6 +8,7 @@
 }
 
 .error-image-container {
+  background-image: url(https://i.imgur.com/yW2W9SC.png);
   display: inline-block;
   background-size: cover;
   background-position: center;

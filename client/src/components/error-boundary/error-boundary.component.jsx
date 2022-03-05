@@ -4,10 +4,7 @@ import styles from "./error-boundary.module.css";
 const ErrorComponent = () => {
   return (
     <div className={styles["error-image-overlay"]}>
-      <div
-        className={styles["error-image-container"]}
-        style={{ backgroundImage: "url(https://i.imgur.com/yW2W9SC.png)" }}
-      ></div>
+      <div className={styles["error-image-container"]}></div>
       <h2 className={styles["error-image-text"]}>Something went wrong!</h2>
     </div>
   );
