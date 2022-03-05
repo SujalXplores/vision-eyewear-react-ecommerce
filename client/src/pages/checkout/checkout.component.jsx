@@ -1,7 +1,10 @@
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
-import { Button } from '@mui/material';
+import { Button, RadioGroup, Radio, FormControlLabel } from '@mui/material';
 import PaymentIcon from '@mui/icons-material/Payment';
+import PaymentsIcon from '@mui/icons-material/Payments';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 import {
   selectCartItems,
@@ -11,17 +14,22 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import './checkout.styles.css';
 
 import { ReactComponent as EmptyCartIcon } from '../../assets/empty-cart.svg';
+import { firestore } from '../../firebase/firebase.utils';
+import { clearCart } from '../../redux/cart/cart.actions';
 
 const getStripe = () => {
-  let stripePromise;
-  stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+  let stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
   return stripePromise;
 };
 
 export const CheckoutPage = () => {
+  const [checkOutMode, setCheckOutMode] = useState('cash');
   const cartItems = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const clearCartItems = () => dispatch(clearCart());
 
   let items = [];
   cartItems.map((item) => {
@@ -42,13 +50,42 @@ export const CheckoutPage = () => {
     billingAddressCollection: 'required',
     customerEmail: email,
     successUrl: 'http://localhost:3000/order-confirmed',
-    cancelUrl: 'http://localhost:3000/cart',
+    cancelUrl: 'http://localhost:3000',
   };
 
   const redirectCheckout = async () => {
     const stripe = await getStripe();
     const { error } = await stripe.redirectToCheckout(checkoutOptions);
     console.log('Stripe error !', error);
+  };
+
+  const handleCheckoutModeChange = (e) => {
+    setCheckOutMode(e.target.value);
+  };
+
+  const handlePlaceOrder = async () => {
+    if (checkOutMode === 'cash') {
+      console.log('Cash mode');
+      console.log(currentUser);
+      console.log(cartItems);
+      console.log(total);
+      const createdAt = new Date();
+      try {
+        const orderRef = firestore.collection('orders').doc();
+        await orderRef.set({
+          createdAt,
+          email,
+          ordered_items: cartItems,
+          total,
+        });
+        clearCartItems();
+        navigate('/order-confirmed');
+      } catch (error) {
+        console.log('error creating order', error.message);
+      }
+    } else {
+      redirectCheckout();
+    }
   };
 
   return (
@@ -75,23 +112,42 @@ export const CheckoutPage = () => {
           {cartItems.map((cartItem) => (
             <CheckoutItem key={cartItem.id} cartItem={cartItem} />
           ))}
-          <div className='total-container'>
-            TOTAL:{' '}
-            {new Intl.NumberFormat('en-IN', {
-              currency: 'INR',
-              style: 'currency',
-              maximumFractionDigits: 0,
-            }).format(total)}
+          <div className='checkout-bottom'>
+            {console.log(checkOutMode)}
+            <RadioGroup
+              row
+              name='checkout-option'
+              value={checkOutMode}
+              onChange={handleCheckoutModeChange}
+              sx={{ mt: '15px' }}
+            >
+              <FormControlLabel value='cash' control={<Radio />} label='Cash' />
+              <FormControlLabel
+                value='stripe'
+                control={<Radio />}
+                label='Credit / Debit Card'
+              />
+            </RadioGroup>
+            <span className='total-container'>
+              Total:{' '}
+              {new Intl.NumberFormat('en-IN', {
+                currency: 'INR',
+                style: 'currency',
+                maximumFractionDigits: 0,
+              }).format(total)}
+              {'/-'}
+            </span>
           </div>
           <Button
-            onClick={redirectCheckout}
-            size='large'
+            onClick={handlePlaceOrder}
             variant='contained'
             color='secondary'
-            startIcon={<PaymentIcon />}
+            startIcon={
+              checkOutMode === 'stripe' ? <PaymentIcon /> : <PaymentsIcon />
+            }
             sx={{ marginBottom: '40px' }}
           >
-            Pay with Stripe
+            {checkOutMode === 'stripe' ? 'Pay with Card' : 'Cash on Delivery'}
           </Button>
         </div>
       ) : (

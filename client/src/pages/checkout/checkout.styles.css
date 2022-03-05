@@ -29,6 +29,18 @@
   width: 8%;
 }
 
+.total-container {
+  margin-top: 20px;
+  margin-left: auto;
+  font-size: 1.5rem;
+}
+
+.checkout-bottom {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 @media screen and (max-width: 800px) {
   .checkout-page-container {
     width: 90%;
@@ -39,10 +51,4 @@
   .header-block-container:last-child {
     width: 12%;
   }
-}
-
-.total-container {
-  margin-top: 30px;
-  margin-left: auto;
-  font-size: 36px;
 }
