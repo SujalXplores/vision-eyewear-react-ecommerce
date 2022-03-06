@@ -1,0 +1,30 @@
+.contactus-container {
+  height: 100vh !important;
+}
+
+.contactus-image-container {
+  background-image: url(https://images.unsplash.com/photo-1615840287214-7ff58936c4cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80) !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.contactus-box {
+  margin: 1rem 2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.contactus-avatar {
+  margin: 0.5rem;
+  background-color: #212121;
+}
+
+.contactus-form {
+  margin-top: 0.5rem;
+}
+
+.contactus-button {
+  margin-top: 1.5rem;
+}
