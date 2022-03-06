@@ -1,0 +1,30 @@
+.profile-image-container {
+  background-image: url(https://images.unsplash.com/photo-1504131598085-4cca8500b677?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.profile-box {
+  margin: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-avatar {
+  margin: 0.5rem;
+  background-color: #212121;
+}
+
+.profile-form {
+  margin-top: 0.5rem;
+}
+
+.profile-button {
+  margin-top: 1.5rem;
+}
+
+.root {
+  height: 100vh;
+}

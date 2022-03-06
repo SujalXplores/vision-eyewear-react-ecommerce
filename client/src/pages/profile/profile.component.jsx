@@ -6,9 +6,11 @@ import {
   Paper,
   Avatar,
   Typography,
-} from '@mui/material';
-import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../redux/user/user.selectors';
+} from "@mui/material";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+
+import styles from "./profile.module.css";
 
 const Profile = () => {
   const currentUser = useSelector(selectCurrentUser);
@@ -16,38 +18,24 @@ const Profile = () => {
   const { email, displayName, photoURL } = currentUser;
 
   return (
-    <Grid container component='main' sx={{ height: '100vh' }}>
+    <Grid container component='main' className={styles.root}>
       <Grid
         item
         xs={false}
         sm={4}
         md={7}
-        sx={{
-          backgroundImage:
-            'url(https://images.unsplash.com/photo-1504131598085-4cca8500b677?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
+        className={styles["profile-image-container"]}
       />
       <Grid item xs={12} sm={8} md={5} component={Paper} square>
-        <Box
-          sx={{
-            my: 2,
-            mx: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+        <Box className={styles["profile-box"]}>
           <Avatar
             alt={displayName}
             src={photoURL}
-            sx={{ m: 1, bgcolor: 'secondary.main' }}
+            className={styles["profile-avatar"]}
           >
             {displayName.charAt(0)}
           </Avatar>
-          <Box component='form' sx={{ mt: 1 }}>
+          <Box component='form' className={styles["profile-form"]}>
             <Grid container spacing={1}>
               <TextField
                 type='email'
@@ -112,7 +100,7 @@ const Profile = () => {
                 type='submit'
                 variant='contained'
                 color='secondary'
-                sx={{ mt: 3 }}
+                className={styles["profile-button"]}
                 fullWidth
               >
                 Save
