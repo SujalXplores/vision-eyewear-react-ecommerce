@@ -16,8 +16,6 @@ section {
   width: 100%;
   text-align: center;
   padding: 55px 50px;
-  position: relative;
-  bottom: 0;
 }
 
 .footer-distributed .footer-left,
@@ -115,7 +113,7 @@ section {
 }
 
 .footer-distributed .footer-links a:before {
-  content: "|";
+  content: '|';
   font-weight: 300;
   font-size: 20px;
   left: 0;
