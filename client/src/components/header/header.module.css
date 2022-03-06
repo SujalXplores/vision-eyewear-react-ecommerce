@@ -35,6 +35,16 @@
   cursor: pointer;
 }
 
+.avatar {
+  width: 30px;
+  height: 30px;
+}
+
+.logout-icon {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
 @media screen and (max-width: 800px) {
   .header-container {
     height: 60px;

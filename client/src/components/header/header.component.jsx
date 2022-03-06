@@ -85,7 +85,7 @@ export const Header = () => {
                 <Avatar
                   alt={currentUser.displayName}
                   src={currentUser.photoURL}
-                  sx={{ width: "30px", height: "30px" }}
+                  className={styles["avatar"]}
                 >
                   {currentUser?.displayName?.charAt(0)}
                 </Avatar>
@@ -114,7 +114,7 @@ export const Header = () => {
       </div>
       <Dialog open={open} keepMounted onClose={handleClose}>
         <DialogTitle>
-          <LogoutIcon sx={{ verticalAlign: "middle", mr: "10px" }} />
+          <LogoutIcon className={styles["logout-icon"]} />
           Confirm Signout
         </DialogTitle>
         <DialogContent>
