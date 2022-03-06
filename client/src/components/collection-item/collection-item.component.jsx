@@ -42,11 +42,7 @@ export const CollectionItem = ({ item }) => {
 
   return (
     <>
-      <Card
-        sx={{ maxWidth: 345 }}
-        className={styles["item-card"]}
-        variant='outlined'
-      >
+      <Card className={styles["item-card"]} variant='outlined'>
         {items ? (
           <CardMedia
             component='img'
@@ -56,7 +52,7 @@ export const CollectionItem = ({ item }) => {
           />
         ) : (
           <Skeleton
-            sx={{ height: 300, width: 345 }}
+            className={styles["item-card-media"]}
             animation='wave'
             variant='rectangular'
           />
@@ -105,7 +101,7 @@ export const CollectionItem = ({ item }) => {
               animation='wave'
               height={22}
               width={109}
-              sx={{ margin: "7px" }}
+              className={styles["skeleton-button"]}
             />
           )}
         </CardActions>

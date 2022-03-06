@@ -1,5 +1,15 @@
 .item-card {
   border-radius: 10px;
+  max-width: 345px !important;
+}
+
+.item-card-media {
+  height: 300px !important;
+  width: 345px !important;
+}
+
+.skeleton-button {
+  margin: 7px !important;
 }
 
 .add-to-cart {
