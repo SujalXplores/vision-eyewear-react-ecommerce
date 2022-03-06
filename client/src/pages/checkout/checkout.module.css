@@ -50,6 +50,14 @@
   height: 50vh !important;
 }
 
+.checkout-option-container {
+  margin-top: 15px;
+}
+
+.place-order-button {
+  margin-bottom: 40px;
+}
+
 @media screen and (max-width: 800px) {
   .checkout-page-container {
     width: 90%;

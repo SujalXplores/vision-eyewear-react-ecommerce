@@ -119,7 +119,7 @@ export const CheckoutPage = () => {
               name='checkout-option'
               value={checkOutMode}
               onChange={handleCheckoutModeChange}
-              sx={{ mt: "15px" }}
+              className={styles["checkout-option-container"]}
             >
               <FormControlLabel value='cash' control={<Radio />} label='Cash' />
               <FormControlLabel
@@ -145,7 +145,7 @@ export const CheckoutPage = () => {
             startIcon={
               checkOutMode === "stripe" ? <PaymentIcon /> : <PaymentsIcon />
             }
-            sx={{ marginBottom: "40px" }}
+            className={styles["place-order-button"]}
           >
             {checkOutMode === "stripe" ? "Pay with Card" : "Cash on Delivery"}
           </Button>
