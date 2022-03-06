@@ -1,27 +1,26 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Grid,
   TextField,
   Button,
   Box,
-  Paper,
   Avatar,
   Typography,
   Alert,
-} from "@mui/material";
-import EmailIcon from "@mui/icons-material/Email";
-import SendIcon from "@mui/icons-material/Send";
-import useInput from "../../hooks/useInput";
+} from '@mui/material';
+import EmailIcon from '@mui/icons-material/Email';
+import SendIcon from '@mui/icons-material/Send';
+import useInput from '../../hooks/useInput';
 
-import styles from "./contactus.module.css";
+import styles from './contactus.module.css';
 
 const ContactUs = () => {
   let formIsValid = false;
 
-  const isNotEmpty = (val) => val.trim() !== "";
+  const isNotEmpty = (val) => val.trim() !== '';
   const isValidEmail = (val) => /^\S+@\S+\.\S+$/.test(val);
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const {
     value: enteredEmail,
@@ -49,10 +48,10 @@ const ContactUs = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:3001/mail", {
-        method: "POST",
+      const res = await fetch('http://localhost:3001/mail', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: enteredEmail,
@@ -60,7 +59,7 @@ const ContactUs = () => {
         }),
       });
       const data = await res.json();
-      console.log("data", data);
+      console.log('data', data);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -74,17 +73,17 @@ const ContactUs = () => {
   }
 
   return (
-    <Grid container component='main' className={styles["contactus-container"]}>
+    <Grid container component='main' className={styles['contactus-container']}>
       <Grid
         item
         xs={false}
         sm={4}
         md={7}
-        className={styles["contactus-image-container"]}
+        className={styles['contactus-image-container']}
       />
-      <Grid item xs={12} sm={8} md={5} component={Paper} square>
-        <Box className={styles["contactus-box"]}>
-          <Avatar className={styles["contactus-avatar"]}>
+      <Grid item xs={12} sm={8} md={5}>
+        <Box className={styles['contactus-box']}>
+          <Avatar className={styles['contactus-avatar']}>
             <EmailIcon />
           </Avatar>
           <Typography gutterBottom variant='h5'>
@@ -101,7 +100,7 @@ const ContactUs = () => {
           {error && <Alert severity='error'>{error}</Alert>}
           <Box
             component='form'
-            className={styles["contactus-form"]}
+            className={styles['contactus-form']}
             onSubmit={sendmail}
           >
             <Grid container spacing={1}>
@@ -120,7 +119,7 @@ const ContactUs = () => {
                 error={emailHasError}
                 value={enteredEmail}
                 {...(emailHasError && {
-                  helperText: "Invalid Email Address!",
+                  helperText: 'Invalid Email Address!',
                 })}
               />
               <TextField
@@ -138,14 +137,14 @@ const ContactUs = () => {
                 value={enteredMessage}
                 error={messageHasError}
                 {...(messageHasError && {
-                  helperText: "Message cannot be empty!",
+                  helperText: 'Message cannot be empty!',
                 })}
               />
               <Button
                 type='submit'
                 variant='contained'
                 color='secondary'
-                className={styles["contactus-button"]}
+                className={styles['contactus-button']}
                 fullWidth
                 disabled={!formIsValid}
                 endIcon={<SendIcon />}
