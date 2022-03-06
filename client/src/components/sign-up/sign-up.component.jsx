@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   TextField,
@@ -8,18 +8,20 @@ import {
   Grid,
   Typography,
   Alert,
-} from '@mui/material';
-import { Link } from 'react-router-dom';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-import { signUpStart } from '../../redux/user/user.actions';
-import useInput from '../../hooks/useInput';
-import { selectSignUpErrorMessage } from '../../redux/user/user.selectors';
+import { signUpStart } from "../../redux/user/user.actions";
+import useInput from "../../hooks/useInput";
+import { selectSignUpErrorMessage } from "../../redux/user/user.selectors";
+
+import styles from "./sign-up.module.css";
 
 const SignUp = () => {
   let formIsValid = false;
 
-  const isNotEmpty = (val) => val.trim() !== '';
+  const isNotEmpty = (val) => val.trim() !== "";
   const isValidEmail = (val) => /^\S+@\S+\.\S+$/.test(val);
 
   const hasErrorInSignUp = useSelector(selectSignUpErrorMessage);
@@ -75,8 +77,8 @@ const SignUp = () => {
       displayName: enteredDisplayName,
       email: enteredEmail,
       password: enteredPassword,
-      address: '',
-      phone: '',
+      address: "",
+      phone: "",
     });
 
     handleSignUp({
@@ -103,27 +105,23 @@ const SignUp = () => {
 
   return (
     <Grid item xs={12} sm={8} md={5} component={Paper} square>
-      <Box
-        sx={{
-          my: 8,
-          mx: 4,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+      <Box className={styles["sign-up-container"]}>
+        <Avatar className={styles["sign-up-avatar"]}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component='h1' variant='h5'>
           Sign Up
         </Typography>
         {hasErrorInSignUp && (
-          <Alert severity='error' sx={{ mt: 1 }}>
+          <Alert className={styles["sign-up-error"]} severity='error'>
             {hasErrorInSignUp.message}
           </Alert>
         )}
-        <Box component='form' sx={{ mt: 1 }} onSubmit={handleSubmit}>
+        <Box
+          className={styles["sign-up-form"]}
+          component='form'
+          onSubmit={handleSubmit}
+        >
           <TextField
             margin='normal'
             required
@@ -138,7 +136,7 @@ const SignUp = () => {
             onBlur={displayNameBlurHandler}
             error={displayNameHasError}
             {...(displayNameHasError && {
-              helperText: 'Display name is required!',
+              helperText: "Display name is required!",
             })}
           />
           <TextField
@@ -154,7 +152,7 @@ const SignUp = () => {
             error={emailHasError}
             value={enteredEmail}
             {...(emailHasError && {
-              helperText: 'Invalid Email Address!',
+              helperText: "Invalid Email Address!",
             })}
           />
           <TextField
@@ -170,7 +168,7 @@ const SignUp = () => {
             onBlur={passwordBlurHandler}
             error={passwordHasError}
             {...(passwordHasError && {
-              helperText: 'Password is required!',
+              helperText: "Password is required!",
             })}
           />
           <TextField
@@ -186,7 +184,7 @@ const SignUp = () => {
             onBlur={confirmPasswordBlurHandler}
             error={confirmPasswordHasError}
             {...(confirmPasswordHasError && {
-              helperText: 'Confirm Password is required!',
+              helperText: "Confirm Password is required!",
             })}
           />
 
@@ -195,14 +193,19 @@ const SignUp = () => {
             fullWidth
             color='secondary'
             variant='contained'
-            sx={{ mt: 3, mb: 2 }}
+            className={styles["sign-up-submit"]}
             disabled={!formIsValid}
           >
             Sign Up
           </Button>
           <Grid container>
             <Grid item>
-              <Link to='/auth/signin' variant='body2' color='secondary'>
+              <Link
+                to='/auth/signin'
+                variant='body2'
+                color='secondary'
+                className={styles["sign-up-link"]}
+              >
                 Already have an account? Sign In
               </Link>
             </Grid>

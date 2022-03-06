@@ -1,0 +1,29 @@
+.sign-up-container {
+  margin: 4rem 2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.sign-up-avatar {
+  margin: 0.5rem !important;
+  background-color: #212121 !important;
+}
+
+.sign-up-error {
+  margin-top: 0.5rem !important;
+}
+
+.sign-up-form {
+  margin-top: 0.5rem !important;
+  /* margin-bottom: 3rem !important; */
+}
+
+.sign-up-submit {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.sign-up-link {
+  margin-bottom: 3rem !important;
+}
