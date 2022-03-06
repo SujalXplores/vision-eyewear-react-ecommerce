@@ -11,6 +11,8 @@ import {
 import { toggleCartHidden } from "../../redux/cart/cart.actions.js";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 
+import styles from "./cart-drawer.module.css";
+
 import { ReactComponent as EmptyCartIcon } from "../../assets/empty-cart.svg";
 
 export const CartDrawer = () => {
@@ -27,7 +29,7 @@ export const CartDrawer = () => {
   };
 
   const list = () => (
-    <Box sx={{ width: 250 }} role='presentation' p={3}>
+    <Box className={styles["cart-drawer-box"]} role='presentation' p={3}>
       <List>
         {cartItems.length ? (
           cartItems.map((cartItem) => (
