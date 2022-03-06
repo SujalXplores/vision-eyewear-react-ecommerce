@@ -1,0 +1,28 @@
+.sign-in-container {
+  margin: 4rem 2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.sign-in-avatar {
+  margin: 0.5rem !important;
+  background-color: #212121 !important;
+}
+
+.sign-in-error {
+  margin-top: 0.5rem !important;
+}
+
+.sign-in-form {
+  margin-top: 0.5rem !important;
+}
+
+.sign-in-button {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.sign-in-google-button {
+  margin-bottom: 1rem !important;
+}
