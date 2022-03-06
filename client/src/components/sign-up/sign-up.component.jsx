@@ -1,27 +1,26 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   TextField,
   Avatar,
-  Paper,
   Box,
   Grid,
   Typography,
   Alert,
-} from "@mui/material";
-import { Link } from "react-router-dom";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+} from '@mui/material';
+import { Link } from 'react-router-dom';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
-import { signUpStart } from "../../redux/user/user.actions";
-import useInput from "../../hooks/useInput";
-import { selectSignUpErrorMessage } from "../../redux/user/user.selectors";
+import { signUpStart } from '../../redux/user/user.actions';
+import useInput from '../../hooks/useInput';
+import { selectSignUpErrorMessage } from '../../redux/user/user.selectors';
 
-import styles from "./sign-up.module.css";
+import styles from './sign-up.module.css';
 
 const SignUp = () => {
   let formIsValid = false;
 
-  const isNotEmpty = (val) => val.trim() !== "";
+  const isNotEmpty = (val) => val.trim() !== '';
   const isValidEmail = (val) => /^\S+@\S+\.\S+$/.test(val);
 
   const hasErrorInSignUp = useSelector(selectSignUpErrorMessage);
@@ -77,8 +76,8 @@ const SignUp = () => {
       displayName: enteredDisplayName,
       email: enteredEmail,
       password: enteredPassword,
-      address: "",
-      phone: "",
+      address: '',
+      phone: '',
     });
 
     handleSignUp({
@@ -104,21 +103,21 @@ const SignUp = () => {
   }
 
   return (
-    <Grid item xs={12} sm={8} md={5} component={Paper} square>
-      <Box className={styles["sign-up-container"]}>
-        <Avatar className={styles["sign-up-avatar"]}>
+    <Grid item xs={12} sm={8} md={5}>
+      <Box className={styles['sign-up-container']}>
+        <Avatar className={styles['sign-up-avatar']}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component='h1' variant='h5'>
           Sign Up
         </Typography>
         {hasErrorInSignUp && (
-          <Alert className={styles["sign-up-error"]} severity='error'>
+          <Alert className={styles['sign-up-error']} severity='error'>
             {hasErrorInSignUp.message}
           </Alert>
         )}
         <Box
-          className={styles["sign-up-form"]}
+          className={styles['sign-up-form']}
           component='form'
           onSubmit={handleSubmit}
         >
@@ -136,7 +135,7 @@ const SignUp = () => {
             onBlur={displayNameBlurHandler}
             error={displayNameHasError}
             {...(displayNameHasError && {
-              helperText: "Display name is required!",
+              helperText: 'Display name is required!',
             })}
           />
           <TextField
@@ -152,7 +151,7 @@ const SignUp = () => {
             error={emailHasError}
             value={enteredEmail}
             {...(emailHasError && {
-              helperText: "Invalid Email Address!",
+              helperText: 'Invalid Email Address!',
             })}
           />
           <TextField
@@ -168,7 +167,7 @@ const SignUp = () => {
             onBlur={passwordBlurHandler}
             error={passwordHasError}
             {...(passwordHasError && {
-              helperText: "Password is required!",
+              helperText: 'Password is required!',
             })}
           />
           <TextField
@@ -184,7 +183,7 @@ const SignUp = () => {
             onBlur={confirmPasswordBlurHandler}
             error={confirmPasswordHasError}
             {...(confirmPasswordHasError && {
-              helperText: "Confirm Password is required!",
+              helperText: 'Confirm Password is required!',
             })}
           />
 
@@ -193,7 +192,7 @@ const SignUp = () => {
             fullWidth
             color='secondary'
             variant='contained'
-            className={styles["sign-up-submit"]}
+            className={styles['sign-up-submit']}
             disabled={!formIsValid}
           >
             Sign Up
@@ -204,7 +203,7 @@ const SignUp = () => {
                 to='/auth/signin'
                 variant='body2'
                 color='secondary'
-                className={styles["sign-up-link"]}
+                className={styles['sign-up-link']}
               >
                 Already have an account? Sign In
               </Link>

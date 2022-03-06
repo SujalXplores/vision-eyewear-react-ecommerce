@@ -1,31 +1,30 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Button,
   TextField,
   Avatar,
-  Paper,
   Box,
   Grid,
   Typography,
   Alert,
-} from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+} from '@mui/material';
+import LoginIcon from '@mui/icons-material/Login';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {
   googleSignInStart,
   emailSignInStart,
-} from "../../redux/user/user.actions";
-import { selectSignInErrorMessage } from "../../redux/user/user.selectors";
-import useInput from "../../hooks/useInput";
-import { ReactComponent as GoogleIcon } from "../../assets/google-icon.svg";
+} from '../../redux/user/user.actions';
+import { selectSignInErrorMessage } from '../../redux/user/user.selectors';
+import useInput from '../../hooks/useInput';
+import { ReactComponent as GoogleIcon } from '../../assets/google-icon.svg';
 
-import styles from "./sign-in.module.css";
+import styles from './sign-in.module.css';
 
 const SignIn = () => {
   let formIsValid = false;
 
-  const isNotEmpty = (val) => val.trim() !== "";
+  const isNotEmpty = (val) => val.trim() !== '';
   const isValidEmail = (val) => /^\S+@\S+\.\S+$/.test(val);
 
   const hasErrorInSignIn = useSelector(selectSignInErrorMessage);
@@ -70,22 +69,22 @@ const SignIn = () => {
   }
 
   return (
-    <Grid item xs={12} sm={8} md={5} component={Paper} square>
-      <Box className={styles["sign-in-container"]}>
-        <Avatar className={styles["sign-in-avatar"]}>
+    <Grid item xs={12} sm={8} md={5}>
+      <Box className={styles['sign-in-container']}>
+        <Avatar className={styles['sign-in-avatar']}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component='h1' variant='h5'>
           Sign In
         </Typography>
         {hasErrorInSignIn && (
-          <Alert className={styles["sign-in-error"]} severity='error'>
+          <Alert className={styles['sign-in-error']} severity='error'>
             {hasErrorInSignIn.message}
           </Alert>
         )}
         <Box
           component='form'
-          className={styles["sign-in-form"]}
+          className={styles['sign-in-form']}
           noValidate
           onSubmit={handleSubmit}
         >
@@ -103,7 +102,7 @@ const SignIn = () => {
             error={emailHasError}
             value={enteredEmail}
             {...(emailHasError && {
-              helperText: "Invalid Email Address!",
+              helperText: 'Invalid Email Address!',
             })}
           />
           <TextField
@@ -119,7 +118,7 @@ const SignIn = () => {
             onBlur={passwordBlurHandler}
             error={passwordHasError}
             {...(passwordHasError && {
-              helperText: "Password is required!",
+              helperText: 'Password is required!',
             })}
           />
           <Button
@@ -129,7 +128,7 @@ const SignIn = () => {
             color='secondary'
             type='submit'
             startIcon={<LoginIcon />}
-            className={styles["sign-in-button"]}
+            className={styles['sign-in-button']}
             disabled={!formIsValid}
           >
             Sign in
@@ -142,7 +141,7 @@ const SignIn = () => {
             color='secondary'
             startIcon={<GoogleIcon />}
             onClick={handleGoogleAuth}
-            className={styles["sign-in-google-button"]}
+            className={styles['sign-in-google-button']}
           >
             Sign in with Google
           </Button>

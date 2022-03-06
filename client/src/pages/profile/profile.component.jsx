@@ -1,16 +1,8 @@
-import {
-  Grid,
-  TextField,
-  Button,
-  Box,
-  Paper,
-  Avatar,
-  Typography,
-} from "@mui/material";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { Grid, TextField, Button, Box, Avatar } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
-import styles from "./profile.module.css";
+import styles from './profile.module.css';
 
 const Profile = () => {
   const currentUser = useSelector(selectCurrentUser);
@@ -24,35 +16,22 @@ const Profile = () => {
         xs={false}
         sm={4}
         md={7}
-        className={styles["profile-image-container"]}
+        className={styles['profile-image-container']}
       />
-      <Grid item xs={12} sm={8} md={5} component={Paper} square>
-        <Box className={styles["profile-box"]}>
+      <Grid item xs={12} sm={8} md={5}>
+        <Box className={styles['profile-box']}>
           <Avatar
             alt={displayName}
             src={photoURL}
-            className={styles["profile-avatar"]}
+            className={styles['profile-avatar']}
           >
             {displayName.charAt(0)}
           </Avatar>
-          <Box component='form' className={styles["profile-form"]}>
+          <Box component='form' className={styles['profile-form']}>
             <Grid container spacing={1}>
               <TextField
                 type='email'
                 placeholder='Enter email'
-                label='Email'
-                color='secondary'
-                variant='outlined'
-                margin='normal'
-                size='small'
-                fullWidth
-                autoFocus
-                required
-                disabled
-                value={email}
-              />
-              <TextField
-                type='email'
                 label='Email'
                 color='secondary'
                 variant='outlined'
@@ -100,7 +79,7 @@ const Profile = () => {
                 type='submit'
                 variant='contained'
                 color='secondary'
-                className={styles["profile-button"]}
+                className={styles['profile-button']}
                 fullWidth
               >
                 Save

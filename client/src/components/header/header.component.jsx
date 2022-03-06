@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Avatar,
   Dialog,
@@ -14,16 +14,16 @@ import {
   Tooltip,
   IconButton,
   ListItemIcon,
-} from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import LogoutIcon from "@mui/icons-material/Logout";
+} from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
 
-import CartIcon from "../cart-icon/cart-icon.component";
-import CartDrawer from "../cart-drawer/cart-drawer.component";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
-import { signOutStart } from "../../redux/user/user.actions";
-import { ReactComponent as Logo } from "../../assets/brand-logo.svg";
-import styles from "./header.module.css";
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDrawer from '../cart-drawer/cart-drawer.component';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { signOutStart } from '../../redux/user/user.actions';
+import { ReactComponent as Logo } from '../../assets/brand-logo.svg';
+import styles from './header.module.css';
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -35,7 +35,10 @@ export const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const isAvatarMenuOpen = Boolean(anchorEl);
 
-  const navigateToProfile = () => navigate("/profile");
+  const navigateToProfile = () => {
+    handleAvatarClose();
+    navigate('/profile');
+  };
 
   const handleAvatarClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -48,7 +51,7 @@ export const Header = () => {
   const onSignOut = () => {
     dispatch(signOutStart());
     setOpen(false);
-    navigate("/", { replace: true });
+    navigate('/', { replace: true });
   };
 
   const handleOpenDialog = () => {
@@ -61,19 +64,19 @@ export const Header = () => {
   };
 
   return (
-    <div className={styles["header-container"]}>
-      <Link to='/' className={styles["logo-container"]}>
-        <Logo className={styles["logo"]} />
+    <div className={styles['header-container']}>
+      <Link to='/' className={styles['logo-container']}>
+        <Logo className={styles['logo']} />
       </Link>
-      <div className={styles["options-container"]}>
-        <Link className={styles["option-link"]} to='/shop'>
+      <div className={styles['options-container']}>
+        <Link className={styles['option-link']} to='/shop'>
           Shop
         </Link>
-        <Link className={styles["option-link"]} to='/contactus'>
+        <Link className={styles['option-link']} to='/contactus'>
           Contact Us
         </Link>
         {!currentUser && (
-          <Link className={styles["option-link"]} to='/auth/signin'>
+          <Link className={styles['option-link']} to='/auth/signin'>
             Sign In
           </Link>
         )}
@@ -85,7 +88,7 @@ export const Header = () => {
                 <Avatar
                   alt={currentUser.displayName}
                   src={currentUser.photoURL}
-                  className={styles["avatar"]}
+                  className={styles['avatar']}
                 >
                   {currentUser?.displayName?.charAt(0)}
                 </Avatar>
@@ -114,7 +117,7 @@ export const Header = () => {
       </div>
       <Dialog open={open} keepMounted onClose={handleClose}>
         <DialogTitle>
-          <LogoutIcon className={styles["logout-icon"]} />
+          <LogoutIcon className={styles['logout-icon']} />
           Confirm Signout
         </DialogTitle>
         <DialogContent>
