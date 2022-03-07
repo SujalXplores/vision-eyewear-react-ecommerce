@@ -1,13 +1,79 @@
 import { Grid, TextField, Button, Box, Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
+
+import useInput from '../../hooks/useInput';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { auth, firestore } from '../../firebase/firebase.utils';
 
 import styles from './profile.module.css';
 
 const Profile = () => {
+  let formIsValid = false;
+  const isNotEmpty = (val) => val.trim() !== '';
+  const isValidPhone = (val) => /^\d{10}$/.test(val);
+
   const currentUser = useSelector(selectCurrentUser);
   console.log(currentUser);
-  const { email, displayName, photoURL } = currentUser;
+  const { email, displayName, photoURL, address, phoneNumber } = currentUser;
+  console.log(auth.currentUser.multiFactor.user);
+
+  const handleProfileSubmit = (event) => {
+    event.preventDefault();
+
+    if (!formIsValid) {
+      return;
+    }
+
+    auth.currentUser
+      .updateProfile({
+        displayName: enteredName,
+      })
+      .then(() => {
+        firestore.collection('users').doc(currentUser.uid).update({
+          displayName: enteredName,
+          address: enteredAddress,
+          phoneNumber: enteredPhone,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    resetName();
+    resetPhone();
+    resetAddress();
+  };
+
+  const {
+    value: enteredName,
+    isValid: nameIsValid,
+    hasError: nameHasError,
+    valueChangeHandler: nameChangeHandler,
+    inputBlurHandler: nameBlurHandler,
+    reset: resetName,
+  } = useInput(isNotEmpty, displayName);
+
+  const {
+    value: enteredPhone,
+    isValid: phoneIsValid,
+    hasError: phoneHasError,
+    valueChangeHandler: phoneChangeHandler,
+    inputBlurHandler: phoneBlurHandler,
+    reset: resetPhone,
+  } = useInput(isValidPhone, phoneNumber);
+
+  const {
+    value: enteredAddress,
+    isValid: addressIsValid,
+    hasError: addressHasError,
+    valueChangeHandler: addressChangeHandler,
+    inputBlurHandler: addressBlurHandler,
+    reset: resetAddress,
+  } = useInput(isNotEmpty, address);
+
+  if (nameIsValid && phoneIsValid && addressIsValid) {
+    formIsValid = true;
+  }
 
   return (
     <Grid container component='main' className={styles.root}>
@@ -27,7 +93,11 @@ const Profile = () => {
           >
             {displayName.charAt(0)}
           </Avatar>
-          <Box component='form' className={styles['profile-form']}>
+          <Box
+            component='form'
+            className={styles['profile-form']}
+            onSubmit={handleProfileSubmit}
+          >
             <Grid container spacing={1}>
               <TextField
                 type='email'
@@ -52,9 +122,16 @@ const Profile = () => {
                 size='small'
                 fullWidth
                 required
+                value={enteredName}
+                onChange={nameChangeHandler}
+                onBlur={nameBlurHandler}
+                error={nameHasError}
+                {...(nameHasError && {
+                  helperText: 'Name cannot be empty!',
+                })}
               />
               <TextField
-                type='text'
+                type='tel'
                 label='Phone Number'
                 color='secondary'
                 variant='outlined'
@@ -62,6 +139,13 @@ const Profile = () => {
                 size='small'
                 fullWidth
                 required
+                value={enteredPhone}
+                onChange={phoneChangeHandler}
+                onBlur={phoneBlurHandler}
+                error={phoneHasError}
+                {...(phoneHasError && {
+                  helperText: 'Invalid Phone Number!',
+                })}
               />
               <TextField
                 color='secondary'
@@ -74,6 +158,13 @@ const Profile = () => {
                 size='small'
                 fullWidth
                 required
+                value={enteredAddress}
+                onChange={addressChangeHandler}
+                onBlur={addressBlurHandler}
+                error={addressHasError}
+                {...(addressHasError && {
+                  helperText: 'Address cannot be empty!',
+                })}
               />
               <Button
                 type='submit'
@@ -81,6 +172,7 @@ const Profile = () => {
                 color='secondary'
                 className={styles['profile-button']}
                 fullWidth
+                disabled={!formIsValid}
               >
                 Save
               </Button>
