@@ -44,7 +44,6 @@ export const CollectionItem = ({ item }) => {
   };
 
   const handleViewMoreDetails = () => {
-    console.log(item);
     navigate(`${item.id}`, item);
   };
 
