@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import { useSelector } from 'react-redux';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, Outlet } from 'react-router-dom';
 
 import { selectCurrentUser } from './redux/user/user.selectors';
 import SignIn from './components/sign-in/sign-in.component';
@@ -32,18 +32,18 @@ const Router = () => {
   const location = useLocation();
   const currentUser = useSelector(selectCurrentUser);
 
-  const HideLogin = ({ children }) => {
+  const HideLogin = () => {
     if (currentUser) {
       return <Navigate to='/' state={{ from: location }} replace />;
     }
-    return children;
+    return <Outlet />;
   };
 
-  const ProtectedRoute = ({ children }) => {
+  const ProtectedRoute = () => {
     if (!currentUser) {
       return <Navigate to='/auth/signin' state={{ from: location }} replace />;
     }
-    return children;
+    return <Outlet />;
   };
 
   return (
