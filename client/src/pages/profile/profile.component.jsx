@@ -1,11 +1,13 @@
 import { Grid, TextField, Button, Box, Avatar } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useInput from '../../hooks/useInput';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { auth, firestore } from '../../firebase/firebase.utils';
 
 import styles from './profile.module.css';
+import { checkUserSession } from '../../redux/user/user.actions';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   let formIsValid = false;
@@ -13,35 +15,36 @@ const Profile = () => {
   const isValidPhone = (val) => /^\d{10}$/.test(val);
 
   const currentUser = useSelector(selectCurrentUser);
-  console.log(currentUser);
-  const { email, displayName, photoURL, address, phoneNumber } = currentUser;
-  console.log(auth.currentUser.multiFactor.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleProfileSubmit = (event) => {
+  const { email, displayName, photoURL, address, phoneNumber } = currentUser;
+
+  const handleProfileSubmit = async (event) => {
     event.preventDefault();
 
     if (!formIsValid) {
       return;
     }
 
-    auth.currentUser
-      .updateProfile({
+    try {
+      const currentUser = auth.currentUser;
+
+      await currentUser.updateProfile({
         displayName: enteredName,
-      })
-      .then(() => {
-        firestore.collection('users').doc(currentUser.uid).update({
-          displayName: enteredName,
-          address: enteredAddress,
-          phoneNumber: enteredPhone,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
       });
 
-    resetName();
-    resetPhone();
-    resetAddress();
+      await firestore.collection('users').doc(currentUser.uid).update({
+        displayName: enteredName,
+        address: enteredAddress,
+        phoneNumber: enteredPhone,
+      });
+
+      navigate('/');
+      dispatch(checkUserSession());
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const {
@@ -50,7 +53,6 @@ const Profile = () => {
     hasError: nameHasError,
     valueChangeHandler: nameChangeHandler,
     inputBlurHandler: nameBlurHandler,
-    reset: resetName,
   } = useInput(isNotEmpty, displayName);
 
   const {
@@ -59,7 +61,6 @@ const Profile = () => {
     hasError: phoneHasError,
     valueChangeHandler: phoneChangeHandler,
     inputBlurHandler: phoneBlurHandler,
-    reset: resetPhone,
   } = useInput(isValidPhone, phoneNumber);
 
   const {
@@ -68,7 +69,6 @@ const Profile = () => {
     hasError: addressHasError,
     valueChangeHandler: addressChangeHandler,
     inputBlurHandler: addressBlurHandler,
-    reset: resetAddress,
   } = useInput(isNotEmpty, address);
 
   if (nameIsValid && phoneIsValid && addressIsValid) {
