@@ -5,21 +5,21 @@ const INITIAL_STATE = {
       imageUrl:
         'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Sunglasses-Men.jpg',
       id: 1,
-      linkUrl: 'shop/mens',
+      linkUrl: 'shop/category/mens',
     },
     {
       title: 'women',
       imageUrl:
         'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Sunglasses-Women.jpg',
       id: 2,
-      linkUrl: 'shop/women',
+      linkUrl: 'shop/category/women',
     },
     {
       title: 'kids',
       imageUrl:
         'https://india.ray-ban.com/pub/media/wysiwyg/Rb_Gift_guide_page/Sunglasses-Kids.jpg',
       id: 3,
-      linkUrl: 'shop/kids',
+      linkUrl: 'shop/category/kids',
     },
     {
       title: 'sunglasses',
@@ -27,7 +27,7 @@ const INITIAL_STATE = {
         'https://india.ray-ban.com/pub/media/wysiwyg/Rb_home_opti/34-Sunglasses-Homepage-Banner-Desktop.jpg',
       size: 'large',
       id: 4,
-      linkUrl: 'shop/sunglasses',
+      linkUrl: 'shop/category/sunglasses',
     },
     {
       title: 'eyeglasses',
@@ -35,7 +35,7 @@ const INITIAL_STATE = {
         'https://india.ray-ban.com/pub/media/wysiwyg/Rb_home_opti/36-Eyeglasses-Homepage-Banner-Desktop.jpg',
       size: 'large',
       id: 5,
-      linkUrl: 'shop/eyeglasses',
+      linkUrl: 'shop/category/eyeglasses',
     },
   ],
 };
