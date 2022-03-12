@@ -59,7 +59,6 @@ const ContactUs = () => {
         }),
       });
       const data = await res.json();
-      console.log('data', data);
     } catch (error) {
       setError(error.message);
     } finally {

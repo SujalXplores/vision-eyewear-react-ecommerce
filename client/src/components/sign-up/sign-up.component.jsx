@@ -72,14 +72,6 @@ const SignUp = () => {
       return;
     }
 
-    console.log({
-      displayName: enteredDisplayName,
-      email: enteredEmail,
-      password: enteredPassword,
-      address: '',
-      phone: '',
-    });
-
     handleSignUp({
       displayName: enteredDisplayName,
       email: enteredEmail,

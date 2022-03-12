@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import {
   Button,
   Card,
@@ -11,15 +11,18 @@ import {
   Skeleton,
   Alert,
   Slide,
-} from "@mui/material";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+  CardActionArea,
+} from '@mui/material';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-import { addItem } from "../../redux/cart/cart.actions";
-import styles from "./collection-item.module.css";
+import { addItem } from '../../redux/cart/cart.actions';
+import styles from './collection-item.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export const CollectionItem = ({ item }) => {
   const [state, setState] = useState(false);
   const [items, setItems] = useState(null);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -40,52 +43,58 @@ export const CollectionItem = ({ item }) => {
     setState(false);
   };
 
+  const handleViewMoreDetails = () => {
+    navigate(`${item.id}`, item);
+  };
+
   return (
     <>
-      <Card className={styles["item-card"]} variant='outlined'>
-        {items ? (
-          <CardMedia
-            component='img'
-            width='100%'
-            image={items.imageUrl}
-            alt={items.name}
-          />
-        ) : (
-          <Skeleton
-            className={styles["item-card-media"]}
-            animation='wave'
-            variant='rectangular'
-          />
-        )}
-        <CardContent>
+      <Card className={styles['item-card']} variant='outlined'>
+        <CardActionArea onClick={handleViewMoreDetails}>
           {items ? (
-            <>
-              <Typography gutterBottom variant='h5' component='div'>
-                {items.name}
-              </Typography>
-              <Typography variant='body2' color='text.secondary'>
-                {new Intl.NumberFormat("en-IN", {
-                  currency: "INR",
-                  style: "currency",
-                  maximumFractionDigits: 0,
-                }).format(items.price) + "/-"}
-              </Typography>
-            </>
+            <CardMedia
+              component='img'
+              width='100%'
+              image={items.imageUrl}
+              alt={items.name}
+            />
           ) : (
-            <>
-              <Skeleton
-                animation='wave'
-                height={10}
-                className={styles["skeleton-text"]}
-              />
-              <Skeleton animation='wave' height={10} width='80%' />
-            </>
+            <Skeleton
+              className={styles['item-card-media']}
+              animation='wave'
+              variant='rectangular'
+            />
           )}
-        </CardContent>
+          <CardContent>
+            {items ? (
+              <>
+                <Typography gutterBottom variant='h5' component='div'>
+                  {items.name}
+                </Typography>
+                <Typography variant='body2' color='text.secondary'>
+                  {new Intl.NumberFormat('en-IN', {
+                    currency: 'INR',
+                    style: 'currency',
+                    maximumFractionDigits: 0,
+                  }).format(items.price) + '/-'}
+                </Typography>
+              </>
+            ) : (
+              <>
+                <Skeleton
+                  animation='wave'
+                  height={10}
+                  className={styles['skeleton-text']}
+                />
+                <Skeleton animation='wave' height={10} width='80%' />
+              </>
+            )}
+          </CardContent>
+        </CardActionArea>
         <CardActions>
           {items ? (
             <Button
-              className={styles["add-to-cart"]}
+              className={styles['add-to-cart']}
               onClick={onAddItem}
               size='small'
               fullWidth
@@ -101,7 +110,7 @@ export const CollectionItem = ({ item }) => {
               animation='wave'
               height={22}
               width={109}
-              className={styles["skeleton-button"]}
+              className={styles['skeleton-button']}
             />
           )}
         </CardActions>
@@ -112,7 +121,7 @@ export const CollectionItem = ({ item }) => {
         onClose={handleClose}
         key={Math.random()}
         TransitionComponent={TransitionLeft}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
         <Alert severity='success'>1 item added to cart.</Alert>
       </Snackbar>

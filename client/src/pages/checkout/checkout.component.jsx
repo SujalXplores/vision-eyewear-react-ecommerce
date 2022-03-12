@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { loadStripe } from "@stripe/stripe-js";
-import { Button, RadioGroup, Radio, FormControlLabel } from "@mui/material";
-import PaymentIcon from "@mui/icons-material/Payment";
-import PaymentsIcon from "@mui/icons-material/Payments";
-import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+import { Button, RadioGroup, Radio, FormControlLabel } from '@mui/material';
+import PaymentIcon from '@mui/icons-material/Payment';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 import {
   selectCartItems,
   selectCartTotal,
-} from "../../redux/cart/cart.selectors";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
-import styles from "./checkout.module.css";
+} from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import styles from './checkout.module.css';
 
-import { ReactComponent as EmptyCartIcon } from "../../assets/empty-cart.svg";
-import { firestore } from "../../firebase/firebase.utils";
-import { clearCart } from "../../redux/cart/cart.actions";
+import { ReactComponent as EmptyCartIcon } from '../../assets/empty-cart.svg';
+import { firestore } from '../../firebase/firebase.utils';
+import { clearCart } from '../../redux/cart/cart.actions';
 
 const getStripe = () => {
   let stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
@@ -23,7 +23,7 @@ const getStripe = () => {
 };
 
 export const CheckoutPage = () => {
-  const [checkOutMode, setCheckOutMode] = useState("cash");
+  const [checkOutMode, setCheckOutMode] = useState('cash');
   const cartItems = useSelector(selectCartItems);
   const total = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
@@ -46,17 +46,17 @@ export const CheckoutPage = () => {
 
   const checkoutOptions = {
     lineItems: items,
-    mode: "payment",
-    billingAddressCollection: "required",
+    mode: 'payment',
+    billingAddressCollection: 'required',
     customerEmail: email,
-    successUrl: "http://localhost:3000/order-confirmed",
-    cancelUrl: "http://localhost:3000",
+    successUrl: 'http://localhost:3000/order-confirmed',
+    cancelUrl: 'http://localhost:3000',
   };
 
   const redirectCheckout = async () => {
     const stripe = await getStripe();
     const { error } = await stripe.redirectToCheckout(checkoutOptions);
-    console.log("Stripe error !", error);
+    console.log('Stripe error !', error);
   };
 
   const handleCheckoutModeChange = (e) => {
@@ -64,14 +64,10 @@ export const CheckoutPage = () => {
   };
 
   const handlePlaceOrder = async () => {
-    if (checkOutMode === "cash") {
-      console.log("Cash mode");
-      console.log(currentUser);
-      console.log(cartItems);
-      console.log(total);
+    if (checkOutMode === 'cash') {
       const createdAt = new Date();
       try {
-        const orderRef = firestore.collection("orders").doc();
+        const orderRef = firestore.collection('orders').doc();
         await orderRef.set({
           createdAt,
           email,
@@ -79,9 +75,9 @@ export const CheckoutPage = () => {
           total,
         });
         clearCartItems();
-        navigate("/order-confirmed");
+        navigate('/order-confirmed');
       } catch (error) {
-        console.log("error creating order", error.message);
+        console.log('error creating order', error.message);
       }
     } else {
       redirectCheckout();
@@ -91,35 +87,34 @@ export const CheckoutPage = () => {
   return (
     <>
       {cartItems.length ? (
-        <div className={styles["checkout-page-container"]}>
-          <div className={styles["checkout-header-container"]}>
-            <div className={styles["header-block-container"]}>
+        <div className={styles['checkout-page-container']}>
+          <div className={styles['checkout-header-container']}>
+            <div className={styles['header-block-container']}>
               <span>Product</span>
             </div>
-            <div className={styles["header-block-container"]}>
+            <div className={styles['header-block-container']}>
               <span>Description</span>
             </div>
-            <div className={styles["header-block-container"]}>
+            <div className={styles['header-block-container']}>
               <span>Quantity</span>
             </div>
-            <div className={styles["header-block-container"]}>
+            <div className={styles['header-block-container']}>
               <span>Price</span>
             </div>
-            <div className={styles["header-block-container"]}>
+            <div className={styles['header-block-container']}>
               <span>Remove</span>
             </div>
           </div>
           {cartItems.map((cartItem) => (
             <CheckoutItem key={cartItem.id} cartItem={cartItem} />
           ))}
-          <div className={styles["checkout-bottom"]}>
-            {console.log(checkOutMode)}
+          <div className={styles['checkout-bottom']}>
             <RadioGroup
               row
               name='checkout-option'
               value={checkOutMode}
               onChange={handleCheckoutModeChange}
-              className={styles["checkout-option-container"]}
+              className={styles['checkout-option-container']}
             >
               <FormControlLabel value='cash' control={<Radio />} label='Cash' />
               <FormControlLabel
@@ -128,14 +123,14 @@ export const CheckoutPage = () => {
                 label='Credit / Debit Card'
               />
             </RadioGroup>
-            <span className={styles["total-container"]}>
-              Total:{" "}
-              {new Intl.NumberFormat("en-IN", {
-                currency: "INR",
-                style: "currency",
+            <span className={styles['total-container']}>
+              Total:{' '}
+              {new Intl.NumberFormat('en-IN', {
+                currency: 'INR',
+                style: 'currency',
                 maximumFractionDigits: 0,
               }).format(total)}
-              {"/-"}
+              {'/-'}
             </span>
           </div>
           <Button
@@ -143,16 +138,16 @@ export const CheckoutPage = () => {
             variant='contained'
             color='secondary'
             startIcon={
-              checkOutMode === "stripe" ? <PaymentIcon /> : <PaymentsIcon />
+              checkOutMode === 'stripe' ? <PaymentIcon /> : <PaymentsIcon />
             }
-            className={styles["place-order-button"]}
+            className={styles['place-order-button']}
           >
-            {checkOutMode === "stripe" ? "Pay with Card" : "Cash on Delivery"}
+            {checkOutMode === 'stripe' ? 'Pay with Card' : 'Cash on Delivery'}
           </Button>
         </div>
       ) : (
-        <div className={styles["empty-cart-grid"]}>
-          <EmptyCartIcon className={styles["empty-cart-icon"]} />
+        <div className={styles['empty-cart-grid']}>
+          <EmptyCartIcon className={styles['empty-cart-icon']} />
         </div>
       )}
     </>

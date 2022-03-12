@@ -1,7 +1,7 @@
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import styles from "./spinner.module.css";
+import styles from './spinner.module.css';
 
 const Spinner = () => (
   <>
