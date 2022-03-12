@@ -73,6 +73,7 @@ export const CheckoutPage = () => {
           email,
           ordered_items: cartItems,
           total,
+          payment_mode: 'cash',
         });
         clearCartItems();
         navigate('/order-confirmed');

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import CollectionItem from '../collection-item/collection-item.component';
+import { CollectionItem } from '../collection-item/collection-item.component';
 import styles from './collection-preview.module.css';
 
 export const CollectionPreview = ({ title, items, routeName }) => {
