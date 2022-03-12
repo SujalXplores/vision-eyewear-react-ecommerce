@@ -32,11 +32,11 @@ const Router = () => {
   const location = useLocation();
   const currentUser = useSelector(selectCurrentUser);
 
-  const HideLogin = () => {
+  const HideLogin = ({ children }) => {
     if (currentUser) {
       return <Navigate to='/' state={{ from: location }} replace />;
     }
-    return <Outlet />;
+    return children;
   };
 
   const ProtectedRoute = () => {
@@ -65,7 +65,7 @@ const Router = () => {
         <Route path='/order-confirmed' element={<ConfirmOrder />} />
       </Route>
       <Route
-        path='/auth'
+        path='auth'
         element={
           <HideLogin>
             <SignInAndSignUpPage />
