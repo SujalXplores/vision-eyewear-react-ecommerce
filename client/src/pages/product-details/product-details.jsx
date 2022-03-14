@@ -1,77 +1,75 @@
-import './productdetails.css';
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Button } from '@mui/material';
+
+import { addItem } from '../../redux/cart/cart.actions';
+
+import styles from './productdetails.module.css';
 
 const ProductDetails = () => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const {
+    name,
+    price,
+    frame_dimensions,
+    frame_shape,
+    frame_size,
+    frame_width,
+    imageUrl,
+  } = location.state;
+
+  const onAddToCart = () => {
+    dispatch(addItem(location.state));
+  };
+
   return (
-    <div className='pd-wrap'>
-      <div className='container'>
-        <div className='heading-section'>
+    <div className={styles['pd-wrap']}>
+      <div className={styles.container}>
+        <div className={styles['heading-section']}>
           <h2>Product Details</h2>
         </div>
-        <div className='row'>
-          <div className='col-md-6'>
-            <div className='pd-img'>
-              <img
-                src='https://static5.lenskart.com/media/catalog/product/pro/1/thumbnail/480x480/9df78eab33525d08d6e5fb8d27136e95//l/i/Gold-Transparent-Full-Rim-Square-Lenskart-Air-Signia-LA-E14202-C1-Eyeglasses_lenskart-air-la-e14202-c1-eyeglasses_G_576907_02_2022.jpg'
-                alt='product'
-              />
-            </div>
+        <div className={styles['row']}>
+          <div className={styles['col-md-6']}>
+            <img src={imageUrl} alt={name} />
           </div>
-          <div className='col-md-6'>
-            <div className='product-dtl'>
-              <div className='product-info'>
-                <div className='product-name'>
-                  Gold Transparent Full Rim Square Eyeglasses
-                </div>
-
-                <div className='product-price-discount'>
+          <div className={styles['col-md-6']}>
+            <div className={styles['product-dtl']}>
+              <div className={styles['product-info']}>
+                <div className={styles['product-name']}>{name}</div>
+                <div className={styles['product-price-discount']}>
                   <span>
-                    <strong>₹999</strong>
+                    <strong>₹{price}/-</strong>
                   </span>
                 </div>
               </div>
-              <ul className='product-dtl'>
+              <ul className={styles['product-dtl']}>
                 <li>
-                  <strong>Brand Name:</strong> Vincent Chase Online
+                  <strong>Frame Shape:</strong>
+                  {frame_shape}
                 </li>
                 <li>
-                  <strong>Product Type:</strong> Eyeglasses
+                  <strong>Frame Size:</strong>
+                  {frame_size}
                 </li>
                 <li>
-                  <strong>Frame Type:</strong> Full Rim
+                  <strong>Frame Width:</strong>
+                  {frame_width}
                 </li>
                 <li>
-                  <strong>Frame Shape:</strong> Rectangle
-                </li>
-                <li>
-                  <strong>Frame Size:</strong> Lenskart Air
-                </li>
-                <li>
-                  <strong>Frame Width:</strong> Lenskart Air
-                </li>
-                <li>
-                  <strong>Frame Dimensions:</strong> Lenskart Air
-                </li>
-                <li>
-                  <strong>Frame Colour:</strong> Lenskart Air
+                  <strong>Frame Dimensions:</strong>
+                  {frame_dimensions}
                 </li>
               </ul>
 
-              <div className='product-count'>
-                <label htmlFor='size'>Quantity</label>
-                <form action='#' className='display-flex'>
-                  <div className='qtyminus'>-</div>
-                  <input
-                    type='text'
-                    name='quantity'
-                    defaultValue={1}
-                    className='qty'
-                  />
-                  <div className='qtyplus'>+</div>
-                </form>
-                <a href='#' className='round-black-btn'>
-                  Add to Cart
-                </a>
-              </div>
+              <Button
+                variant='contained'
+                color='secondary'
+                sx={{ mt: '1rem' }}
+                onClick={onAddToCart}
+              >
+                Add to Cart
+              </Button>
             </div>
           </div>
         </div>
