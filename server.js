@@ -3,6 +3,7 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 const { deleteUser, disableUser, enableUser } = require('./firebase.utils');
+const { createProduct } = require('./stripe');
 const app = express();
 
 app.use(express.json());
@@ -78,6 +79,20 @@ app.post('/enable-user', async (req, res) => {
     await enableUser(uid);
     res.json({
       message: 'User Unblocked',
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+});
+
+app.post('/edit-product', async (req, res) => {
+  try {
+    const product = await createProduct(req.body);
+    res.json({
+      message: 'Product Edited',
+      product,
     });
   } catch (error) {
     res.json({
