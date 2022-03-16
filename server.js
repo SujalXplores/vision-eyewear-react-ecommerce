@@ -87,12 +87,26 @@ app.post('/enable-user', async (req, res) => {
   }
 });
 
-app.post('/edit-product', async (req, res) => {
+app.post('/add-product', async (req, res) => {
   try {
     const product = await createProduct(req.body);
     res.json({
-      message: 'Product Edited',
+      message: 'Product Added',
       product,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+});
+
+app.post('/edit-product', async (req, res) => {
+  try {
+    // const product = await createProduct(req.body);
+    res.json({
+      message: 'Product Edited lol',
+      // product,
     });
   } catch (error) {
     res.json({

@@ -36,6 +36,7 @@ const enableUser = async (uid) => {
 };
 
 module.exports = {
+  db,
   deleteUser,
   disableUser,
   enableUser,
