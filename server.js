@@ -3,7 +3,7 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 const { deleteUser, disableUser, enableUser } = require('./firebase.utils');
-const { createProduct } = require('./stripe');
+const { createProduct, deleteProduct } = require('./stripe');
 const app = express();
 
 app.use(express.json());
@@ -107,6 +107,20 @@ app.post('/edit-product', async (req, res) => {
     res.json({
       message: 'Product Edited lol',
       // product,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+});
+
+app.post('/delete-product', async (req, res) => {
+  try {
+    const product = await deleteProduct(req.body);
+    res.json({
+      message: 'Product deleted',
+      product,
     });
   } catch (error) {
     res.json({
