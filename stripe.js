@@ -54,14 +54,86 @@ async function createProduct(data) {
   return { product, priceResponse };
 }
 
-const deleteProduct = async (data) => {
-  const { id, price_id, category } = data;
+const editProduct = async (data) => {
+  const {
+    id,
+    price_id,
+    name,
+    imageUrl,
+    price,
+    category,
+    frame_size,
+    frame_shape,
+    frame_width,
+    frame_dimensions,
+    old_category,
+  } = data;
 
-  const res1 = await stripe.prices.update(price_id, {
+  const productResponse = await stripe.products.update(id, {
+    name,
+    images: [imageUrl],
+  });
+
+  await stripe.prices.update(price_id, {
     active: false,
   });
 
-  const res2 = await stripe.products.update(id, {
+  const createPrice = await stripe.prices.create({
+    unit_amount: price * 100,
+    currency: 'inr',
+    product: productResponse.id,
+  });
+
+  // if category is changed then delete product from that category
+  const old_snapshot = await db
+    .collection('collections')
+    .where('title', '==', old_category)
+    .get();
+
+  old_snapshot.forEach((doc) => {
+    const { items } = doc.data();
+    const newItems = items.filter((item) => item.id !== id);
+    db.collection('collections').doc(doc.id).update({
+      items: newItems,
+    });
+  });
+
+  // adding product in updated category
+  const snapshot = await db
+    .collection('collections')
+    .where('title', '==', category)
+    .get();
+
+  snapshot.forEach((doc) => {
+    const { items } = doc.data();
+    const newItems = items.filter((item) => item.id !== id);
+    newItems.push({
+      frame_size,
+      frame_shape,
+      frame_width,
+      frame_dimensions,
+      imageUrl,
+      name,
+      price,
+      id: productResponse.id,
+      price_id: createPrice.id,
+    });
+    db.collection('collections').doc(doc.id).update({
+      items: newItems,
+    });
+  });
+
+  return { priceResponse, productResponse };
+};
+
+const deleteProduct = async (data) => {
+  const { id, price_id, category } = data;
+
+  const priceResponse = await stripe.prices.update(price_id, {
+    active: false,
+  });
+
+  const productResponse = await stripe.products.update(id, {
     active: false,
   });
 
@@ -77,10 +149,11 @@ const deleteProduct = async (data) => {
       items: newItems,
     });
   });
-  return { res1, res2 };
+  return { priceResponse, productResponse };
 };
 
 module.exports = {
   createProduct,
   deleteProduct,
+  editProduct,
 };

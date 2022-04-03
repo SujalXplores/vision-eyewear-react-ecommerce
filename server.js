@@ -3,7 +3,7 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 const { deleteUser, disableUser, enableUser } = require('./firebase.utils');
-const { createProduct, deleteProduct } = require('./stripe');
+const { createProduct, deleteProduct, editProduct } = require('./stripe');
 const app = express();
 
 app.use(express.json());
@@ -103,10 +103,10 @@ app.post('/add-product', async (req, res) => {
 
 app.post('/edit-product', async (req, res) => {
   try {
-    // const product = await createProduct(req.body);
+    const product = await editProduct(req.body);
     res.json({
       message: 'Product Edited lol',
-      // product,
+      product,
     });
   } catch (error) {
     res.json({
