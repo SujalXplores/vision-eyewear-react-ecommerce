@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 
 import { addItem } from '../../redux/cart/cart.actions';
+import { ImageMagnifier } from '../../components/image-magnifier/image-magnifier';
 
 import styles from './productdetails.module.css';
 
@@ -31,7 +32,7 @@ const ProductDetails = () => {
         </div>
         <div className={styles['row']}>
           <div className={styles['col-md-6']}>
-            <img src={imageUrl} alt={name} />
+            <ImageMagnifier src={imageUrl} />
           </div>
           <div className={styles['col-md-6']}>
             <div className={styles['product-dtl']}>
