@@ -35,9 +35,20 @@ const enableUser = async (uid) => {
   });
 };
 
+const createAdminUser = async (email, password) => {
+  await firebaseAdmin.auth().createUser({
+    email: 'admin@visioneyewear.com',
+    password: 'vision@admin',
+    displayName: 'Admin',
+    emailVerified: true,
+    uid: 'admin52345220',
+  });
+};
+
 module.exports = {
   db,
   deleteUser,
   disableUser,
   enableUser,
+  createAdminUser,
 };

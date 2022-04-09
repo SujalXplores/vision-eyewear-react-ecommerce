@@ -2,7 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
-const { deleteUser, disableUser, enableUser } = require('./firebase.utils');
+const {
+  deleteUser,
+  disableUser,
+  enableUser,
+  createAdminUser,
+} = require('./firebase.utils');
 const { createProduct, deleteProduct, editProduct } = require('./stripe');
 const app = express();
 
@@ -43,6 +48,19 @@ app.post('/mail', async (req, res) => {
       });
     }
   });
+});
+
+app.post('/creat-admin', async (req, res) => {
+  try {
+    await createAdminUser();
+    res.json({
+      message: 'Admin user created',
+    });
+  } catch (error) {
+    res.json({
+      message: error,
+    });
+  }
 });
 
 app.post('/delete-user', async (req, res) => {
