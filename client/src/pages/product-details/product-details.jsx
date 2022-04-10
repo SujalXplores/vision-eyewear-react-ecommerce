@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from '@mui/material';
 
 import { addItem } from '../../redux/cart/cart.actions';
+import { ImageMagnifier } from '../../components/image-magnifier/image-magnifier';
 
 import styles from './productdetails.module.css';
 
@@ -27,40 +28,39 @@ const ProductDetails = () => {
     <div className={styles['pd-wrap']}>
       <div className={styles.container}>
         <div className={styles['heading-section']}>
-          <h2>Product Details</h2>
+          <h1>{name}</h1>
         </div>
         <div className={styles['row']}>
-          <div className={styles['col-md-6']}>
-            <img src={imageUrl} alt={name} />
+          <div className={`${styles['col-md-6']} ${styles['section-left']}`}>
+            <ImageMagnifier src={imageUrl} />
           </div>
-          <div className={styles['col-md-6']}>
+          <div className={`${styles['col-md-6']} ${styles['section-right']}`}>
             <div className={styles['product-dtl']}>
-              <div className={styles['product-info']}>
-                <div className={styles['product-name']}>{name}</div>
-                <div className={styles['product-price-discount']}>
-                  <span>
-                    <strong>₹{price}/-</strong>
-                  </span>
-                </div>
-              </div>
               <ul className={styles['product-dtl']}>
                 <li>
-                  <strong>Frame Shape:</strong>
+                  <strong>Frame Shape: </strong>
                   {frame_shape}
                 </li>
                 <li>
-                  <strong>Frame Size:</strong>
+                  <strong>Frame Size: </strong>
                   {frame_size}
                 </li>
                 <li>
-                  <strong>Frame Width:</strong>
+                  <strong>Frame Width: </strong>
                   {frame_width}
                 </li>
                 <li>
-                  <strong>Frame Dimensions:</strong>
+                  <strong>Frame Dimensions: </strong>
                   {frame_dimensions}
                 </li>
               </ul>
+              <div className={styles['product-info']}>
+                <div className={styles['product-price-discount']}>
+                  <span>
+                    Price: <strong>₹{price}/-</strong>
+                  </span>
+                </div>
+              </div>
 
               <Button
                 variant='contained'

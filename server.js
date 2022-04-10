@@ -2,7 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
-const { deleteUser, disableUser, enableUser } = require('./firebase.utils');
+const {
+  deleteUser,
+  disableUser,
+  enableUser,
+  createAdminUser,
+} = require('./firebase.utils');
+const { createProduct, deleteProduct, editProduct } = require('./stripe');
 const app = express();
 
 app.use(express.json());
@@ -44,6 +50,19 @@ app.post('/mail', async (req, res) => {
   });
 });
 
+app.post('/creat-admin', async (req, res) => {
+  try {
+    await createAdminUser();
+    res.json({
+      message: 'Admin user created',
+    });
+  } catch (error) {
+    res.json({
+      message: error,
+    });
+  }
+});
+
 app.post('/delete-user', async (req, res) => {
   const uid = req.body.uid;
   try {
@@ -78,6 +97,48 @@ app.post('/enable-user', async (req, res) => {
     await enableUser(uid);
     res.json({
       message: 'User Unblocked',
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+});
+
+app.post('/add-product', async (req, res) => {
+  try {
+    const product = await createProduct(req.body);
+    res.json({
+      message: 'Product Added',
+      product,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+});
+
+app.post('/edit-product', async (req, res) => {
+  try {
+    const product = await editProduct(req.body);
+    res.json({
+      message: 'Product Edited lol',
+      product,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+});
+
+app.post('/delete-product', async (req, res) => {
+  try {
+    const product = await deleteProduct(req.body);
+    res.json({
+      message: 'Product deleted',
+      product,
     });
   } catch (error) {
     res.json({
