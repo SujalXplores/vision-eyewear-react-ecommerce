@@ -27,17 +27,18 @@ const CollectionsOverviewContainer = lazy(() =>
 const CollectionPage = lazy(() =>
   import('./pages/collection/collection.component'),
 );
+const OrderHistory = lazy(() => import('./pages/order-history/order-history'));
 
 const Router = () => {
   const location = useLocation();
   const currentUser = useSelector(selectCurrentUser);
 
-  // const HideLogin = ({ children }) => {
-  //   if (currentUser) {
-  //     return <Navigate to='/' state={{ from: location }} replace />;
-  //   }
-  //   return children;
-  // };
+  const HideLogin = ({ children }) => {
+    if (currentUser) {
+      return <Navigate to="/" state={{ from: location }} replace />;
+    }
+    return children;
+  };
 
   const ProtectedRoute = () => {
     if (!currentUser) {
@@ -59,7 +60,14 @@ const Router = () => {
         />
         <Route path=":productId" element={<ProductDetails />} />
       </Route>
-      <Route path="auth" element={<SignInAndSignUpPage />}>
+      <Route
+        path="auth"
+        element={
+          <HideLogin>
+            <SignInAndSignUpPage />
+          </HideLogin>
+        }
+      >
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
       </Route>
@@ -67,6 +75,7 @@ const Router = () => {
       <Route element={<ProtectedRoute />}>
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/order-history" element={<OrderHistory />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

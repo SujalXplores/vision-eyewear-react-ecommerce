@@ -80,6 +80,11 @@ export const Header = () => {
             Sign In
           </Link>
         )}
+        {currentUser && (
+          <Link className={styles['option-link']} to='/order-history'>
+            Order History
+          </Link>
+        )}
         <CartIcon />
         {currentUser && (
           <>
