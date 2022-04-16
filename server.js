@@ -2,19 +2,27 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+dotenv.config();
+
 const {
   deleteUser,
   disableUser,
   enableUser,
   createAdminUser,
 } = require('./firebase.utils');
-const { createProduct, deleteProduct, editProduct } = require('./stripe');
-const app = express();
 
-app.use(express.json());
-app.use(cors());
-
-dotenv.config();
+const {
+  createProduct,
+  deleteProduct,
+  editProduct,
+  createCheckOutSession,
+  retrieveSession,
+} = require('./stripe');
 
 app.post('/mail', async (req, res) => {
   const to_mail = req.body.email;
@@ -48,6 +56,19 @@ app.post('/mail', async (req, res) => {
       });
     }
   });
+});
+
+app.post('/create-checkout-session', async (req, res) => {
+  const { items, email } = req.body;
+  const session = await createCheckOutSession(items, email);
+  res.json({
+    session,
+  });
+});
+
+app.get('/checkout-session', async (req, res) => {
+  const session = await retrieveSession(req.query.session_id);
+  res.json(session);
 });
 
 app.post('/creat-admin', async (req, res) => {

@@ -3,6 +3,23 @@ const dotenv = require('dotenv');
 dotenv.config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+async function createCheckOutSession(items, email) {
+  const session = await stripe.checkout.sessions.create({
+    success_url: 'http://localhost:3006/order-confirmed?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'http://localhost:3006',
+    customer_email: email,
+    billing_address_collection: 'required',
+    line_items: items,
+    mode: 'payment',
+  });
+  return session;
+}
+
+async function retrieveSession(id) {
+  const session = await stripe.checkout.sessions.retrieve(id);
+  return session;
+}
+
 async function createProduct(data) {
   console.log('----->', data);
   const {
@@ -153,6 +170,8 @@ const deleteProduct = async (data) => {
 };
 
 module.exports = {
+  createCheckOutSession,
+  retrieveSession,
   createProduct,
   deleteProduct,
   editProduct,
