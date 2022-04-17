@@ -11,11 +11,8 @@ const Footer = () => (
         <Link to='/' className={styles['link-1']}>
           Home
         </Link>
-        <Link to='/'>Blog</Link>
-        <Link to='/'>Pricing</Link>
-        <Link to='/'>About</Link>
-        <Link to='/'>Faq</Link>
-        <Link to='/'>Contact</Link>
+        <Link to='/shop'>Shop</Link>
+        <Link to='/contactus'>Contact US</Link>
       </p>
       <p className={styles['footer-company-name']}>Vision Eyewear © 2022</p>
     </div>
