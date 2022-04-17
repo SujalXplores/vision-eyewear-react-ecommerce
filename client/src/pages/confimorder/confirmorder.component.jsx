@@ -61,6 +61,7 @@ export default function ConfirmOrder() {
           ordered_items: cartItems,
           total: session.amount_total / 100,
           payment_mode: 'stripe',
+          address: session.customer_details.address,
         });
         clearCartItems();
       } catch (error) {
@@ -68,7 +69,7 @@ export default function ConfirmOrder() {
         navigate('/page-not-found', { replace: true });
       }
     })();
-  }, [cartItems, navigate, dispatch]);
+  }, []);
 
   return (
     <>
