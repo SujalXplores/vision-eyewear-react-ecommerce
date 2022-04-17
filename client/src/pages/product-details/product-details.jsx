@@ -57,7 +57,7 @@ const ProductDetails = () => {
               <div className={styles['product-info']}>
                 <div className={styles['product-price-discount']}>
                   <span>
-                    Price: <strong>₹{price}/-</strong>
+                    <strong className={styles['product-price']}>₹{price}/-</strong>
                   </span>
                 </div>
               </div>
