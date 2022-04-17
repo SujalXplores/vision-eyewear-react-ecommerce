@@ -9,7 +9,7 @@ export const CollectionPage = () => {
     selectCollection(window.location.pathname.split('/').pop())
   );
 
-  return (
+  return (collection &&
     <div className={styles['collection-page-container']}>
       <h2 className={styles['collection-title']}>{collection.title}</h2>
       <div className={styles['collection-items-container']}>
