@@ -6,6 +6,7 @@
   padding: 15px 0;
   font-size: 20px;
   align-items: center;
+  text-align: center;
 }
 
 .image-container {
@@ -24,6 +25,7 @@
 
 .quantity-container {
   display: flex;
+  justify-content: center;
 }
 
 .quantity-container span {

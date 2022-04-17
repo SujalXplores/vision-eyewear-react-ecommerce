@@ -23,6 +23,7 @@
 .header-block-container {
   text-transform: capitalize;
   width: 23%;
+  text-align: center;
 }
 
 .header-block-container:last-child {
