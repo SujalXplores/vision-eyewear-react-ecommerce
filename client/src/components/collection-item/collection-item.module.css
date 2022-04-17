@@ -1,6 +1,16 @@
 .item-card {
   border-radius: 10px;
+  border: none;
   max-width: 345px !important;
+  box-shadow: 0 0 5px rgba(0,0,0,0.19);
+  text-align: center;
+}
+
+.item-card:hover {
+  /* box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.19); */
+  box-shadow: 0 0 10px rgba(0,0,0,0.19);
+  transition: all 0.3s ease-in-out;
+  background-color: transparent;
 }
 
 .item-card-media {
